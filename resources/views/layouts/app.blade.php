@@ -19,7 +19,7 @@
     </head>
 
     <body>
-        {{$slot}}
+        {{ $slot }}
     </body>
 
     <script>
