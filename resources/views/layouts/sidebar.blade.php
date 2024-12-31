@@ -21,38 +21,97 @@
                         dropdownOpen: false
                     }" class="relative">
 
-                        <button @click="dropdownOpen=true" class="inline-flex items-center justify-center h-12 py-2 pl-3 pr-12 text-sm font-medium transition-colors bg-white border rounded-md text-neutral-700 hover:bg-neutral-100 active:bg-white focus:bg-white focus:outline-none disabled:opacity-50 disabled:pointer-events-none">
-                            <img src="https://cdn.devdojo.com/images/may2023/adam.jpeg" class="object-cover w-8 h-8 border rounded-full border-neutral-200" />
-                            <span class="flex flex-col items-start flex-shrink-0 h-full ml-2 leading-none translate-y-px">
-                                <span>{{App::getLocale()}}</span>
-                                <span class="text-xs font-light text-neutral-400">@adamwathan</span>
-                            </span>
-                            <svg class="absolute right-0 w-5 h-5 mr-3" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 15L12 18.75 15.75 15m-7.5-6L12 5.25 15.75 9" />
+                        <button @click="dropdownOpen=true" class="inline-flex items-center justify-center h-12 py-2 px-4 rounded text-sm font-medium transition-colors bg-white border text-neutral-700 hover:bg-neutral-100 active:bg-white focus:bg-white focus:outline-none disabled:opacity-50 disabled:pointer-events-none">
+                            @if (App::getLocale() == 'en')
+                            <svg class="w-4 h-4 mr-2" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 7410 3900">
+                                <path fill="#b22234" d="M0 0h7410v3900H0z" />
+                                <path d="M0 450h7410m0 600H0m0 600h7410m0 600H0m0 600h7410m0 600H0" stroke="#fff" stroke-width="300" />
+                                <path fill="#3c3b6e" d="M0 0h2964v2100H0z" />
+                                <g fill="#fff">
+                                    <g id="d">
+                                        <g id="c">
+                                            <g id="e">
+                                                <g id="b">
+                                                    <path id="a" d="M247 90l70.534 217.082-184.66-134.164h228.253L176.466 307.082z" />
+                                                    <use xlink:href="#a" y="420" />
+                                                    <use xlink:href="#a" y="840" />
+                                                    <use xlink:href="#a" y="1260" />
+                                                </g>
+                                                <use xlink:href="#a" y="1680" />
+                                            </g>
+                                            <use xlink:href="#b" x="247" y="210" />
+                                        </g>
+                                        <use xlink:href="#c" x="494" />
+                                    </g>
+                                    <use xlink:href="#d" x="988" />
+                                    <use xlink:href="#c" x="1976" />
+                                    <use xlink:href="#e" x="2470" />
+                                </g>
                             </svg>
+                            @elseif (App::getLocale() == 'tr')
+                            <svg class="w-4 h-4 mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 8">
+                                <path fill="#E30A17" d="M0 0h12v8H0z" />
+                                <circle cx="4.25" cy="4" r="2" fill="#fff" />
+                                <circle cx="4.75" cy="4" r="1.6" fill="#e30a17" />
+                                <path fill="#fff" d="M5.83334 4l1.80901 .58779-1.11804-1.53885v1.90212l1.11804-1.53885z" />
+                            </svg>
+                            @else
+                            <svg class="w-4 h-4 mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 9 6">
+                                <path fill="#fff" d="M0 0h9v3H0z" />
+                                <path fill="#DA291C" d="M0 3h9v3H0z" />
+                                <path fill="#0032A0" d="M0 2h9v2H0z" />
+                            </svg>
+                            @endif
+
+
+                            {{strtoupper(App::getLocale())}}
                         </button>
 
                         <div x-show="dropdownOpen" @click.away="dropdownOpen=false" x-transition:enter="ease-out duration-200" x-transition:enter-start="-translate-y-2" x-transition:enter-end="translate-y-0" class="absolute top-0 z-50 w-56 mt-12 -translate-x-1/2 left-1/2" x-cloak>
                             <div class="p-1 mt-1 bg-white border rounded-md shadow-md border-neutral-200/70 text-neutral-700">
 
                                 <a href="{{route('switch-language','en')}}" class="relative flex cursor-default select-none hover:bg-neutral-100 items-center rounded px-2 py-1.5 text-sm outline-none transition-colors data-[disabled]:pointer-events-none data-[disabled]:opacity-50">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4 mr-2">
-                                        <rect width="20" height="14" x="2" y="5" rx="2"></rect>
-                                        <line x1="2" x2="22" y1="10" y2="10"></line>
+                                    <svg class="w-4 h-4 mr-2" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 7410 3900">
+                                        <path fill="#b22234" d="M0 0h7410v3900H0z" />
+                                        <path d="M0 450h7410m0 600H0m0 600h7410m0 600H0m0 600h7410m0 600H0" stroke="#fff" stroke-width="300" />
+                                        <path fill="#3c3b6e" d="M0 0h2964v2100H0z" />
+                                        <g fill="#fff">
+                                            <g id="d">
+                                                <g id="c">
+                                                    <g id="e">
+                                                        <g id="b">
+                                                            <path id="a" d="M247 90l70.534 217.082-184.66-134.164h228.253L176.466 307.082z" />
+                                                            <use xlink:href="#a" y="420" />
+                                                            <use xlink:href="#a" y="840" />
+                                                            <use xlink:href="#a" y="1260" />
+                                                        </g>
+                                                        <use xlink:href="#a" y="1680" />
+                                                    </g>
+                                                    <use xlink:href="#b" x="247" y="210" />
+                                                </g>
+                                                <use xlink:href="#c" x="494" />
+                                            </g>
+                                            <use xlink:href="#d" x="988" />
+                                            <use xlink:href="#c" x="1976" />
+                                            <use xlink:href="#e" x="2470" />
+                                        </g>
                                     </svg>
                                     <span>English</span>
                                 </a>
                                 <a href="{{route('switch-language','tr')}}" class="relative flex cursor-default select-none hover:bg-neutral-100 items-center rounded px-2 py-1.5 text-sm outline-none transition-colors data-[disabled]:pointer-events-none data-[disabled]:opacity-50">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4 mr-2">
-                                        <rect width="20" height="14" x="2" y="5" rx="2"></rect>
-                                        <line x1="2" x2="22" y1="10" y2="10"></line>
+                                    <svg class="w-4 h-4 mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 8">
+                                        <path fill="#E30A17" d="M0 0h12v8H0z" />
+                                        <circle cx="4.25" cy="4" r="2" fill="#fff" />
+                                        <circle cx="4.75" cy="4" r="1.6" fill="#e30a17" />
+                                        <path fill="#fff" d="M5.83334 4l1.80901 .58779-1.11804-1.53885v1.90212l1.11804-1.53885z" />
                                     </svg>
                                     <span>Turkish</span>
                                 </a>
                                 <a href="{{route('switch-language','ru')}}" class="relative flex cursor-default select-none hover:bg-neutral-100 items-center rounded px-2 py-1.5 text-sm outline-none transition-colors data-[disabled]:pointer-events-none data-[disabled]:opacity-50">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4 mr-2">
-                                        <rect width="20" height="14" x="2" y="5" rx="2"></rect>
-                                        <line x1="2" x2="22" y1="10" y2="10"></line>
+                                    <svg class="w-4 h-4 mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 9 6">
+                                        <path fill="#fff" d="M0 0h9v3H0z" />
+                                        <path fill="#DA291C" d="M0 3h9v3H0z" />
+                                        <path fill="#0032A0" d="M0 2h9v2H0z" />
                                     </svg>
                                     <span>Russian</span>
                                 </a>
