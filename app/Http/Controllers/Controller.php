@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-abstract class Controller
-{
-    //
-}
+use Illuminate\Contracts\View\View;
+
+abstract class Controller {}

@@ -1,5 +1,12 @@
 @section('title', 'Log In |')
 <x-app>
+
+    <select id="selectedLang" name="" class="changeLangSelect absolute top-4 right-4 p-2 text-sm text-gray-900 bg-white border border-gray-300 rounded-lg dark:bg-gray-800 dark:border-gray-700 dark:text-white">
+        <option value="en">English </option>
+        <option value="tr">Turkish</option>
+        <option value="ru">Russian</option>
+    </select>
+    <a href="{{route('home')}}">Tikla TR</a>
     <section class="bg-gray-50 dark:bg-gray-900">
         <div class="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
             <div class="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
