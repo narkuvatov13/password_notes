@@ -3,6 +3,7 @@
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\LanguageController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\PasswordController;
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\App;
@@ -21,6 +22,14 @@ Route::middleware('auth')->group(function () {
     Route::get('/dashboard', function () {
         return view('dashboard');
     })->middleware(['auth', 'verified'])->name('dashboard');
+
+
+
+    // Route::post('/password-store', [PasswordController::class, 'store'])->name('form.password.store');
+
+
+    Route::post('form/password/store', [PasswordController::class, 'store'])->name('form.password.store');
+
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
