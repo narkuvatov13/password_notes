@@ -14,10 +14,10 @@ return new class extends Migration
         Schema::create('passwords', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
-            $table->string('url');
-            $table->string('username');
-            $table->string('password');
-            $table->string('message');
+            $table->string('url')->nullable();
+            $table->string('username')->nullable();
+            $table->string('password')->nullable();
+            $table->string('message')->nullable();
             $table->timestamps();
         });
     }

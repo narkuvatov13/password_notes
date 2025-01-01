@@ -25,7 +25,7 @@ class PasswordController extends Controller
             'url',
             'username',
             'password',
-            'messages',
+            'message',
         ]);
 
         auth()->user()->passwords()->create($request->all());
