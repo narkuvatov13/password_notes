@@ -23,6 +23,7 @@ class PasswordController extends Controller
         // dd($request->all());
         $request->validate([
             'url',
+            'name',
             'username',
             'password',
             'message',

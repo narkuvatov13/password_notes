@@ -9,6 +9,7 @@ class Password extends Model
     protected $fillable = [
         'user_id',
         'url',
+        'name',
         'username',
         'password',
         'message',
