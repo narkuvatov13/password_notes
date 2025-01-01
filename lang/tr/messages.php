@@ -1,6 +1,10 @@
 <?php
 
 return [
-    'welcome' => 'Uygulamamıza hoş geldiniz!',
-    'goodbye' => 'Hoşça kal!',
+    'all' => 'Tümü',
+    'passwords' => 'Şifreler',
+    'notes' => 'Notlar',
+    'adresses' => 'Adresler',
+    'paymentCards' => 'Ödeme Kartları',
+    'bankAccounts' => 'Banka Hesapları',
 ];

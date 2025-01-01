@@ -1,5 +1,10 @@
-@section('title', 'Dashboard')
+@extends('layouts.sidebar')
 <x-app>
-    @include('layouts.sidebar')
-    dssdf
+    @section('title', 'Dashboard')
+    @section('content')
+    <h1>sdadas
+
+
+    </h1>
+    @endsection
 </x-app>

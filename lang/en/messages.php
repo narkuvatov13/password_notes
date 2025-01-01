@@ -1,5 +1,10 @@
 <?php
 return [
-    'welcome' => 'Welcome to our application!',
-    'goodbye' => 'Goodbye!',
+    'all' => "All",
+    'passwords' => 'Passwords',
+    'notes' => 'Notes',
+    'adresses' => 'Adresses',
+    'paymentCards' => 'Payment Cards',
+    'bankAccounts' => 'Bank Accounts'
+    // ''=>'',
 ];
