@@ -22,13 +22,12 @@ Route::get('/', function () {
 Route::middleware('auth')->group(function () {
 
     Route::get('/dashboard', [DashboardController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');
-    Route::delete('/dashboard/{id}', [DashboardController::class, 'destroy'])->name('dashboard.destroy');
 
 
-    // Route::post('/password-store', [PasswordController::class, 'store'])->name('form.password.store');
-
-
+    // Password Routes
     Route::post('form/password/store', [PasswordController::class, 'store'])->name('form.password.store');
+    Route::patch('form/password/{id}', [PasswordController::class, 'update'])->name('form.password.update');
+    Route::delete('form/password/{id}', [PasswordController::class, 'destroy'])->name('form.password.destroy');
 
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

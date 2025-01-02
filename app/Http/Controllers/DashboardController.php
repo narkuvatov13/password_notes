@@ -13,15 +13,4 @@ class DashboardController extends Controller
         // dd($allItems);
         return view('dashboard', compact('passwordItems'));
     }
-
-
-    public function destroy($id)
-    {
-        // dd($id);
-        $password = auth()->user()->passwords()->findOrFail($id);
-
-        $password->delete();
-
-        return redirect()->back()->with('success', 'Password deleted successfully.');
-    }
 }

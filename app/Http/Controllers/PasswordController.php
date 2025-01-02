@@ -23,7 +23,7 @@ class PasswordController extends Controller
         // dd($request->all());
         $request->validate([
             'url',
-            'name',
+            'name' => 'required',
             'username',
             'password',
             'message',
@@ -41,28 +41,36 @@ class PasswordController extends Controller
     //     return view('passwords.edit', compact('password'));
     // }
 
-    // // public function update(Request $request, $id)
-    // // {
-    // //     $password = auth()->user()->passwords()->findOrFail($id);
 
-    // //     $request->validate([
-    // //         'url' => 'required',
-    // //         'username' => 'required',
-    // //         'password' => 'required',
-    // //         'messages' => 'required',
-    // //     ]);
+    public function test($id)
+    {
+        dd('sadas');
+    }
+    public function update(Request $request, $id)
+    {
+        // dd('sdasaaaa');
+        $password = auth()->user()->passwords()->findOrFail($id);
 
-    // //     $password->update($request->all());
+        $request->validate([
+            'url',
+            'name' => 'required',
+            'username',
+            'password',
+            'message',
+        ]);
 
-    // //     return redirect()->route('passwords.index');
-    // // }
+        $password->update($request->all());
 
-    // public function destroy($id)
-    // {
-    //     $password = auth()->user()->passwords()->findOrFail($id);
+        return redirect()->back()->with('success', 'Password updated successfully.');
+    }
 
-    //     $password->delete();
+    public function destroy($id)
+    {
+        // dd($id);
+        $password = auth()->user()->passwords()->findOrFail($id);
 
-    //     return redirect()->route('passwords.index');
-    // }
+        $password->delete();
+
+        return redirect()->back()->with('success', 'Password deleted successfully.');
+    }
 }
