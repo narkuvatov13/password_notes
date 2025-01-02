@@ -31,7 +31,7 @@ class PasswordController extends Controller
 
         auth()->user()->passwords()->create($request->all());
 
-        return redirect()->back()->with('success', 'Password saved successfully.');
+        return redirect()->back()->with('success', 'Password created successfully.');
     }
 
     // public function edit($id)
