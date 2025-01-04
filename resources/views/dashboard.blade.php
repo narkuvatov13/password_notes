@@ -4,7 +4,7 @@
     @section('main-content')
 
 
-    {{-- Notification Message --}}
+    <!-- Notification Message -->
     @if (session('success'))
     <div>
         <div id="toast-success" class="position absolute top-[-65px] left-1/2 translate-x-[-50%] transition-all duration-1000 ease-in-out  flex items-center w-full max-w-xs p-4 mb-4 text-gray-500 bg-white rounded-lg shadow dark:text-gray-400 dark:bg-gray-800" role="alert">
@@ -24,6 +24,7 @@
         </div>
     </div>
     @endif
+
 
     {{-- Main Content Header --}}
     <div class="p-4 sm:ml-64">
@@ -74,8 +75,8 @@
                             <div id="dropdown{{ $loop->iteration }}" class="z-10 hidden text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
                                 <ul class="py-2" aria-labelledby="dropdownButton">
 
+                                    {{-- Edit Modal --}}
                                     <li>
-                                        {{-- Edit Modal --}}
                                         <div x-data="{ modalOpen: false }" @keydown.escape.window="modalOpen = false" class="relative z-50 w-auto h-auto">
                                             {{-- Edit Modal Button --}}
                                             <button @click="modalOpen=true" class="w-full px-4 py-2 text-sm text-gray-600 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white disabled:opacity-50 disabled:pointer-events-none">Edit</button>
@@ -133,12 +134,44 @@
                                         </div>
                                     </li>
 
+                                    {{-- Delete Form --}}
                                     <li>
-                                        <form action="{{route('form.password.destroy',$item->id)}}" method="POST">
-                                            @method('DELETE')
-                                            @csrf
-                                            <button type="submit" class="w-full px-4 py-2 text-sm text-red-600 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Delete</button>
-                                        </form>
+                                        <!-- Delete Modal Button -->
+                                        <div x-data="{ deleteModalOpen: false }" @keydown.escape.window="deleteModalOpen = false" class="relative z-50 w-auto h-auto">
+                                            {{-- Delete Modal Button --}}
+                                            <button @click="deleteModalOpen=true" class="w-full px-4 py-2 text-sm text-red-700 hover:bg-gray-100  disabled:opacity-50 disabled:pointer-events-none">Delete</button>
+                                            {{-- Delete Modal Body --}}
+                                            <template x-teleport="body">
+                                                <div x-show="deleteModalOpen" class="fixed top-0 left-0 z-[99] flex items-center justify-center w-screen h-screen rounded-md" x-cloak>
+                                                    <div x-show="deleteModalOpen" x-transition:enter="ease-out duration-300" x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100" x-transition:leave="ease-in duration-300" x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0" @click="deleteModalOpen=false" class="absolute inset-0 w-full h-full bg-black bg-opacity-40"></div>
+                                                    <div x-show="deleteModalOpen" x-trap.inert.noscroll="deleteModalOpen" x-transition:enter="ease-out duration-300" x-transition:enter-start="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95" x-transition:enter-end="opacity-100 translate-y-0 sm:scale-100" x-transition:leave="ease-in duration-200" x-transition:leave-start="opacity-100 translate-y-0 sm:scale-100" x-transition:leave-end="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95" class="relative w-full bg-white sm:max-w-lg sm:rounded-lg">
+                                                        <div class="flex items-center justify-between bg-red-700 px-6  py-3 rounded-t-lg">
+                                                            <h3 class="text-lg font-semibold text-white">Delete</h3>
+                                                            <button @click="deleteModalOpen=false" class=" flex items-center justify-center w-8 h-8 text-white rounded-full hover:bg-red-600">
+                                                                <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                                                                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                                                                </svg>
+                                                            </button>
+                                                        </div>
+                                                        {{--Delete Modal Content --}}
+                                                        <div class="relative w-auto mt-2 px-6 py-3">
+
+                                                            <p class="text-lg text-gray-800">Delete this site - {{$item->name}}</p>
+                                                            <div class="mt-4 flex justify-center gap-8 ">
+                                                                <button @click="deleteModalOpen=false" class="border shadow-md px-8 py-2 text-md text-black rounded-lg hover:bg-gray-100 ">
+                                                                    No
+                                                                </button>
+                                                                <form action="{{route('form.password.destroy',$item->id)}}" method="POST">
+                                                                    @method('DELETE')
+                                                                    @csrf
+                                                                    <button type="submit" class="shadow-md px-8 py-2 text-white text-md rounded-xl bg-red-700 hover:bg-red-800">Yes</button>
+                                                                </form>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </template>
+                                        </div>
                                     </li>
 
                                 </ul>
