@@ -59,9 +59,20 @@ class PasswordController extends Controller
             'message',
         ]);
 
-        $password->update($request->all());
 
-        return redirect()->back()->with('success', 'Password updated successfully.');
+        if (
+            $password->name != $request->input('name')
+            || $password->username != $request->input('username')
+            || $password->password != $request->input('password')
+            || $password->message != $request->input('message')
+            || $password->url != $request->input('url')
+        ) {
+
+            $password->update($request->all());
+            return redirect()->back()->with('success', 'Password updated successfully.');
+        }
+
+        return redirect()->back();
     }
 
     public function destroy($id)

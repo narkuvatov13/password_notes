@@ -49,6 +49,7 @@
                     </button>
 
                     <!-- Dropdown menu -->
+
                     <div id="dropdown{{ $loop->iteration }}" class="z-10 hidden text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
                         <ul class="py-2" aria-labelledby="dropdownButton">
 
@@ -112,14 +113,6 @@
                             </li>
 
                             <li>
-                                <form action="#" method="POST">
-                                    {{-- @method('DELETE') --}}
-                                    @csrf
-                                    <button type="submit" class="w-full px-4 py-2 text-sm text-gray-600 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Export Data</button>
-                                </form>
-                            </li>
-
-                            <li>
                                 <form action="{{route('form.password.destroy',$item->id)}}" method="POST">
                                     @method('DELETE')
                                     @csrf
@@ -162,11 +155,11 @@
         const notification = document.getElementById('toast-success');
         setTimeout(() => {
             notification.classList.add('top-[65px]');
-        },1);
+        }, 1);
 
         setTimeout(() => {
             notification.classList.remove('top-[65px]');
-        },2500);
+        }, 2500);
 
         console.log(notification);
     </script>
