@@ -10,7 +10,8 @@ class DashboardController extends Controller
     {
         // dd('sad');
         $passwordItems = auth()->user()->passwords;
+        $noteItems = auth()->user()->notes;
         // dd($allItems);
-        return view('dashboard', compact('passwordItems'));
+        return view('dashboard', compact('passwordItems', 'noteItems'));
     }
 }

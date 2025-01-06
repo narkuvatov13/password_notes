@@ -5,6 +5,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\LanguageController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PasswordController;
+use App\Http\Controllers\NoteController;
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\App;
@@ -29,6 +30,9 @@ Route::middleware('auth')->group(function () {
     Route::patch('/form/password/{id}', [PasswordController::class, 'update'])->name('form.password.update');
     Route::delete('/form/password/{id}', [PasswordController::class, 'destroy'])->name('form.password.destroy');
 
+    // Note Routes
+    Route::post('/form/note/store', [NoteController::class, 'store'])->name('form.note.store');
+    Route::patch('/form/note/{id}', [NoteController::class, 'update'])->name('form.note.update');
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');

@@ -42,10 +42,6 @@ class PasswordController extends Controller
     // }
 
 
-    public function test($id)
-    {
-        dd('sadas');
-    }
     public function update(Request $request, $id)
     {
         // dd('sdasaaaa');
