@@ -48,6 +48,7 @@ class PasswordController extends Controller
     }
     public function update(Request $request, $id)
     {
+        // dd('sdasaaaa');
         $password = auth()->user()->passwords()->findOrFail($id);
 
         $request->validate([

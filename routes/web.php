@@ -25,9 +25,9 @@ Route::middleware('auth')->group(function () {
 
 
     // Password Routes
-    Route::post('form/password/store', [PasswordController::class, 'store'])->name('form.password.store');
-    Route::patch('form/password/{id}', [PasswordController::class, 'update'])->name('form.password.update');
-    Route::delete('form/password/{id}', [PasswordController::class, 'destroy'])->name('form.password.destroy');
+    Route::post('/form/password/store', [PasswordController::class, 'store'])->name('form.password.store');
+    Route::patch('/form/password/{id}', [PasswordController::class, 'update'])->name('form.password.update');
+    Route::delete('/form/password/{id}', [PasswordController::class, 'destroy'])->name('form.password.destroy');
 
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

@@ -47,8 +47,17 @@ class User extends Authenticatable
         ];
     }
 
+
+    // Relations Function
+
+    // Password
     public function passwords()
     {
         return $this->hasMany(Password::class);
+    }
+
+    public function notes()
+    {
+        return $this->hasMany(Note::class);
     }
 }
