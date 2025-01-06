@@ -63,7 +63,7 @@
 
                         {{-- Item Card Buttons --}}
                         <div class="flex justify-end">
-                            <button id="dropdownButton{{ $loop->iteration }}" data-dropdown-toggle="dropdown{{ $loop->iteration }}" class="inline-block text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:ring-4 focus:outline-none focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm p-1.5" type="button">
+                            <button id="passwordDropdownButton{{ $loop->iteration }}" data-dropdown-toggle="passwordDropdown{{ $loop->iteration }}" class="inline-block text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:ring-4 focus:outline-none focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm p-1.5" type="button">
                                 <span class="sr-only">Open dropdown</span>
                                 <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 3">
                                     <path d="M2 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Zm6.041 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM14 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Z" />
@@ -72,22 +72,22 @@
 
                             <!-- Dropdown menu -->
 
-                            <div id="dropdown{{ $loop->iteration }}" class="z-10 hidden text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
-                                <ul class="py-2" aria-labelledby="dropdownButton">
+                            <div id="passwordDropdown{{ $loop->iteration }}" class="z-10 hidden text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
+                                <ul class="py-2" aria-labelledby="passwordDropdownButton">
 
                                     {{-- Edit Modal --}}
                                     <li>
-                                        <div x-data="{ editModalOpen: false }" @keydown.escape.window="editModalOpen = false" class="relative z-50 w-auto h-auto">
+                                        <div x-data="{ passwordEditModalOpen: false }" @keydown.escape.window="passwordEditModalOpen = false" class="relative z-50 w-auto h-auto">
                                             {{-- Edit Modal Button --}}
-                                            <button @click="editModalOpen=true" class="w-full px-4 py-2 text-sm text-gray-600 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white disabled:opacity-50 disabled:pointer-events-none">Edit</button>
+                                            <button @click="passwordEditModalOpen=true" class="w-full px-4 py-2 text-sm text-gray-600 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white disabled:opacity-50 disabled:pointer-events-none">Edit</button>
                                             {{-- Edit Modal Body --}}
                                             <template x-teleport="body">
-                                                <div x-show="editModalOpen" class="fixed top-0 left-0 z-[99] flex items-center justify-center w-screen h-screen" x-cloak>
-                                                    <div x-show="editModalOpen" x-transition:enter="ease-out duration-300" x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100" x-transition:leave="ease-in duration-300" x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0" @click="editModalOpen=false" class="absolute inset-0 w-full h-full bg-black bg-opacity-40"></div>
-                                                    <div x-show="editModalOpen" x-trap.inert.noscroll="editModalOpen" x-transition:enter="ease-out duration-300" x-transition:enter-start="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95" x-transition:enter-end="opacity-100 translate-y-0 sm:scale-100" x-transition:leave="ease-in duration-200" x-transition:leave-start="opacity-100 translate-y-0 sm:scale-100" x-transition:leave-end="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95" class="relative w-full py-6 bg-white px-7 sm:max-w-lg sm:rounded-lg">
+                                                <div x-show="passwordEditModalOpen" class="fixed top-0 left-0 z-[99] flex items-center justify-center w-screen h-screen" x-cloak>
+                                                    <div x-show="passwordEditModalOpen" x-transition:enter="ease-out duration-300" x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100" x-transition:leave="ease-in duration-300" x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0" @click="passwordEditModalOpen=false" class="absolute inset-0 w-full h-full bg-black bg-opacity-40"></div>
+                                                    <div x-show="passwordEditModalOpen" x-trap.inert.noscroll="passwordEditModalOpen" x-transition:enter="ease-out duration-300" x-transition:enter-start="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95" x-transition:enter-end="opacity-100 translate-y-0 sm:scale-100" x-transition:leave="ease-in duration-200" x-transition:leave-start="opacity-100 translate-y-0 sm:scale-100" x-transition:leave-end="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95" class="relative w-full py-6 bg-white px-7 sm:max-w-lg sm:rounded-lg">
                                                         <div class="flex items-center justify-between pb-2">
                                                             <h3 class="text-lg font-semibold">Password Update</h3>
-                                                            <button @click="editModalOpen=false" class="absolute top-0 right-0 flex items-center justify-center w-8 h-8 mt-5 mr-5 text-gray-600 rounded-full hover:text-gray-800 hover:bg-gray-50">
+                                                            <button @click="passwordEditModalOpen=false" class="absolute top-0 right-0 flex items-center justify-center w-8 h-8 mt-5 mr-5 text-gray-600 rounded-full hover:text-gray-800 hover:bg-gray-50">
                                                                 <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
                                                                     <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
                                                                 </svg>
@@ -158,17 +158,17 @@
                                     {{-- Delete Form --}}
                                     <li>
                                         <!-- Delete Modal Button -->
-                                        <div x-data="{ deleteModalOpen: false }" @keydown.escape.window="deleteModalOpen = false" class="relative z-50 w-auto h-auto">
+                                        <div x-data="{ passwordDeleteModalOpen: false }" @keydown.escape.window="passwordDeleteModalOpen = false" class="relative z-50 w-auto h-auto">
                                             {{-- Delete Modal Button --}}
-                                            <button @click="deleteModalOpen=true" class="w-full px-4 py-2 text-sm text-red-700 hover:bg-gray-100  disabled:opacity-50 disabled:pointer-events-none">Delete</button>
+                                            <button @click="passwordDeleteModalOpen=true" class="w-full px-4 py-2 text-sm text-red-700 hover:bg-gray-100  disabled:opacity-50 disabled:pointer-events-none">Delete</button>
                                             {{-- Delete Modal Body --}}
                                             <template x-teleport="body">
-                                                <div x-show="deleteModalOpen" class="fixed top-0 left-0 z-[99] flex items-center justify-center w-screen h-screen rounded-md" x-cloak>
-                                                    <div x-show="deleteModalOpen" x-transition:enter="ease-out duration-300" x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100" x-transition:leave="ease-in duration-300" x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0" @click="deleteModalOpen=false" class="absolute inset-0 w-full h-full bg-black bg-opacity-40"></div>
-                                                    <div x-show="deleteModalOpen" x-trap.inert.noscroll="deleteModalOpen" x-transition:enter="ease-out duration-300" x-transition:enter-start="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95" x-transition:enter-end="opacity-100 translate-y-0 sm:scale-100" x-transition:leave="ease-in duration-200" x-transition:leave-start="opacity-100 translate-y-0 sm:scale-100" x-transition:leave-end="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95" class="relative w-full bg-white sm:max-w-lg sm:rounded-lg">
+                                                <div x-show="passwordDeleteModalOpen" class="fixed top-0 left-0 z-[99] flex items-center justify-center w-screen h-screen rounded-md" x-cloak>
+                                                    <div x-show="passwordDeleteModalOpen" x-transition:enter="ease-out duration-300" x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100" x-transition:leave="ease-in duration-300" x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0" @click="passwordDeleteModalOpen=false" class="absolute inset-0 w-full h-full bg-black bg-opacity-40"></div>
+                                                    <div x-show="passwordDeleteModalOpen" x-trap.inert.noscroll="passwordDeleteModalOpen" x-transition:enter="ease-out duration-300" x-transition:enter-start="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95" x-transition:enter-end="opacity-100 translate-y-0 sm:scale-100" x-transition:leave="ease-in duration-200" x-transition:leave-start="opacity-100 translate-y-0 sm:scale-100" x-transition:leave-end="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95" class="relative w-full bg-white sm:max-w-lg sm:rounded-lg">
                                                         <div class="flex items-center justify-between bg-red-700 px-6  py-3 rounded-t-lg">
                                                             <h3 class="text-lg font-semibold text-white">Delete</h3>
-                                                            <button @click="deleteModalOpen=false" class=" flex items-center justify-center w-8 h-8 text-white rounded-full hover:bg-red-600">
+                                                            <button @click="passwordDeleteModalOpen=false" class=" flex items-center justify-center w-8 h-8 text-white rounded-full hover:bg-red-600">
                                                                 <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
                                                                     <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
                                                                 </svg>
@@ -179,7 +179,7 @@
 
                                                             <p class="text-lg text-gray-800">Delete this site - {{$item->name}}</p>
                                                             <div class="mt-4 flex justify-center gap-8 ">
-                                                                <button @click="deleteModalOpen=false" class="border shadow-md px-8 py-2 text-md text-black rounded-lg hover:bg-gray-100 ">
+                                                                <button @click="passwordDeleteModalOpen=false" class="border shadow-md px-8 py-2 text-md text-black rounded-lg hover:bg-gray-100 ">
                                                                     No
                                                                 </button>
                                                                 <form action="{{route('form.password.destroy',$item->id)}}" method="POST">
@@ -231,7 +231,7 @@
 
                         {{-- Item Card Buttons --}}
                         <div class="flex justify-end">
-                            <button id="editDropdownButton{{ $loop->iteration }}" data-dropdown-toggle="editDropdown{{ $loop->iteration }}" class="inline-block text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:ring-4 focus:outline-none focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm p-1.5" type="button">
+                            <button id="noteEditDropdownButton{{ $loop->iteration }}" data-dropdown-toggle="notEditDropdown{{ $loop->iteration }}" class="inline-block text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:ring-4 focus:outline-none focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm p-1.5" type="button">
                                 <span class="sr-only">Open dropdown</span>
                                 <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 3">
                                     <path d="M2 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Zm6.041 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM14 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Z" />
@@ -240,8 +240,8 @@
 
                             <!-- Dropdown menu -->
 
-                            <div id="editDropdown{{ $loop->iteration }}" class="z-10 hidden text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
-                                <ul class="py-2" aria-labelledby="editDropdownButton">
+                            <div id="notEditDropdown{{ $loop->iteration }}" class="z-10 hidden text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
+                                <ul class="py-2" aria-labelledby="noteEditDropdownButton">
 
                                     {{-- Edit Modal --}}
                                     <li>
@@ -307,17 +307,17 @@
                                     {{-- Delete Form --}}
                                     <li>
                                         <!-- Delete Modal Button -->
-                                        <div x-data="{ deleteModalOpen: false }" @keydown.escape.window="deleteModalOpen = false" class="relative z-50 w-auto h-auto">
+                                        <div x-data="{ noteDeleteModalOpen: false }" @keydown.escape.window="noteDeleteModalOpen = false" class="relative z-50 w-auto h-auto">
                                             {{-- Delete Modal Button --}}
-                                            <button @click="deleteModalOpen=true" class="w-full px-4 py-2 text-sm text-red-700 hover:bg-gray-100  disabled:opacity-50 disabled:pointer-events-none">Delete</button>
+                                            <button @click="noteDeleteModalOpen=true" class="w-full px-4 py-2 text-sm text-red-700 hover:bg-gray-100  disabled:opacity-50 disabled:pointer-events-none">Delete</button>
                                             {{-- Delete Modal Body --}}
                                             <template x-teleport="body">
-                                                <div x-show="deleteModalOpen" class="fixed top-0 left-0 z-[99] flex items-center justify-center w-screen h-screen rounded-md" x-cloak>
-                                                    <div x-show="deleteModalOpen" x-transition:enter="ease-out duration-300" x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100" x-transition:leave="ease-in duration-300" x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0" @click="deleteModalOpen=false" class="absolute inset-0 w-full h-full bg-black bg-opacity-40"></div>
-                                                    <div x-show="deleteModalOpen" x-trap.inert.noscroll="deleteModalOpen" x-transition:enter="ease-out duration-300" x-transition:enter-start="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95" x-transition:enter-end="opacity-100 translate-y-0 sm:scale-100" x-transition:leave="ease-in duration-200" x-transition:leave-start="opacity-100 translate-y-0 sm:scale-100" x-transition:leave-end="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95" class="relative w-full bg-white sm:max-w-lg sm:rounded-lg">
+                                                <div x-show="noteDeleteModalOpen" class="fixed top-0 left-0 z-[99] flex items-center justify-center w-screen h-screen rounded-md" x-cloak>
+                                                    <div x-show="noteDeleteModalOpen" @click="noteDeleteModalOpen=false" x-transition:enter="ease-out duration-300" x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100" x-transition:leave="ease-in duration-300" x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0" class="absolute inset-0 w-full h-full bg-black bg-opacity-40"></div>
+                                                    <div x-show="noteDeleteModalOpen" x-trap.inert.noscroll="noteDeleteModalOpen" x-transition:enter="ease-out duration-300" x-transition:enter-start="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95" x-transition:enter-end="opacity-100 translate-y-0 sm:scale-100" x-transition:leave="ease-in duration-200" x-transition:leave-start="opacity-100 translate-y-0 sm:scale-100" x-transition:leave-end="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95" class="relative w-full bg-white sm:max-w-lg sm:rounded-lg">
                                                         <div class="flex items-center justify-between bg-red-700 px-6  py-3 rounded-t-lg">
                                                             <h3 class="text-lg font-semibold text-white">Delete</h3>
-                                                            <button @click="deleteModalOpen=false" class=" flex items-center justify-center w-8 h-8 text-white rounded-full hover:bg-red-600">
+                                                            <button @click="noteDeleteModalOpen=false" class=" flex items-center justify-center w-8 h-8 text-white rounded-full hover:bg-red-600">
                                                                 <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
                                                                     <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
                                                                 </svg>
@@ -326,12 +326,12 @@
                                                         {{--Delete Modal Content --}}
                                                         <div class="relative w-auto mt-2 px-6 py-3">
 
-                                                            <p class="text-lg text-gray-800">Delete this site - {{$item->name}}</p>
+                                                            <p class="text-lg text-gray-800">Delete this site - {{$noteItem->name}}</p>
                                                             <div class="mt-4 flex justify-center gap-8 ">
-                                                                <button @click="deleteModalOpen=false" class="border shadow-md px-8 py-2 text-md text-black rounded-lg hover:bg-gray-100 ">
+                                                                <button @click="noteDeleteModalOpen=false" class="border shadow-md px-8 py-2 text-md text-black rounded-lg hover:bg-gray-100 ">
                                                                     No
                                                                 </button>
-                                                                <form action="{{route('form.password.destroy',$item->id)}}" method="POST">
+                                                                <form action="{{route('form.note.destroy',$noteItem->id)}}" method="POST">
                                                                     @method('DELETE')
                                                                     @csrf
                                                                     <button type="submit" class="shadow-md px-8 py-2 text-white text-md rounded-xl bg-red-700 hover:bg-red-800">Yes</button>

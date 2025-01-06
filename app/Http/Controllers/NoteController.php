@@ -42,4 +42,15 @@ class NoteController extends Controller
 
         return redirect()->back()->with('success', ' Update Note Successfully');
     }
+
+
+
+
+
+    public function destroy($id)
+    {
+        $note = auth()->user()->notes()->findorFail($id);
+        $note->delete();
+        return redirect()->back()->with('success', 'Note Delete Successfully');
+    }
 }

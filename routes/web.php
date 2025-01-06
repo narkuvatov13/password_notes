@@ -33,6 +33,7 @@ Route::middleware('auth')->group(function () {
     // Note Routes
     Route::post('/form/note/store', [NoteController::class, 'store'])->name('form.note.store');
     Route::patch('/form/note/{id}', [NoteController::class, 'update'])->name('form.note.update');
+    Route::delete('/form/note/{id}', [NoteController::class, 'destroy'])->name('form.note.destroy');
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
