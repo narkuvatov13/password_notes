@@ -620,6 +620,159 @@
             </div>
 
 
+            <!-- Payment Cards Accordian -->
+            <h2 id="accordion-collapse-heading-note">
+
+                <!-- Payment Cards Accordian Header -->
+                <button type="button" class="flex items-center justify-between w-full p-5 font-medium rtl:text-right text-gray-500 border border-b-0 border-gray-200 rounded-t-xl focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-800 dark:border-gray-700 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 gap-3" data-accordion-target="#accordion-collapse-body-note" aria-expanded="true" aria-controls="accordion-collapse-body-note">
+                    <span>Notes Items
+                        <span class="inline-flex items-center justify-center w-3 h-3 p-3 ms-3 text-xs font-medium text-blue-800 bg-blue-100 rounded-full dark:bg-blue-900 dark:text-blue-300">{{\App\Models\Note::count()}}</span>
+
+                    </span>
+                    <svg data-accordion-icon class="w-3 h-3 rotate-180 shrink-0" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5 5 1 1 5" />
+                    </svg>
+                </button>
+            </h2>
+            <!-- Payment Cards Accordian Content -->
+            <div id="accordion-collapse-body-note" class="hidden" aria-labelledby="accordion-collapse-heading-note">
+                <div class="flex flex-wrap gap-4 md:gap-6 md:justify-start justify-center p-5 border border-b-0 border-gray-200 dark:border-gray-700 dark:bg-gray-900">
+
+                    {{-- Payment Cards Item Cards --}}
+                    @foreach ($noteItems as $noteItem)
+                    <div class="block w-64 h-32 px-4 py-2 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+
+                        {{-- Payment Cards Item Card Buttons --}}
+                        <div class="flex justify-end">
+                            <button id="noteEditDropdownButton{{ $loop->iteration }}" data-dropdown-toggle="notEditDropdown{{ $loop->iteration }}" class="inline-block text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:ring-4 focus:outline-none focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm p-1.5" type="button">
+                                <span class="sr-only">Open dropdown</span>
+                                <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 3">
+                                    <path d="M2 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Zm6.041 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM14 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Z" />
+                                </svg>
+                            </button>
+
+                            <!--Payment Cards Dropdown menu -->
+
+                            <div id="notEditDropdown{{ $loop->iteration }}" class="z-10 hidden text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
+                                <ul class="py-2" aria-labelledby="noteEditDropdownButton">
+
+                                    {{-- Payment Cards Edit Modal --}}
+                                    <li>
+                                        <div x-data="{ noteEditModalOpen: false }" @keydown.escape.window="noteEditModalOpen = false" class="relative z-50 w-auto h-auto">
+                                            {{-- Payment Cards Edit Modal Button --}}
+                                            <button @click="noteEditModalOpen=true" class="w-full px-4 py-2 text-sm text-gray-600 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white disabled:opacity-50 disabled:pointer-events-none">Edit</button>
+                                            {{--Payment Cards Edit Modal Body --}}
+                                            <template x-teleport="body">
+                                                <div x-show="noteEditModalOpen" class="fixed top-0 left-0 z-[99] flex items-center justify-center w-screen h-screen" x-cloak>
+                                                    <div x-show="noteEditModalOpen" @click="noteEditModalOpen=false" x-transition:enter="ease-out duration-300" x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100" x-transition:leave="ease-in duration-300" x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0" class="absolute inset-0 w-full h-full bg-black bg-opacity-40"></div>
+                                                    <div x-show="noteEditModalOpen" x-trap.inert.noscroll="noteEditModalOpen" x-transition:enter="ease-out duration-300" x-transition:enter-start="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95" x-transition:enter-end="opacity-100 translate-y-0 sm:scale-100" x-transition:leave="ease-in duration-200" x-transition:leave-start="opacity-100 translate-y-0 sm:scale-100" x-transition:leave-end="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95" class="relative w-full py-6 bg-white px-7 sm:max-w-lg sm:rounded-lg">
+                                                        <div class="flex items-center justify-between pb-2">
+                                                            <h3 class="text-lg font-semibold">Password Update</h3>
+                                                            <button @click="noteEditModalOpen=false" class="absolute top-0 right-0 flex items-center justify-center w-8 h-8 mt-5 mr-5 text-gray-600 rounded-full hover:text-gray-800 hover:bg-gray-50">
+                                                                <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                                                                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                                                                </svg>
+                                                            </button>
+                                                        </div>
+                                                        {{--Payment Cards Content --}}
+                                                        <div class="relative w-auto mt-2">
+                                                            <form @submit.prevent="noteEditSubmitForm($event)" x-data="{
+                                        name: '{{old('name',$noteItem->name)}}', 
+                                        note_message: '{{old('note_message',$noteItem->note_message)}}',
+                                        noteEditSubmitForm(event) {
+                                                    if(this.name == '{{$noteItem->name}}' && this.note_message == '{{$noteItem->note_message}}'){
+                                                        event.preventDefault();
+                                                        noteEditModalOpen = false;
+                                                    } else{
+                                                            event.target.submit();
+                                                    }
+                                                } 
+                                        }"
+                                                                class="max-w-md mx-auto" action="{{ route('form.note.update',$noteItem->id)}}" method="POST">
+                                                                @method('PATCH')
+                                                                @csrf
+
+                                                                <div class="relative z-0 w-full mb-5 group">
+                                                                    <input type="text" name="name" x-model="name" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required />
+                                                                    <label for="name" class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Name</label>
+                                                                </div>
+
+
+
+                                                                <div class="relative z-0 w-full mb-5 group">
+                                                                    <label for="note_message" class="block mb-2 text-sm font-medium text-gray-500 dark:text-gray-400">Your Note message</label>
+                                                                    <textarea name="note_message" rows="4" x-model="note_message" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Leave a comment..."></textarea>
+                                                                </div>
+
+                                                                <div class="w-full text-end">
+                                                                    <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 ">Update</button>
+                                                                </div>
+
+
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </template>
+                                        </div>
+                                    </li>
+
+                                    {{--Payment Cards Delete Form --}}
+                                    <li>
+                                        <!--Payment Cards Delete Modal Button -->
+                                        <div x-data="{ noteDeleteModalOpen: false }" @keydown.escape.window="noteDeleteModalOpen = false" class="relative z-50 w-auto h-auto">
+                                            {{--Payment Cards Delete Modal Button --}}
+                                            <button @click="noteDeleteModalOpen=true" class="w-full px-4 py-2 text-sm text-red-700 hover:bg-gray-100  disabled:opacity-50 disabled:pointer-events-none">Delete</button>
+                                            {{--Payment Cards Delete Modal Body --}}
+                                            <template x-teleport="body">
+                                                <div x-show="noteDeleteModalOpen" class="fixed top-0 left-0 z-[99] flex items-center justify-center w-screen h-screen rounded-md" x-cloak>
+                                                    <div x-show="noteDeleteModalOpen" @click="noteDeleteModalOpen=false" x-transition:enter="ease-out duration-300" x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100" x-transition:leave="ease-in duration-300" x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0" class="absolute inset-0 w-full h-full bg-black bg-opacity-40"></div>
+                                                    <div x-show="noteDeleteModalOpen" x-trap.inert.noscroll="noteDeleteModalOpen" x-transition:enter="ease-out duration-300" x-transition:enter-start="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95" x-transition:enter-end="opacity-100 translate-y-0 sm:scale-100" x-transition:leave="ease-in duration-200" x-transition:leave-start="opacity-100 translate-y-0 sm:scale-100" x-transition:leave-end="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95" class="relative w-full bg-white sm:max-w-lg sm:rounded-lg">
+                                                        <div class="flex items-center justify-between bg-red-700 px-6  py-3 rounded-t-lg">
+                                                            <h3 class="text-lg font-semibold text-white">Delete</h3>
+                                                            <button @click="noteDeleteModalOpen=false" class=" flex items-center justify-center w-8 h-8 text-white rounded-full hover:bg-red-600">
+                                                                <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                                                                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                                                                </svg>
+                                                            </button>
+                                                        </div>
+                                                        {{--Payment Cards Delete Modal Content --}}
+                                                        <div class="relative w-auto mt-2 px-6 py-3">
+
+                                                            <p class="text-lg text-gray-800">Delete this site - {{$noteItem->name}}</p>
+                                                            <div class="mt-4 flex justify-center gap-8 ">
+                                                                <button @click="noteDeleteModalOpen=false" class="border shadow-md px-8 py-2 text-md text-black rounded-lg hover:bg-gray-100 ">
+                                                                    No
+                                                                </button>
+                                                                <form action="{{route('form.note.destroy',$noteItem->id)}}" method="POST">
+                                                                    @method('DELETE')
+                                                                    @csrf
+                                                                    <button type="submit" class="shadow-md px-8 py-2 text-white text-md rounded-xl bg-red-700 hover:bg-red-800">Yes</button>
+                                                                </form>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </template>
+                                        </div>
+                                    </li>
+
+                                </ul>
+                            </div>
+                        </div>
+
+                        {{--Payment Cards Item Card Content --}}
+                        <div class="flex flex-col items-center  ">
+                            <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{{Str::limit($noteItem->name,25,'...')}} </h5>
+                            <p class="font-normal text-gray-700 dark:text-gray-400">{{Str::limit($noteItem->username,25,'...')}}</p>
+                        </div>
+                    </div>
+                    @endforeach
+
+
+                </div>
+            </div>
+
 
         </div>
     </div>

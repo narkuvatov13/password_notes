@@ -7,6 +7,8 @@ use App\Http\Controllers\LanguageController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PasswordController;
 use App\Http\Controllers\NoteController;
+use App\Http\Controllers\PaymentCardController;
+
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\App;
@@ -40,6 +42,11 @@ Route::middleware('auth')->group(function () {
     Route::post('/form/address/store', [AddressController::class, 'store'])->name('form.address.store');
     Route::patch('/form/address/{id}', [AddressController::class, 'update'])->name('form.address.update');
     Route::delete('/form/address/{id}', [AddressController::class, 'destroy'])->name('form.address.destroy');
+
+    // Payment Card
+    Route::post('/form/payment-card/store', [PaymentCardController::class, 'store'])->name('form.payment_card.store');
+    Route::patch('/form/payment-card/{id}', [PaymentCardController::class, 'update'])->name('form.payment_card.update');
+    Route::delete('/form/payment-card/{id}', [PaymentCardController::class, 'destroy'])->name('form.payment_card.destroy');
 
 
 
