@@ -29,7 +29,33 @@ class PaymentCardController extends Controller
     //Payment Card Update
     public function update(Request $request, $id)
     {
-        dd('update');
+        // dd('update');
+        $request->validate([
+            "title" => "required",
+            "card_name",
+            "card_type",
+            "card_number",
+            "card_security_code",
+            "card_start_date",
+            "card_expiration_date",
+            "notes"
+        ]);
+
+        $data = [
+            "title" => $request->title,
+            "card_name" => $request->card_name,
+            "card_type" => $request->card_type,
+            "card_number" => $request->card_number,
+            "card_security_code" => $request->card_security_code,
+            "card_start_date" => $request->card_start_date,
+            "card_expiration_date" => $request->card_expiration_date,
+            "notes" => $request->notes
+        ];
+
+        $paymentCard = auth()->user()->paymentCards()->findorFail($id);
+        $paymentCard->update($data);
+
+        return redirect()->back()->with('success', 'Update Payment Card Succesfully');
     }
 
     //Payment Card Delete

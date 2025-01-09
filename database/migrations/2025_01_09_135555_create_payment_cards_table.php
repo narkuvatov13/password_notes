@@ -15,13 +15,13 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();
             $table->string('title', 50);
-            $table->string('card_name', 50);
-            $table->string('card_type', 50);
-            $table->string('card_number', 50);
-            $table->string('card_security_code', 50);
-            $table->string('card_start_date', 20);
-            $table->string('card_expiration_date', 20);
-            $table->text('notes');
+            $table->string('card_name', 50)->nullable();
+            $table->string('card_type', 50)->nullable();
+            $table->string('card_number', 50)->nullable();
+            $table->string('card_security_code', 50)->nullable();
+            $table->string('card_start_date', 20)->nullable();
+            $table->string('card_expiration_date', 20)->nullable();
+            $table->text('notes')->nullable();
             $table->timestamps();
         });
     }

@@ -18,7 +18,8 @@ class DashboardController extends Controller
         $passwordItems = auth()->user()->passwords;
         $noteItems = auth()->user()->notes;
         $addresses = auth()->user()->addresses;
+        $paymentCards = auth()->user()->paymentCards;
         // dd($allItems);
-        return view('dashboard', compact('passwordItems', 'noteItems', 'addresses'));
+        return view('dashboard', compact('passwordItems', 'noteItems', 'addresses', 'paymentCards'));
     }
 }
