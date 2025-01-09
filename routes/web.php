@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AddressController;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\LanguageController;
@@ -36,9 +37,9 @@ Route::middleware('auth')->group(function () {
     Route::delete('/form/note/{id}', [NoteController::class, 'destroy'])->name('form.note.destroy');
 
     // Address Routes
-    Route::post('/form/address/store', [NoteController::class, 'store'])->name('form.address.store');
-    Route::patch('/form/address/{id}', [NoteController::class, 'update'])->name('form.address.update');
-    Route::delete('/form/address/{id}', [NoteController::class, 'destroy'])->name('form.address.destroy');
+    Route::post('/form/address/store', [AddressController::class, 'store'])->name('form.address.store');
+    Route::patch('/form/address/{id}', [AddressController::class, 'update'])->name('form.address.update');
+    Route::delete('/form/address/{id}', [AddressController::class, 'destroy'])->name('form.address.destroy');
 
 
 

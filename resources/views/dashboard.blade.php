@@ -410,17 +410,43 @@
     <script>
         // Notification Message
         const notification = document.getElementById('toast-success');
-        setTimeout(() => {
-            notification.classList.add('top-[65px]');
-        }, 1);
+        if (notification != null) {
+            setTimeout(() => {
+                notification.classList.add('top-[65px]');
+            }, 1);
 
-        setTimeout(() => {
-            notification.classList.remove('top-[65px]');
-        }, 2500);
+            setTimeout(() => {
+                notification.classList.remove('top-[65px]');
+            }, 2500);
 
-        console.log(notification);
+        }
+
+        // console.log(notification);
 
         // Edit  Modal Form Script
+
+        function addressDate(event) {
+            if (event) {
+                const input = event.target;
+
+                input.addEventListener("input", function() {
+                    let value = input.value;
+
+                    // Sadece rakamları al (tarih için geçerli karakterler)
+                    value = value.replace(/\D/g, "");
+
+                    // GG/AA/YYYY formatını uygula
+                    if (value.length >= 3 && value.length <= 4) {
+                        value = value.slice(0, 2) + "/" + value.slice(2);
+                    } else if (value.length >= 5) {
+                        value = value.slice(0, 2) + "/" + value.slice(2, 4) + "/" + value.slice(4, 8);
+                    }
+
+                    // Değeri input alanına geri yaz
+                    input.value = value;
+                });
+            }
+        }
     </script>
     @endsection
 
