@@ -35,6 +35,16 @@ Route::middleware('auth')->group(function () {
     Route::patch('/form/note/{id}', [NoteController::class, 'update'])->name('form.note.update');
     Route::delete('/form/note/{id}', [NoteController::class, 'destroy'])->name('form.note.destroy');
 
+    // Address Routes
+    Route::post('/form/address/store', [NoteController::class, 'store'])->name('form.address.store');
+    Route::patch('/form/address/{id}', [NoteController::class, 'update'])->name('form.address.update');
+    Route::delete('/form/address/{id}', [NoteController::class, 'destroy'])->name('form.address.destroy');
+
+
+
+
+
+
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');

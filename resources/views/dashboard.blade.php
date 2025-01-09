@@ -39,6 +39,9 @@
         <!-- Accordians -->
         <div id="accordion-collapse" data-accordion="collapse">
 
+
+
+
             <!-- Password Accordian -->
             <h2 id="accordion-collapse-heading-password">
 
@@ -215,7 +218,10 @@
 
                 <!-- Notes Accordian Header -->
                 <button type="button" class="flex items-center justify-between w-full p-5 font-medium rtl:text-right text-gray-500 border border-b-0 border-gray-200 rounded-t-xl focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-800 dark:border-gray-700 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 gap-3" data-accordion-target="#accordion-collapse-body-note" aria-expanded="true" aria-controls="accordion-collapse-body-note">
-                    <span>Notes Items</span>
+                    <span>Notes Items
+                        <span class="inline-flex items-center justify-center w-3 h-3 p-3 ms-3 text-xs font-medium text-blue-800 bg-blue-100 rounded-full dark:bg-blue-900 dark:text-blue-300">{{\App\Models\Note::count()}}</span>
+
+                    </span>
                     <svg data-accordion-icon class="w-3 h-3 rotate-180 shrink-0" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5 5 1 1 5" />
                     </svg>
@@ -229,7 +235,7 @@
                     @foreach ($noteItems as $noteItem)
                     <div class="block w-64 h-32 px-4 py-2 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
 
-                        {{-- Item Card Buttons --}}
+                        {{-- Note Item Card Buttons --}}
                         <div class="flex justify-end">
                             <button id="noteEditDropdownButton{{ $loop->iteration }}" data-dropdown-toggle="notEditDropdown{{ $loop->iteration }}" class="inline-block text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:ring-4 focus:outline-none focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm p-1.5" type="button">
                                 <span class="sr-only">Open dropdown</span>
@@ -238,17 +244,17 @@
                                 </svg>
                             </button>
 
-                            <!-- Dropdown menu -->
+                            <!--Note Dropdown menu -->
 
                             <div id="notEditDropdown{{ $loop->iteration }}" class="z-10 hidden text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
                                 <ul class="py-2" aria-labelledby="noteEditDropdownButton">
 
-                                    {{-- Edit Modal --}}
+                                    {{--Note Edit Modal --}}
                                     <li>
                                         <div x-data="{ noteEditModalOpen: false }" @keydown.escape.window="noteEditModalOpen = false" class="relative z-50 w-auto h-auto">
-                                            {{-- Edit Modal Button --}}
+                                            {{-- Note Edit Modal Button --}}
                                             <button @click="noteEditModalOpen=true" class="w-full px-4 py-2 text-sm text-gray-600 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white disabled:opacity-50 disabled:pointer-events-none">Edit</button>
-                                            {{-- Edit Modal Body --}}
+                                            {{--Note Edit Modal Body --}}
                                             <template x-teleport="body">
                                                 <div x-show="noteEditModalOpen" class="fixed top-0 left-0 z-[99] flex items-center justify-center w-screen h-screen" x-cloak>
                                                     <div x-show="noteEditModalOpen" @click="noteEditModalOpen=false" x-transition:enter="ease-out duration-300" x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100" x-transition:leave="ease-in duration-300" x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0" class="absolute inset-0 w-full h-full bg-black bg-opacity-40"></div>
@@ -261,7 +267,7 @@
                                                                 </svg>
                                                             </button>
                                                         </div>
-                                                        {{-- Content --}}
+                                                        {{--Note Content --}}
                                                         <div class="relative w-auto mt-2">
                                                             <form @submit.prevent="noteEditSubmitForm($event)" x-data="{
                                                         name: '{{old('name',$noteItem->name)}}', 
@@ -304,13 +310,13 @@
                                         </div>
                                     </li>
 
-                                    {{-- Delete Form --}}
+                                    {{--Note Delete Form --}}
                                     <li>
-                                        <!-- Delete Modal Button -->
+                                        <!--Note Delete Modal Button -->
                                         <div x-data="{ noteDeleteModalOpen: false }" @keydown.escape.window="noteDeleteModalOpen = false" class="relative z-50 w-auto h-auto">
-                                            {{-- Delete Modal Button --}}
+                                            {{--Note Delete Modal Button --}}
                                             <button @click="noteDeleteModalOpen=true" class="w-full px-4 py-2 text-sm text-red-700 hover:bg-gray-100  disabled:opacity-50 disabled:pointer-events-none">Delete</button>
-                                            {{-- Delete Modal Body --}}
+                                            {{--Note Delete Modal Body --}}
                                             <template x-teleport="body">
                                                 <div x-show="noteDeleteModalOpen" class="fixed top-0 left-0 z-[99] flex items-center justify-center w-screen h-screen rounded-md" x-cloak>
                                                     <div x-show="noteDeleteModalOpen" @click="noteDeleteModalOpen=false" x-transition:enter="ease-out duration-300" x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100" x-transition:leave="ease-in duration-300" x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0" class="absolute inset-0 w-full h-full bg-black bg-opacity-40"></div>
@@ -323,7 +329,7 @@
                                                                 </svg>
                                                             </button>
                                                         </div>
-                                                        {{--Delete Modal Content --}}
+                                                        {{--Note Delete Modal Content --}}
                                                         <div class="relative w-auto mt-2 px-6 py-3">
 
                                                             <p class="text-lg text-gray-800">Delete this site - {{$noteItem->name}}</p>
@@ -348,7 +354,7 @@
                             </div>
                         </div>
 
-                        {{-- Item Card Content --}}
+                        {{--Note Item Card Content --}}
                         <div class="flex flex-col items-center  ">
                             <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{{Str::limit($noteItem->name,25,'...')}} </h5>
                             <p class="font-normal text-gray-700 dark:text-gray-400">{{Str::limit($noteItem->username,25,'...')}}</p>
@@ -359,6 +365,32 @@
 
                 </div>
             </div>
+
+
+            <!-- Adress Accordian -->
+            <h2 id="accordion-collapse-heading-note">
+
+                <!-- Adress Accordian Header -->
+                <button type="button" class="flex items-center justify-between w-full p-5 font-medium rtl:text-right text-gray-500 border border-b-0 border-gray-200 rounded-t-xl focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-800 dark:border-gray-700 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 gap-3" data-accordion-target="#accordion-collapse-body-address" aria-expanded="true" aria-controls="accordion-collapse-body-address">
+                    <span>Address Items
+                        <span class="inline-flex items-center justify-center w-3 h-3 p-3 ms-3 text-xs font-medium text-blue-800 bg-blue-100 rounded-full dark:bg-blue-900 dark:text-blue-300"></span>
+                    </span>
+                    <svg data-accordion-icon class="w-3 h-3 rotate-180 shrink-0" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5 5 1 1 5" />
+                    </svg>
+                </button>
+            </h2>
+
+            <!-- Adress Accordian Content -->
+            <div id="accordion-collapse-body-address" class="hidden" aria-labelledby="accordion-collapse-body-address">
+                <div class="flex flex-wrap gap-4 md:gap-6 md:justify-start justify-center p-5 border border-b-0 border-gray-200 dark:border-gray-700 dark:bg-gray-900">
+
+                    <h1>sda</h1>
+
+                </div>
+            </div>
+
+
 
         </div>
     </div>
