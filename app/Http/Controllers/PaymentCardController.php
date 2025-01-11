@@ -6,6 +6,14 @@ use Illuminate\Http\Request;
 
 class PaymentCardController extends Controller
 {
+    public function index()
+    {
+
+        $paymentCards = auth()->user()->paymentCards;
+        return view("pages.payment-cards", compact('paymentCards'));
+    }
+
+
     //Payment Card Create
     public function store(Request $request)
     {

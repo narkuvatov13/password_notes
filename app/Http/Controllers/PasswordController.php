@@ -6,12 +6,12 @@ use Illuminate\Http\Request;
 
 class PasswordController extends Controller
 {
-    // public function index()
-    // {
-    //     $passwords = auth()->user()->passwords;
+    public function index()
+    {
+        $passwordItems = auth()->user()->passwords;
 
-    //     return view('passwords.index', compact('passwords'));
-    // }
+        return view('pages.passwords', compact('passwordItems'));
+    }
 
     // public function create()
     // {

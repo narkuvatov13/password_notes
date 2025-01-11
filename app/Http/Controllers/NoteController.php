@@ -7,7 +7,12 @@ use Illuminate\Http\Request;
 class NoteController extends Controller
 {
 
+    public function index()
+    {
 
+        $noteItems = auth()->user()->notes;
+        return view("pages.notes", compact('noteItems'));
+    }
 
 
 

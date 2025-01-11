@@ -7,6 +7,13 @@ use Illuminate\Http\Request;
 class AddressController extends Controller
 {
 
+    public function index()
+    {
+
+        $addresses = auth()->user()->addresses;
+        return view("pages.addresses", compact('addresses'));
+    }
+
     public function store(Request $request)
     {
         // dd($request->input('birthday'));

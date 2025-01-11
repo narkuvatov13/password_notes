@@ -7,6 +7,16 @@ use Illuminate\Http\Request;
 
 class BankAccountController extends Controller
 {
+
+    public function index()
+    {
+
+        $bankAccounts = auth()->user()->bankAccounts;
+        return view("pages.bank-accounts", compact('bankAccounts'));
+    }
+
+
+
     public function store(BankAccountRequest $request)
     {
         // dd($request);
