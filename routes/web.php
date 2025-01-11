@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AddressController;
+use App\Http\Controllers\BankAccountController;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\LanguageController;
@@ -48,7 +49,10 @@ Route::middleware('auth')->group(function () {
     Route::patch('/form/payment-card/{id}', [PaymentCardController::class, 'update'])->name('form.payment_card.update');
     Route::delete('/form/payment-card/{id}', [PaymentCardController::class, 'destroy'])->name('form.payment_card.destroy');
 
-
+    // Bank Account Card
+    Route::post('/form/bank-account/store', [BankAccountController::class, 'store'])->name('form.bank_account.store');
+    Route::patch('/form/bank-account/{id}', [BankAccountController::class, 'update'])->name('form.bank_account.update');
+    Route::delete('/form/bank-account/{id}', [BankAccountController::class, 'destroy'])->name('form.bank_account.destroy');
 
 
 

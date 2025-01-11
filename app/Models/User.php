@@ -75,4 +75,11 @@ class User extends Authenticatable
     {
         return $this->hasMany(PaymentCard::class);
     }
+
+
+
+    public function bankAccounts()
+    {
+        return $this->hasMany(BankAccount::class);
+    }
 }

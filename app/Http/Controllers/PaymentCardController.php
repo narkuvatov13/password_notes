@@ -61,6 +61,9 @@ class PaymentCardController extends Controller
     //Payment Card Delete
     public function destroy(Request $request, $id)
     {
-        dd('delete');
+        $paymentCard = auth()->user()->paymentCards()->findOrFail($id);
+        $paymentCard->delete();
+
+        return redirect()->back()->with('success', 'Delete Payment Card Successfully');
     }
 }
