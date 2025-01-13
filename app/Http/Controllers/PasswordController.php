@@ -31,7 +31,7 @@ class PasswordController extends Controller
 
         auth()->user()->passwords()->create($request->all());
 
-        return redirect()->back()->with('success', 'Password created successfully.');
+        return redirect()->back()->with('success', __('messages.creatded_password_success'));
     }
 
     // public function edit($id)
@@ -65,7 +65,7 @@ class PasswordController extends Controller
         ) {
 
             $password->update($request->all());
-            return redirect()->back()->with('success', 'Password updated successfully.');
+            return redirect()->back()->with('success', __('messages.password_updated_successfully'));
         }
 
         return redirect()->back();
@@ -78,6 +78,6 @@ class PasswordController extends Controller
 
         $password->delete();
 
-        return redirect()->back()->with('success', 'Password deleted successfully.');
+        return redirect()->back()->with('success', __('messages.password_deleted_successfully'));
     }
 }

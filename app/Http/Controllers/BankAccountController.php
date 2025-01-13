@@ -25,7 +25,7 @@ class BankAccountController extends Controller
 
         auth()->user()->bankAccounts()->create($validateData);
 
-        return redirect()->back()->with("success", "Create Bank Account Note Successfully");
+        return redirect()->back()->with("success", __('messages.create_bank_account_note_successfully'));
     }
 
 
@@ -52,7 +52,7 @@ class BankAccountController extends Controller
         $bankAccount  = auth()->user()->bankAccounts()->findOrFail($id);
         $bankAccount->update($dataForm);
 
-        return redirect()->back()->with('success', 'Update Bank Account Successfully');
+        return redirect()->back()->with('success', __('messages.update_bank_account_note_successfully'));
     }
 
     public function destroy($id)
@@ -60,6 +60,6 @@ class BankAccountController extends Controller
         // dd('delete');
 
         auth()->user()->bankAccounts()->findOrFail($id)->delete();
-        return redirect()->back()->with('success', 'Delete Bank Account Note Successfully');
+        return redirect()->back()->with('success', __('messages.delete_bank_account_note_successfully'));
     }
 }

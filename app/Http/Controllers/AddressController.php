@@ -41,7 +41,7 @@ class AddressController extends Controller
 
         // if()
         auth()->user()->addresses()->create($request->all());
-        return redirect()->back()->with('success', "Create Address Successfylly");
+        return redirect()->back()->with('success', __('messages.create_address_successfully') __());
     }
 
     public function update(Request $request, $id)
@@ -90,7 +90,7 @@ class AddressController extends Controller
             'notes' => $request->input("notes"),
         ]);
 
-        return redirect()->back()->with('success', 'Update Address Successfully');
+        return redirect()->back()->with('success', __('messages.update_address_successfully'));
     }
 
     public function destroy($id)
@@ -98,7 +98,7 @@ class AddressController extends Controller
         $address = auth()->user()->addresses()->findorFail($id);
         $address->delete();
 
-        return redirect()->back()->with('success', 'Delete Address Successfully');
+        return redirect()->back()->with('success', __('messages.delete_address_successfully'));
         // dd($id);
     }
 }

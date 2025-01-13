@@ -28,7 +28,7 @@ class NoteController extends Controller
 
         auth()->user()->notes()->create($request->all());
 
-        return redirect()->back()->with('success', 'Created Note Successfully');
+        return redirect()->back()->with('success', __('messages.created_note_successfuly'));
     }
 
 
@@ -45,7 +45,7 @@ class NoteController extends Controller
             'note_message' => $request->input('note_message')
         ]);
 
-        return redirect()->back()->with('success', ' Update Note Successfully');
+        return redirect()->back()->with('success', __('messages.update_note_successfully'));
     }
 
 
@@ -56,6 +56,6 @@ class NoteController extends Controller
     {
         $note = auth()->user()->notes()->findorFail($id);
         $note->delete();
-        return redirect()->back()->with('success', 'Note Delete Successfully');
+        return redirect()->back()->with('success', __('messages.note_delete_successfully'));
     }
 }
