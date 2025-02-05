@@ -41,7 +41,7 @@ class AddressController extends Controller
 
         // if()
         auth()->user()->addresses()->create($request->all());
-        return redirect()->back()->with('success', __('messages.create_address_successfully') __());
+        return redirect()->back()->with('success', __('messages.create_address_successfully'));
     }
 
     public function update(Request $request, $id)

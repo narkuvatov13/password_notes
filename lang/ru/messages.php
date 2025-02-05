@@ -87,5 +87,9 @@ return [
     'create_payment_card_successfully' => 'Успешно создать платежную карту',
     'update_payment_card_successfully' => 'Обновить платежную карту успешно',
     'delete_payment_card_successfully' => 'Удалить платежную карту успешно',
-    'update' => 'Обновить', //
+    'update' => 'Обновить',
+    'note_update' => 'Заметки об обновлении',
+    'settings' => 'Настройки',
+    'profile' => 'Профиль',
+
 ];

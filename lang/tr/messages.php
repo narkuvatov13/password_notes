@@ -87,4 +87,7 @@ return [
     'update_payment_card_successfully' => 'Ödeme Kartını Başarıyla Güncellendi',
     'delete_payment_card_successfully' => 'Ödeme Kartını Başarıyla Silindi',
     'update' => 'Güncelle', //
+    'note_update' => 'Notlari Güncelle',
+    'settings' => 'Ayarlar',
+    'profile' => 'Profil Bilgileri',
 ];
