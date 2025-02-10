@@ -4,6 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\Rules\Password;
+use Illuminate\Support\Facades\Validator;
+
 
 class SettingController extends Controller
 {
@@ -55,24 +59,61 @@ class SettingController extends Controller
         // dd($request->all());
         $user = User::findOrFail($id);
         $img = null;
-        $request->validate([
+
+
+        // dd('asdad');
+
+        $validator = Validator::make($request->all(), [
             'name' => 'required',
             'email' => 'required|email',
             'imageUrl'   => 'nullable|file|image|mimes:png,jpg,jpeg',
+            'password' => [
+                'nullable',
+                // 'required_with:new_password',
+                function ($attribute, $value, $fail) {
+                    if (!Hash::check($value, auth()->user()->password)) {
+                        $fail(__('Fail Current Password'));
+                    }
+                }
+            ],
+            'new_password' => [
+                'nullable',
+                'different:password',
+                'required_with:password',
+                Password::min(8)->mixedCase()->letters()->numbers(),
+            ],
         ]);
 
+        // Password Fail
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput()->with('error', __('messages.error_password_not_update'));
+        }
 
+        // image upload
         if ($request->file('imageUrl')) {
             $img = $request->file('imageUrl')->store('user/images', 'public');
         }
 
-        $user->update([
-            'name' => $request->input('name'),
-            'email' => $request->input('email'),
-            'img' => $img != null ? $img : $request->file('imageUrl'),
-        ]);
 
-        return redirect()->back()->with('success', "Update Profile Settings Successfully");
+        // password 
+        if ($request->input('password') == null || $request->input('password') == null) {
+            $user->update([
+                'name' => $request->input('name'),
+                'email' => $request->input('email'),
+                'img' => $img != null ? $img : $user->img,
+            ]);
+
+            return redirect()->back()->with(['success' => "Update Profile Settings Successfully"]);
+        } else {
+
+            $user->update([
+                'name' => $request->input('name'),
+                'email' => $request->input('email'),
+                'img' => $img != null ? $img : $user->img,
+                'password' =>  Hash::make($request->input('new_password')),
+            ]);
+            return redirect()->back()->with(['success' => "Update Profile Settings Successfully"]);
+        }
     }
 
     /**

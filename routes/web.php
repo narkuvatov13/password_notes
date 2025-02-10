@@ -12,7 +12,7 @@ use App\Http\Controllers\PaymentCardController;
 use App\Http\Controllers\SettingController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\App;
-
+use Illuminate\Support\Facades\Hash;
 
 Route::any('/switch-locale/{locale}', [LanguageController::class, 'switchLocale'])->name('switch-language');
 
@@ -20,6 +20,10 @@ Route::get('/', function () {
     return view('auth.login');
 });
 
+// Route::get('/test', function () {
+//     $pass = Hash::make('12345Yusup');
+//     echo $pass;
+// });
 
 
 
@@ -60,7 +64,6 @@ Route::middleware('auth')->group(function () {
 
     //Settings
     Route::put('/settings/{id}', [SettingController::class, 'update'])->name('settings.update');
-
 
 
     // Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

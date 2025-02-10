@@ -20,6 +20,27 @@
     @endif
 
 
+    @if (session('error'))
+    <div>
+        <div id="toast-success" class="position absolute top-[-65px] left-1/2 translate-x-[-50%] transition-all duration-1000 ease-in-out  flex items-center w-full max-w-xs p-4 mb-4 text-gray-500 bg-white rounded-lg shadow dark:text-gray-400 dark:bg-gray-800" role="alert">
+            <div class="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 text-red-500 bg-red-100 rounded-lg dark:bg-red-800 dark:text-red-200">
+                <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
+                </svg>
+            </div>
+            <div class="ms-3 text-sm font-normal">{{session('error')}}</div>
+            <button type="button" class="ms-auto -mx-1.5 -my-1.5 bg-white text-gray-400 hover:text-gray-900 rounded-lg focus:ring-2 focus:ring-gray-300 p-1.5 hover:bg-gray-100 inline-flex items-center justify-center h-8 w-8 dark:text-gray-500 dark:hover:text-white dark:bg-gray-800 dark:hover:bg-gray-700" data-dismiss-target="#toast-error" aria-label="Close">
+                <span class="sr-only">Close</span>
+                <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
+                </svg>
+            </button>
+        </div>
+    </div>
+    @endif
+
+
+
     {{-- Nav Top Bar --}}
     <div class="px-1 py-1 lg:px-3 lg:pl-1">
         <div class="flex items-center justify-between">
@@ -200,9 +221,12 @@
                                                 <!-- Settings Modal Content -->
                                                 <div class="relative w-auto">
 
-                                                    <form action="{{route('settings.update', auth()->user()->id)}}" method="POST" enctype="multipart/form-data" @submit.prevent="settingSubmitForm($event)" x-data="{
+                                                    <form action="{{route('settings.update', auth()->user()->id)}}" method="POST" enctype="multipart/form-data" @submit.prevent="settingSubmitForm($event)"
+                                                        x-data="{
                                                         name: '{{old('name',auth()->user()->name)}}', 
                                                         email: '{{old('email',auth()->user()->email)}}', 
+                                                        password:null,
+                                                        new_password:null,
                                                         imageUrl:null,
                                                         imageFile:null,
                                                         uploadedUrl:null,
@@ -220,11 +244,14 @@
                                                             }
                                                         },
                                                         settingSubmitForm(event) {
-                                                                    if(this.name == '{{auth()->user()->name}}' && this.email == '{{auth()->user()->email}}' && this.imageUrl == '{{auth()->user()->img}}'){
+                                                                    if(this.name == '{{auth()->user()->name}}' && this.email == '{{auth()->user()->email}}' && this.imageUrl == null && this.password == null && this.new_password == null){
+                                                                        console.log(settingModalOpen);
+                                                                        settingModalOpen = true;
                                                                         event.preventDefault();
-                                                                        settingModalOpen = false;
                                                                     } else{
-                                                                            event.target.submit();
+                                                                        console.log(settingModalOpen);
+                                                                        
+                                                                        event.target.submit();
                                                                     }
                                                                 } 
                                                         }">
@@ -247,21 +274,38 @@
                                                         </div>
 
                                                         <div class="relative z-0 w-full mb-5 group">
-                                                            <input type="text" x-model="name" name="name" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder="Entry Name Please " required />
+                                                            <input type="text" x-model="name" name="name" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder="Entry Name Please " />
                                                             <label for="name" class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">{{ __('messages.name') }}</label>
+                                                            @error('name')
+                                                            <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+                                                            @enderror
                                                         </div>
                                                         <div class="relative z-0 w-full mb-5 group">
-                                                            <input type="email" x-model="email" name="email" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder="Entry Email Please " required />
+                                                            <input type="email" x-model="email" name="email" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder="Entry Email Please " />
                                                             <label for="email" class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">{{ __('messages.email_address') }}</label>
+                                                            @error('email')
+                                                            <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+                                                            @enderror
                                                         </div>
 
-                                                        <!-- <div class="relative z-0 w-full mb-5 group">
-                                                            <input type="text" x-model="password" name="password" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " />
-                                                            <label for="password" class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">{{ __('messages.password') }}</label>
-                                                        </div> -->
+                                                        <div class="relative z-0 w-full mb-5 group">
+                                                            <input type="text" x-model="password" name="password" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder="" />
+                                                            <label for="password" class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">{{ __('messages.current_password') }}</label>
+                                                            @error('password')
+                                                            <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+                                                            @enderror
+                                                        </div>
+
+                                                        <div class="relative z-0 w-full mb-5 group">
+                                                            <input type="text" x-model="new_password" name="new_password" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder="" />
+                                                            <label for="password" class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">{{ __('messages.new_password') }}</label>
+                                                            @error('new_password')
+                                                            <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+                                                            @enderror
+                                                        </div>
 
                                                         <div class="w-full text-end">
-                                                            <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 ">{{ __('messages.update') }}</button>
+                                                            <button type="submit" @click="settingModalOpen=true" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 ">{{ __('messages.save') }}</button>
                                                         </div>
 
                                                     </form>

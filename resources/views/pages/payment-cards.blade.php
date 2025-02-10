@@ -134,7 +134,7 @@
 
                                                         <div class="relative z-0 w-full mb-5 group">
                                                             <label for="notes" class="block mb-2 text-sm font-medium text-gray-500 dark:text-gray-400">{{ __('messages.your_message') }}</label>
-                                                            <textarea name="notes" rows="4" x-model="note_message" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="{{ __('messages.leave_a_comment') }}"></textarea>
+                                                            <textarea name="notes" rows="4" x-model="notes" class="block p-3 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="{{ __('messages.leave_a_comment') }}"></textarea>
                                                         </div>
 
                                                         <div class="w-full text-end">
