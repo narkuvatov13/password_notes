@@ -5,6 +5,7 @@ use App\Http\Controllers\BankAccountController;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\LanguageController;
+use App\Http\Controllers\PasswordForgetController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PasswordController;
 use App\Http\Controllers\NoteController;
@@ -25,6 +26,8 @@ Route::get('/', function () {
 //     echo $pass;
 // });
 
+Route::get('password-forget', [PasswordForgetController::class, 'index'])->name('password.forgot.index');
+Route::post('password-forget', [PasswordForgetController::class, 'update'])->name('password.forgot.update');
 
 
 Route::middleware('auth')->group(function () {

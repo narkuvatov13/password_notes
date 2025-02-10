@@ -30,7 +30,13 @@
                             @error('password')
                             <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
                             @enderror
+
+
+                            <div class="text-end">
+                                <a href="{{route('password.forgot.index')}}" class="text-sm text-gray-500 font-medium hover:underline">{{__('Reset Password')}}</a>
+                            </div>
                         </div>
+
 
                         <button type="submit" class="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">Log In</button>
 
