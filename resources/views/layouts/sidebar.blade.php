@@ -146,7 +146,7 @@
                     <div x-data="{ accountDropdownOpen: false }" class="relative">
                         <!-- My Account Dropdown Button -->
                         <button @click="accountDropdownOpen=true" class="inline-flex border-none items-center justify-center h-12 py-2 pl-3 pr-12 text-sm font-medium transition-colors bg-white border rounded-md text-neutral-700 hover:bg-neutral-100 active:bg-white focus:bg-white focus:outline-none disabled:opacity-50 disabled:pointer-events-none">
-                            <img src="https://cdn.devdojo.com/images/may2023/adam.jpeg" class="object-cover w-8 h-8 border rounded-full border-neutral-200" />
+                            <img src="{{asset('/storage/'.auth()->user()->img)}}" class="object-cover w-8 h-8 border rounded-full border-neutral-200" />
                             <span class="flex flex-col items-start flex-shrink-0 h-full ml-2 leading-none translate-y-px">
                                 <span>{{auth()->user()->name}}</span>
                                 <span class="text-xs font-light text-neutral-400">{{auth()->user()->email}}</span>
@@ -157,13 +157,126 @@
                         <div x-show="accountDropdownOpen" @click.away="accountDropdownOpen=false" x-transition:enter="ease-out duration-200" x-transition:enter-start="-translate-y-2" x-transition:enter-end="translate-y-0" class="absolute top-0 z-50 w-56 mt-12 -translate-x-1/2 left-1/2" x-cloak>
                             <div class="p-1 mt-1 bg-white border rounded-md shadow-md border-neutral-200/70 text-neutral-700">
 
-                                <a href="#_" class="relative flex  cursor-default select-none hover:bg-neutral-100 items-center rounded px-2 py-1.5 text-sm outline-none transition-colors data-[disabled]:pointer-events-none data-[disabled]:opacity-50">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4 mr-2">
-                                        <path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"></path>
-                                        <circle cx="12" cy="12" r="3"></circle>
-                                    </svg>
-                                    <span>{{__('messages.settings')}}</span>
-                                </a>
+                                <!-- Settings Modal  -->
+                                <div x-data="{ settingModalOpen: false }"
+                                    @keydown.escape.window="settingModalOpen = false"
+                                    class="relative z-50 w-auto h-auto">
+                                    <button @click="settingModalOpen=true" class="relative flex w-full cursor-default select-none hover:bg-neutral-100 items-center rounded px-2 py-1.5 text-sm outline-none transition-colors data-[disabled]:pointer-events-none data-[disabled]:opacity-50">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4 mr-2">
+                                            <path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"></path>
+                                            <circle cx="12" cy="12" r="3"></circle>
+                                        </svg>
+                                        <span>{{__('messages.settings')}}</span>
+                                    </button>
+
+                                    <template x-teleport="body">
+                                        <div x-show="settingModalOpen" class="fixed top-0 left-0 z-[99] flex items-center justify-center w-screen h-screen" x-cloak>
+                                            <div x-show="settingModalOpen"
+                                                x-transition:enter="ease-out duration-300"
+                                                x-transition:enter-start="opacity-0"
+                                                x-transition:enter-end="opacity-100"
+                                                x-transition:leave="ease-in duration-300"
+                                                x-transition:leave-start="opacity-100"
+                                                x-transition:leave-end="opacity-0"
+                                                @click="settingModalOpen=false" class="absolute inset-0 w-full h-full bg-black bg-opacity-40"></div>
+                                            <div x-show="settingModalOpen"
+                                                x-trap.inert.noscroll="settingModalOpen"
+                                                x-transition:enter="ease-out duration-300"
+                                                x-transition:enter-start="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+                                                x-transition:enter-end="opacity-100 translate-y-0 sm:scale-100"
+                                                x-transition:leave="ease-in duration-200"
+                                                x-transition:leave-start="opacity-100 translate-y-0 sm:scale-100"
+                                                x-transition:leave-end="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+                                                class="relative w-full py-6 bg-white px-7 sm:max-w-lg sm:rounded-lg">
+                                                <div class="flex items-center justify-between pb-2">
+                                                    <!-- Settings Modal Title -->
+                                                    <h3 class="text-lg font-semibold">{{__("messages.settings")}}</h3>
+                                                    <button @click="settingModalOpen=false" class="absolute top-0 right-0 flex items-center justify-center w-8 h-8 mt-5 mr-5 text-gray-600 rounded-full hover:text-gray-800 hover:bg-gray-50">
+                                                        <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                                                            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                                                        </svg>
+                                                    </button>
+                                                </div>
+                                                <!-- Settings Modal Content -->
+                                                <div class="relative w-auto">
+
+                                                    <form action="{{route('settings.update', auth()->user()->id)}}" method="POST" enctype="multipart/form-data" @submit.prevent="settingSubmitForm($event)" x-data="{
+                                                        name: '{{old('name',auth()->user()->name)}}', 
+                                                        email: '{{old('email',auth()->user()->email)}}', 
+                                                        imageUrl:null,
+                                                        imageFile:null,
+                                                        uploadedUrl:null,
+                                                        loading:false,
+
+                                                        previewImage(event){
+                                                            let file = event.target.files[0];
+                                                            if (file) {
+                                                                this.imageFile = file;
+                                                                let reader = new FileReader();
+                                                                reader.onload = (e) => {
+                                                                    this.imageUrl = e.target.result;
+                                                                };
+                                                                reader.readAsDataURL(file);
+                                                            }
+                                                        },
+                                                        settingSubmitForm(event) {
+                                                                    if(this.name == '{{auth()->user()->name}}' && this.email == '{{auth()->user()->email}}' && this.imageUrl == '{{auth()->user()->img}}'){
+                                                                        event.preventDefault();
+                                                                        settingModalOpen = false;
+                                                                    } else{
+                                                                            event.target.submit();
+                                                                    }
+                                                                } 
+                                                        }">
+                                                        @csrf
+                                                        @method('PUT')
+                                                        <div class="relative z-0 w-full mb-5 group">
+                                                            <template x-if="imageUrl">
+                                                                <img :src="imageUrl" alt="{{__('messages.preview_image')}}" class="w-20 h-20 rounded-full" />
+                                                            </template>
+                                                            @if(auth()->user()->img)
+                                                            <template x-if="!imageUrl">
+                                                                <img src="{{asset('/storage/'.auth()->user()->img)}}" alt="{{__('messages.preview_image')}}" class="w-20 h-20 rounded-full" />
+                                                            </template>
+
+                                                            @endif
+
+
+
+                                                            <input type="file" name="imageUrl" accept="image/*" @change="previewImage" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" />
+                                                        </div>
+
+                                                        <div class="relative z-0 w-full mb-5 group">
+                                                            <input type="text" x-model="name" name="name" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder="Entry Name Please " required />
+                                                            <label for="name" class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">{{ __('messages.name') }}</label>
+                                                        </div>
+                                                        <div class="relative z-0 w-full mb-5 group">
+                                                            <input type="email" x-model="email" name="email" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder="Entry Email Please " required />
+                                                            <label for="email" class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">{{ __('messages.email_address') }}</label>
+                                                        </div>
+
+                                                        <!-- <div class="relative z-0 w-full mb-5 group">
+                                                            <input type="text" x-model="password" name="password" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " />
+                                                            <label for="password" class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">{{ __('messages.password') }}</label>
+                                                        </div> -->
+
+                                                        <div class="w-full text-end">
+                                                            <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 ">{{ __('messages.update') }}</button>
+                                                        </div>
+
+                                                    </form>
+
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </template>
+                                </div>
+
+
+
+
+
 
 
                                 <div class="h-px my-1 -mx-1 bg-neutral-200"></div>

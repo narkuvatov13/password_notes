@@ -9,8 +9,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PasswordController;
 use App\Http\Controllers\NoteController;
 use App\Http\Controllers\PaymentCardController;
-
-
+use App\Http\Controllers\SettingController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\App;
 
@@ -59,12 +58,14 @@ Route::middleware('auth')->group(function () {
     Route::patch('/form/bank-account/{id}', [BankAccountController::class, 'update'])->name('form.bank_account.update');
     Route::delete('/form/bank-account/{id}', [BankAccountController::class, 'destroy'])->name('form.bank_account.destroy');
 
+    //Settings
+    Route::put('/settings/{id}', [SettingController::class, 'update'])->name('settings.update');
 
 
 
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    // Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    // Route::patch('/profile/update', [ProfileController::class, 'update'])->name('profile.update');
+    // Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
 
