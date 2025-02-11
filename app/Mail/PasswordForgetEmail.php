@@ -36,7 +36,7 @@ class PasswordForgetEmail extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'aaaaaaaaaaaaaaaaa',
+            subject: $this->subject,
         );
     }
 
@@ -46,7 +46,7 @@ class PasswordForgetEmail extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'mail.mail-content',
+            html: 'mail.mail-content',
         );
     }
 
