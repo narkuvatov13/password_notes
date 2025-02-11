@@ -40,7 +40,7 @@ class PasswordForgetController extends Controller
 
         Mail::to($toEmail)->send(new PasswordForgetEmail($message, $subject));
 
-        session()->flash('passwordForgot', __('Reset Password Successfull Check in Mail '));
+        session()->flash('passwordForgot', __('Reset Password Successfull Check in Mail'));
 
         return redirect()->route('login');
     }
