@@ -64,4 +64,24 @@
             </div>
         </div>
     </section>
+
+
+
+
+    @push('scripts')
+    <script>
+        // Notification Message
+        const notification = document.getElementById('toast-success');
+        if (notification != null) {
+            setTimeout(() => {
+                notification.classList.add('top-[65px]');
+            }, 1);
+
+            setTimeout(() => {
+                notification.classList.remove('top-[65px]');
+            }, 2500);
+
+        }
+    </script>
+    @endpush
 </x-app>

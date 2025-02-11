@@ -7,6 +7,8 @@ use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules\Password;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Storage;
+
 
 
 class SettingController extends Controller
@@ -84,16 +86,24 @@ class SettingController extends Controller
             ],
         ]);
 
+        // dd($validator->fails());
         // Password Fail
         if ($validator->fails()) {
-            return redirect()->back()->withErrors($validator)->withInput()->with('error', __('messages.error_password_not_update'));
+
+            session()->flash('error', __('messages.error_password_not_update'));
+            // dd($validator->fails());
+
+            return redirect()->back();
         }
 
         // image upload
         if ($request->file('imageUrl')) {
-            $img = $request->file('imageUrl')->store('user/images', 'public');
-        }
 
+            $img = Storage::disk('public')->put('images', $request->file('imageUrl'));
+            // $me_image = "public/" . $user->img;
+            // dd(Storage::disk('public')->files($img), $user->img);
+            Storage::disk('public')->delete($user->img);
+        }
 
         // password 
         if ($request->input('password') == null || $request->input('password') == null) {
