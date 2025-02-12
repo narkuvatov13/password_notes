@@ -100,8 +100,6 @@ class SettingController extends Controller
         if ($request->file('imageUrl')) {
 
             $img = Storage::disk('public')->put('images', $request->file('imageUrl'));
-            // $me_image = "public/" . $user->img;
-            // dd(Storage::disk('public')->files($img), $user->img);
             Storage::disk('public')->delete($user->img);
         }
 
@@ -113,7 +111,7 @@ class SettingController extends Controller
                 'img' => $img != null ? $img : $user->img,
             ]);
 
-            return redirect()->back()->with(['success' => "Update Profile Settings Successfully"]);
+            return redirect()->back()->with(['success' => __('messages.update_profile_settings_settings')]);
         } else {
 
             $user->update([
@@ -122,7 +120,7 @@ class SettingController extends Controller
                 'img' => $img != null ? $img : $user->img,
                 'password' =>  Hash::make($request->input('new_password')),
             ]);
-            return redirect()->back()->with(['success' => "Update Profile Settings Successfully"]);
+            return redirect()->back()->with(['success' => __('messages.update_profile_settings_settings')]);
         }
     }
 

@@ -110,7 +110,7 @@
                             {{strtoupper(App::getLocale())}}
                         </button>
 
-                        <div x-show="languageDropdownOpen" @click.away="languageDropdownOpen=false" x-transition:enter="ease-out duration-200" x-transition:enter-start="-translate-y-2" x-transition:enter-end="translate-y-0" class="absolute top-0 z-50 w-32 mt-12 -translate-x-1/2 left-1/2 ">
+                        <div x-cloak style="display:none !important; " x-show="languageDropdownOpen" @click.away="languageDropdownOpen=false" x-transition:enter="ease-out duration-200" x-transition:enter-start="-translate-y-2" x-transition:enter-end="translate-y-0" class="absolute top-0 z-50 w-32 mt-12 -translate-x-1/2 left-1/2 ">
                             <div class="p-1 mt-1 bg-white border rounded-md shadow-md border-neutral-200/70 text-neutral-700">
 
                                 <a href="{{route('switch-language','en')}}" class="relative flex cursor-default select-none hover:bg-neutral-100 items-center rounded px-2 py-1.5 text-sm outline-none transition-colors data-[disabled]:pointer-events-none data-[disabled]:opacity-50">
@@ -175,7 +175,7 @@
 
                         </button>
                         <!-- Setting Dropdown Content -->
-                        <div x-show="accountDropdownOpen" @click.away="accountDropdownOpen=false" x-transition:enter="ease-out duration-200" x-transition:enter-start="-translate-y-2" x-transition:enter-end="translate-y-0" class="absolute top-0 z-50 w-56 mt-12 -translate-x-1/2 left-1/2" x-cloak>
+                        <div x-cloak style="display:none !important; " x-show="accountDropdownOpen" @click.away="accountDropdownOpen=false" x-transition:enter="ease-out duration-200" x-transition:enter-start="-translate-y-2" x-transition:enter-end="translate-y-0" class="absolute top-0 z-50 w-56 mt-12 -translate-x-1/2 left-1/2" x-cloak>
                             <div class="p-1 mt-1 bg-white border rounded-md shadow-md border-neutral-200/70 text-neutral-700">
 
                                 <!-- Settings Modal  -->

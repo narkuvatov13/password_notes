@@ -94,7 +94,7 @@ return [
     'new_password' => 'New Password',
     'current_password' => 'Current Password',
     'error_password_not_update' => 'Error Password Not Update',
-    '' => '',
+    'update_profile_settings_settings' => 'Update Profile Settings Successfully',
     '' => '',
     '' => '',
     '' => '',
