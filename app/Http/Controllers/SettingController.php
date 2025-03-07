@@ -60,7 +60,6 @@ class SettingController extends Controller
     {
         // dd($request->all());
         $user = User::findOrFail($id);
-        $img = null;
 
 
         // dd('asdad');
@@ -96,14 +95,22 @@ class SettingController extends Controller
             return redirect()->back();
         }
 
+
         // image upload
+        $img = null;
+
         if ($request->file('imageUrl')) {
 
             $img = Storage::disk('public')->put('images', $request->file('imageUrl'));
-            Storage::disk('public')->delete($user->img);
+            $filepath = $user->img ?? null;
+            if ($filepath && Storage::exists($filepath)) {
+                Storage::disk('public')->delete($user->img);
+            }
         }
 
-        // password 
+
+
+        // password
         if ($request->input('password') == null || $request->input('password') == null) {
             $user->update([
                 'name' => $request->input('name'),
