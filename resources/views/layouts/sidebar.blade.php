@@ -328,7 +328,7 @@
                                                             </template>
                                                             @if (auth()->user()->img)
                                                                 <template x-if="!imageUrl">
-                                                                    <img src="{{ asset('/storage/' . auth()->user()->img) }}"
+                                                                    <img src="{{ 'https://fls-9e603673-c78d-422c-9c57-d6f261ffdccb.laravel.cloud/' . auth()->user()->img }}"
                                                                         alt="{{ __('messages.preview_image') }}"
                                                                         class="w-20 h-20 rounded-full" />
                                                                 </template>
