@@ -123,7 +123,7 @@ class SettingController extends Controller
                 'img' => $img != null ? $img : $user->img,
             ]);
 
-            return redirect()->back()->with(['success' => __('messages.update_profile_settings_settings')]);
+            return redirect()->back()->with(['success' => __('messages.update_profile_settings_settings'), 'filename' => $fileName]);
         } else {
 
             $user->update([
