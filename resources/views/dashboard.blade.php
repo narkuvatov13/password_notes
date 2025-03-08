@@ -57,7 +57,7 @@
                         data-accordion-target="#accordion-collapse-body-password" aria-expanded="true"
                         aria-controls="accordion-collapse-body-password">
                         <span>{{__('messages.password_items')}}<span
-                                class="inline-flex items-center justify-center w-3 h-3 p-3 ms-3 text-xs font-medium text-blue-800 bg-blue-100 rounded-full dark:bg-blue-900 dark:text-blue-300">{{\App\Models\Password::count()}}</span>
+                                class="inline-flex items-center justify-center w-3 h-3 p-3 ms-3 text-xs font-medium text-blue-800 bg-blue-100 rounded-full dark:bg-blue-900 dark:text-blue-300">{{Auth::user()->passwords->count()}}</span>
                         </span>
                         <svg data-accordion-icon class="w-3 h-3 rotate-180 shrink-0" aria-hidden="true"
                             xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
@@ -147,20 +147,21 @@
                                                                 <div class="relative w-auto mt-2">
                                                                     <form @submit.prevent="passwordEditSubmitForm($event)"
                                                                         x-data="{
-                                                                                            url: '{{old('url', $item->url)}}',
-                                                                                            name: '{{old('name', $item->name)}}',
-                                                                                            username: '{{old('username', $item->username)}}',
-                                                                                            password: '{{old('password', $item->password)}}',
-                                                                                            message: '{{old('message', $item->message)}}',
-                                                                                            passwordEditSubmitForm(event) {
-                                                                                                        if(this.url == '{{$item->url}}' && this.name == '{{$item->name}}' && this.username == '{{$item->username}}' && this.password == '{{$item->password}}' && this.message == '{{$item->message}}'){
-                                                                                                            event.preventDefault();
-                                                                                                            editModalOpen = false;
-                                                                                                        } else{
-                                                                                                                event.target.submit();
-                                                                                                        }
-                                                                                                    }
-                                                                                            }" class="max-w-md mx-auto"
+                                                                                                                                            url: '{{old('url', $item->url)}}',
+                                                                                                                                            name: '{{old('name', $item->name)}}',
+                                                                                                                                            username: '{{old('username', $item->username)}}',
+                                                                                                                                            password: '{{old('password', $item->password)}}',
+                                                                                                                                            message: '{{old('message', $item->message)}}',
+                                                                                                                                            passwordEditSubmitForm(event) {
+                                                                                                                                                        if(this.url == '{{$item->url}}' && this.name == '{{$item->name}}' && this.username == '{{$item->username}}' && this.password == '{{$item->password}}' && this.message == '{{$item->message}}'){
+                                                                                                                                                            event.preventDefault();
+                                                                                                                                                            editModalOpen = false;
+                                                                                                                                                        } else{
+                                                                                                                                                                event.target.submit();
+                                                                                                                                                        }
+                                                                                                                                                    }
+                                                                                                                                            }"
+                                                                        class="max-w-md mx-auto"
                                                                         action="{{ route('form.password.update', $item->id)}}"
                                                                         method="POST">
                                                                         @method('PATCH')
@@ -325,7 +326,7 @@
 
                             {{ __('messages.note_items') }}
                             <span
-                                class="inline-flex items-center justify-center w-3 h-3 p-3 ms-3 text-xs font-medium text-blue-800 bg-blue-100 rounded-full dark:bg-blue-900 dark:text-blue-300">{{\App\Models\Note::count()}}</span>
+                                class="inline-flex items-center justify-center w-3 h-3 p-3 ms-3 text-xs font-medium text-blue-800 bg-blue-100 rounded-full dark:bg-blue-900 dark:text-blue-300">{{Auth::user()->notes->count()}}</span>
 
                         </span>
                         <svg data-accordion-icon class="w-3 h-3 rotate-180 shrink-0" aria-hidden="true"
@@ -413,17 +414,18 @@
                                                                 {{--Note Content --}}
                                                                 <div class="relative w-auto mt-2">
                                                                     <form @submit.prevent="noteEditSubmitForm($event)" x-data="{
-                                                                        name: '{{old('name', $noteItem->name)}}',
-                                                                        note_message: '{{old('note_message', $noteItem->note_message)}}',
-                                                                        noteEditSubmitForm(event) {
-                                                                                    if(this.name == '{{$noteItem->name}}' && this.note_message == '{{$noteItem->note_message}}'){
-                                                                                        event.preventDefault();
-                                                                                        noteEditModalOpen = false;
-                                                                                    } else{
-                                                                                            event.target.submit();
-                                                                                    }
-                                                                                }
-                                                                        }" class="max-w-md mx-auto"
+                                                                                                                        name: '{{old('name', $noteItem->name)}}',
+                                                                                                                        note_message: '{{old('note_message', $noteItem->note_message)}}',
+                                                                                                                        noteEditSubmitForm(event) {
+                                                                                                                                    if(this.name == '{{$noteItem->name}}' && this.note_message == '{{$noteItem->note_message}}'){
+                                                                                                                                        event.preventDefault();
+                                                                                                                                        noteEditModalOpen = false;
+                                                                                                                                    } else{
+                                                                                                                                            event.target.submit();
+                                                                                                                                    }
+                                                                                                                                }
+                                                                                                                        }"
+                                                                        class="max-w-md mx-auto"
                                                                         action="{{ route('form.note.update', $noteItem->id)}}"
                                                                         method="POST">
                                                                         @method('PATCH')
@@ -568,7 +570,7 @@
                         aria-controls="accordion-collapse-body-address">
                         <span>{{ __('messages.address_items')  }}
                             <span
-                                class="inline-flex items-center justify-center w-3 h-3 p-3 ms-3 text-xs font-medium text-blue-800 bg-blue-100 rounded-full dark:bg-blue-900 dark:text-blue-300">{{\App\Models\Address::count()}}</span>
+                                class="inline-flex items-center justify-center w-3 h-3 p-3 ms-3 text-xs font-medium text-blue-800 bg-blue-100 rounded-full dark:bg-blue-900 dark:text-blue-300">{{Auth::user()->addresses->count()}}</span>
                         </span>
                         <svg data-accordion-icon class="w-3 h-3 rotate-180 shrink-0" aria-hidden="true"
                             xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
@@ -658,33 +660,34 @@
                                                                 <div class="relative w-auto mt-2">
                                                                     <form @submit.prevent="addressEditSubmitForm($event)"
                                                                         x-data="{
-                                                                        title: '{{old('title', $address->title)}}',
-                                                                        first_name: '{{old('first_name', $address->first_name)}}',
-                                                                        middle_name: '{{old('middle_name', $address->middle_name)}}',
-                                                                        last_name: '{{old('last_name', $address->last_name)}}',
-                                                                        username: '{{old('username', $address->username)}}',
-                                                                        gender: '{{old('gender', $address->gender)}}',
-                                                                        birthday: '{{old('birthday', $address->birthday)}}',
-                                                                        company: '{{old('company', $address->company)}}',
-                                                                        address: '{{old('address', $address->address)}}',
-                                                                        city: '{{old('city', $address->city)}}',
-                                                                        country: '{{old('country', $address->country)}}',
-                                                                        state: '{{old('state', $address->state)}}',
-                                                                        postal_code: '{{old('postal_code', $address->postal_code)}}',
-                                                                        email: '{{old('email', $address->email)}}',
-                                                                        phone_number: '{{old('phone_number', $address->phone_number)}}',
-                                                                        mobile_phone_number: '{{old('mobile_phone_number', $address->mobile_phone_number)}}',
-                                                                        fax: '{{old('fax', $address->fax)}}',
-                                                                        notes: '{{old('notes', $address->notes)}}',
-                                                                        addressEditSubmitForm(event) {
-                                                                                    if(this.title == '{{$address->title}}' && this.first_name == '{{$address->first_name}}' && this.middle_name == '{{$address->middle_name}}' && this.last_name == '{{$address->last_name}}' && this.username == '{{$address->username}}' && this.gender == '{{$address->gender}}' && this.birthday == '{{$address->birthday}}' && this.company == '{{$address->company}}' && this.address == '{{$address->address}}' && this.city == '{{$address->city}}' && this.country == '{{$address->country}}' && this.state == '{{$address->state}}' && this.postal_code == '{{$address->postal_code}}' && this.email == '{{$address->email}}' && this.phone_number == '{{$address->phone_number}}' && this.mobile_phone_number == '{{$address->mobile_phone_number}}' && this.fax == '{{$address->fax}}' && this.notes == '{{$address->notes}}'){
-                                                                                        event.preventDefault();
-                                                                                        noteEditModalOpen = false;
-                                                                                    } else{
-                                                                                            event.target.submit();
-                                                                                    }
-                                                                                }
-                                                                        }" class="max-w-md mx-auto"
+                                                                                                                        title: '{{old('title', $address->title)}}',
+                                                                                                                        first_name: '{{old('first_name', $address->first_name)}}',
+                                                                                                                        middle_name: '{{old('middle_name', $address->middle_name)}}',
+                                                                                                                        last_name: '{{old('last_name', $address->last_name)}}',
+                                                                                                                        username: '{{old('username', $address->username)}}',
+                                                                                                                        gender: '{{old('gender', $address->gender)}}',
+                                                                                                                        birthday: '{{old('birthday', $address->birthday)}}',
+                                                                                                                        company: '{{old('company', $address->company)}}',
+                                                                                                                        address: '{{old('address', $address->address)}}',
+                                                                                                                        city: '{{old('city', $address->city)}}',
+                                                                                                                        country: '{{old('country', $address->country)}}',
+                                                                                                                        state: '{{old('state', $address->state)}}',
+                                                                                                                        postal_code: '{{old('postal_code', $address->postal_code)}}',
+                                                                                                                        email: '{{old('email', $address->email)}}',
+                                                                                                                        phone_number: '{{old('phone_number', $address->phone_number)}}',
+                                                                                                                        mobile_phone_number: '{{old('mobile_phone_number', $address->mobile_phone_number)}}',
+                                                                                                                        fax: '{{old('fax', $address->fax)}}',
+                                                                                                                        notes: '{{old('notes', $address->notes)}}',
+                                                                                                                        addressEditSubmitForm(event) {
+                                                                                                                                    if(this.title == '{{$address->title}}' && this.first_name == '{{$address->first_name}}' && this.middle_name == '{{$address->middle_name}}' && this.last_name == '{{$address->last_name}}' && this.username == '{{$address->username}}' && this.gender == '{{$address->gender}}' && this.birthday == '{{$address->birthday}}' && this.company == '{{$address->company}}' && this.address == '{{$address->address}}' && this.city == '{{$address->city}}' && this.country == '{{$address->country}}' && this.state == '{{$address->state}}' && this.postal_code == '{{$address->postal_code}}' && this.email == '{{$address->email}}' && this.phone_number == '{{$address->phone_number}}' && this.mobile_phone_number == '{{$address->mobile_phone_number}}' && this.fax == '{{$address->fax}}' && this.notes == '{{$address->notes}}'){
+                                                                                                                                        event.preventDefault();
+                                                                                                                                        noteEditModalOpen = false;
+                                                                                                                                    } else{
+                                                                                                                                            event.target.submit();
+                                                                                                                                    }
+                                                                                                                                }
+                                                                                                                        }"
+                                                                        class="max-w-md mx-auto"
                                                                         action="{{ route('form.address.update', $address->id)}}"
                                                                         method="POST">
                                                                         @method('PATCH')
@@ -967,7 +970,7 @@
                         aria-controls="accordion-collapse-body-payment-card">
                         <span>{{ __('messages.payment_card_items') }}
                             <span
-                                class="inline-flex items-center justify-center w-3 h-3 p-3 ms-3 text-xs font-medium text-blue-800 bg-blue-100 rounded-full dark:bg-blue-900 dark:text-blue-300">{{\App\Models\PaymentCard::count()}}</span>
+                                class="inline-flex items-center justify-center w-3 h-3 p-3 ms-3 text-xs font-medium text-blue-800 bg-blue-100 rounded-full dark:bg-blue-900 dark:text-blue-300">{{Auth::user()->paymentCards->count()}}</span>
                         </span>
                         <svg data-accordion-icon class="w-3 h-3 rotate-180 shrink-0" aria-hidden="true"
                             xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
@@ -1057,23 +1060,24 @@
                                                                 <div class="relative w-auto mt-2">
                                                                     <form @submit.prevent="paymentCardsEditSubmitForm($event)"
                                                                         x-data="{
-                                                        title: '{{old('title', $paymentCard->title)}}',
-                                                        card_name: '{{old('card_name', $paymentCard->card_name)}}',
-                                                        card_type: '{{old('card_type', $paymentCard->card_type)}}',
-                                                        card_number: '{{old('card_number', $paymentCard->card_number)}}',
-                                                        card_security_code: '{{old('card_security_code', $paymentCard->card_security_code)}}',
-                                                        card_start_date: '{{old('card_start_date', $paymentCard->card_start_date)}}',
-                                                        card_expiration_date: '{{old('card_expiration_date', $paymentCard->card_expiration_date)}}',
-                                                        notes: '{{old('notes', $paymentCard->notes)}}',
-                                                        paymentCardsEditSubmitForm(event) {
-                                                                    if(this.title == '{{$paymentCard->title}}' && this.card_name == '{{$paymentCard->card_name}}' && this.card_type == '{{$paymentCard->card_type}}' && this.card_number == '{{$paymentCard->card_number}}' && this.card_security_code == '{{$paymentCard->card_security_code}}' && this.card_start_date == '{{$paymentCard->titcard_start_datele}}' && this.card_expiration_date == '{{$paymentCard->card_expiration_date}}' && this.notes == '{{$paymentCard->notes}}'){
-                                                                        event.preventDefault();
-                                                                        paymentCardEditModalOpen = false;
-                                                                    } else{
-                                                                            event.target.submit();
-                                                                    }
-                                                                }
-                                                        }" class="max-w-md mx-auto"
+                                                                                                        title: '{{old('title', $paymentCard->title)}}',
+                                                                                                        card_name: '{{old('card_name', $paymentCard->card_name)}}',
+                                                                                                        card_type: '{{old('card_type', $paymentCard->card_type)}}',
+                                                                                                        card_number: '{{old('card_number', $paymentCard->card_number)}}',
+                                                                                                        card_security_code: '{{old('card_security_code', $paymentCard->card_security_code)}}',
+                                                                                                        card_start_date: '{{old('card_start_date', $paymentCard->card_start_date)}}',
+                                                                                                        card_expiration_date: '{{old('card_expiration_date', $paymentCard->card_expiration_date)}}',
+                                                                                                        notes: '{{old('notes', $paymentCard->notes)}}',
+                                                                                                        paymentCardsEditSubmitForm(event) {
+                                                                                                                    if(this.title == '{{$paymentCard->title}}' && this.card_name == '{{$paymentCard->card_name}}' && this.card_type == '{{$paymentCard->card_type}}' && this.card_number == '{{$paymentCard->card_number}}' && this.card_security_code == '{{$paymentCard->card_security_code}}' && this.card_start_date == '{{$paymentCard->titcard_start_datele}}' && this.card_expiration_date == '{{$paymentCard->card_expiration_date}}' && this.notes == '{{$paymentCard->notes}}'){
+                                                                                                                        event.preventDefault();
+                                                                                                                        paymentCardEditModalOpen = false;
+                                                                                                                    } else{
+                                                                                                                            event.target.submit();
+                                                                                                                    }
+                                                                                                                }
+                                                                                                        }"
+                                                                        class="max-w-md mx-auto"
                                                                         action="{{ route('form.payment_card.update', $paymentCard->id)}}"
                                                                         method="POST">
                                                                         @method('PATCH')
@@ -1269,7 +1273,7 @@
                         <span>
                             {{ __('messages.bank_account_items') }}
                             <span
-                                class="inline-flex items-center justify-center w-3 h-3 p-3 ms-3 text-xs font-medium text-blue-800 bg-blue-100 rounded-full dark:bg-blue-900 dark:text-blue-300">{{\App\Models\BankAccount::count()}}</span>
+                                class="inline-flex items-center justify-center w-3 h-3 p-3 ms-3 text-xs font-medium text-blue-800 bg-blue-100 rounded-full dark:bg-blue-900 dark:text-blue-300">{{Auth::user()->bankAccounts->count()}}</span>
                         </span>
                         <svg data-accordion-icon class="w-3 h-3 rotate-180 shrink-0" aria-hidden="true"
                             xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
@@ -1359,26 +1363,27 @@
                                                                 <div class="relative w-auto mt-2">
                                                                     <form @submit.prevent="bankAccountEditSubmitForm($event)"
                                                                         x-data="{
-                                        title: '{{old('title', $bankAccount->title)}}',
-                                        bank_name: '{{old('bank_name', $bankAccount->bank_name)}}',
-                                        account_type: '{{old('account_type', $bankAccount->account_type)}}',
-                                        routing_number: '{{old('routing_number', $bankAccount->routing_number)}}',
-                                        account_number: '{{old('account_number', $bankAccount->account_number)}}',
-                                        swift_code: '{{old('swift_code', $bankAccount->swift_code)}}',
-                                        iban_number: '{{old('iban_number', $bankAccount->iban_number)}}',
-                                        pin: '{{old('pin', default: $bankAccount->pin)}}',
-                                        branch_address: '{{old('branch_address', $bankAccount->branch_address)}}',
-                                        branch_phone: '{{old('branch_phone', $bankAccount->branch_phone)}}',
-                                        notes: '{{old('notes', $bankAccount->notes)}}',
-                                        bankAccountEditSubmitForm(event) {
-                                                    if(this.title == '{{$bankAccount->title}}' && this.bank_name == '{{$bankAccount->bank_name}}' && this.account_type == '{{$bankAccount->account_type}}' && this.routing_number == '{{$bankAccount->routing_number}}' && this.account_number == '{{$bankAccount->account_number}}' && this.swift_code == '{{$bankAccount->swift_code}}' && this.iban_number == '{{$bankAccount->iban_number}}' && this.pin == '{{$bankAccount->pin}}' && this.branch_address == '{{$bankAccount->branch_address}}' && this.branch_phone == '{{$bankAccount->branch_phone}}' && this.notes == '{{$bankAccount->notes}}'){
-                                                        event.preventDefault();
-                                                        bankAccountEditModalOpen = false;
-                                                    } else{
-                                                            event.target.submit();
-                                                    }
-                                                }
-                                        }" class="max-w-md mx-auto" action="{{ route('form.bank_account.update', $bankAccount->id)}}"
+                                                                                        title: '{{old('title', $bankAccount->title)}}',
+                                                                                        bank_name: '{{old('bank_name', $bankAccount->bank_name)}}',
+                                                                                        account_type: '{{old('account_type', $bankAccount->account_type)}}',
+                                                                                        routing_number: '{{old('routing_number', $bankAccount->routing_number)}}',
+                                                                                        account_number: '{{old('account_number', $bankAccount->account_number)}}',
+                                                                                        swift_code: '{{old('swift_code', $bankAccount->swift_code)}}',
+                                                                                        iban_number: '{{old('iban_number', $bankAccount->iban_number)}}',
+                                                                                        pin: '{{old('pin', default: $bankAccount->pin)}}',
+                                                                                        branch_address: '{{old('branch_address', $bankAccount->branch_address)}}',
+                                                                                        branch_phone: '{{old('branch_phone', $bankAccount->branch_phone)}}',
+                                                                                        notes: '{{old('notes', $bankAccount->notes)}}',
+                                                                                        bankAccountEditSubmitForm(event) {
+                                                                                                    if(this.title == '{{$bankAccount->title}}' && this.bank_name == '{{$bankAccount->bank_name}}' && this.account_type == '{{$bankAccount->account_type}}' && this.routing_number == '{{$bankAccount->routing_number}}' && this.account_number == '{{$bankAccount->account_number}}' && this.swift_code == '{{$bankAccount->swift_code}}' && this.iban_number == '{{$bankAccount->iban_number}}' && this.pin == '{{$bankAccount->pin}}' && this.branch_address == '{{$bankAccount->branch_address}}' && this.branch_phone == '{{$bankAccount->branch_phone}}' && this.notes == '{{$bankAccount->notes}}'){
+                                                                                                        event.preventDefault();
+                                                                                                        bankAccountEditModalOpen = false;
+                                                                                                    } else{
+                                                                                                            event.target.submit();
+                                                                                                    }
+                                                                                                }
+                                                                                        }" class="max-w-md mx-auto"
+                                                                        action="{{ route('form.bank_account.update', $bankAccount->id)}}"
                                                                         method="POST">
                                                                         @method('PATCH')
                                                                         @csrf
