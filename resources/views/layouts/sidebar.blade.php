@@ -376,8 +376,8 @@
                                                                 class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
                                                                 {{ __('messages.current_password') }}
                                                             </label>
-                                                            <svg @mousedown="visibility=!visibility"
-                                                                @mouseup="visibility=!visibility"
+                                                            <svg @mouseenter="visibility=!visibility"
+                                                                @mouseleave="visibility=!visibility"
                                                                 class="absolute top-1/4 right-0 w-6 h-6 text-gray-500 cursor-pointer hover:text-gray-600 dark:text-white"
                                                                 aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                                                                 width="24" height="24" fill="currentColor"
