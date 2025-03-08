@@ -208,8 +208,10 @@
                         <!-- My Setting Dropdown Button -->
                         <button @click="accountDropdownOpen=true"
                             class="inline-flex border-none items-center justify-center h-12 py-2 pl-3 pr-12 text-sm font-medium transition-colors bg-white border rounded-md text-neutral-700 hover:bg-neutral-100 active:bg-white focus:bg-white focus:outline-none disabled:opacity-50 disabled:pointer-events-none">
-                            <img src="{{asset('/storage/' . auth()->user()->img)}}"
+                            <img src="https://{{ env('AWS_BUCKET') }}.s3.{{ env('AWS_DEFAULT_REGION') }}.amazonaws.com/images/konferansTestImage.jpg"
                                 class="object-cover w-8 h-8 border rounded-full border-neutral-200" />
+                            {{-- <img src="{{asset('/storage/' . auth()->user()->img)}}"
+                                class="object-cover w-8 h-8 border rounded-full border-neutral-200" /> --}}
                             <span
                                 class="flex flex-col items-start flex-shrink-0 h-full ml-2 leading-none translate-y-px">
                                 <span>{{auth()->user()->name}}</span>
