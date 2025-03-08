@@ -67,7 +67,7 @@
             <div class="flex items-center justify-start rtl:justify-end">
                 <button data-drawer-target="logo-sidebar" data-drawer-toggle="logo-sidebar" aria-controls="logo-sidebar"
                     type="button"
-                    class="inline-flex items-center p-2 text-sm text-gray-500 rounded-lg sm:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600">
+                    class="inline-flex items-center p-1 sm:p-2 text-sm text-gray-500 rounded-lg sm:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600">
                     <span class="sr-only">Open sidebar</span>
                     <svg class="w-6 h-6" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20"
                         xmlns="http://www.w3.org/2000/svg">
@@ -78,7 +78,7 @@
                 </button>
                 <a href="{{ route('dashboard') }}" class="flex ms-2 md:me-24 text-blue-600">
                     <span
-                        class="self-center text-xl font-semibold sm:text-2xl whitespace-nowrap dark:text-white">{{ __('Password Notes') }}</span>
+                        class="self-center text-sm sm:text-xl  font-semibold whitespace-nowrap dark:text-white">{{ __('Password Notes') }}</span>
                 </a>
             </div>
             {{-- UP Navbar right section --}}
@@ -89,7 +89,7 @@
                     <div x-data="{ languageDropdownOpen: false }" class="relative">
 
                         <button @click="languageDropdownOpen=true"
-                            class="inline-flex border-none items-center justify-center h-12 py-2 px-4 rounded text-sm font-medium transition-colors  text-neutral-700 hover:bg-neutral-100 active:bg-white focus:bg-white  focus:outline-none disabled:opacity-50 disabled:pointer-events-none">
+                            class="inline-flex border-none items-center justify-center h-8 py-1 px-2 sm:h-12 sm:py-2 sm:px-4 rounded text-sm font-medium transition-colors  text-neutral-700 hover:bg-neutral-100 active:bg-white focus:bg-white  focus:outline-none disabled:opacity-50 disabled:pointer-events-none">
                             @if (App::getLocale() == 'en')
                                 <svg class="w-6 h-6 mr-2" xmlns="http://www.w3.org/2000/svg"
                                     xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 7410 3900">
@@ -209,18 +209,13 @@
                         <button @click="accountDropdownOpen=true"
                             class="inline-flex border-none items-center justify-center h-12 py-2 pl-3 pr-12 text-sm font-medium transition-colors bg-white border rounded-md text-neutral-700 hover:bg-neutral-100 active:bg-white focus:bg-white focus:outline-none disabled:opacity-50 disabled:pointer-events-none">
                             <img src="https://fls-9e603673-c78d-422c-9c57-d6f261ffdccb.laravel.cloud/{{ auth()->user()->img }}"
-                                class="object-cover w-8 h-8 border rounded-full border-neutral-200" />
+                                class="object-cover w-6 h-6 sm:w-8 sm:h-8 border rounded-full border-neutral-200" />
                             {{-- <img src="{{asset('/storage/' . auth()->user()->img)}}"
                                 class="object-cover w-8 h-8 border rounded-full border-neutral-200" /> --}}
                             <span
                                 class="flex flex-col items-start flex-shrink-0 h-full ml-2 leading-none translate-y-px">
-                                <span>{{ auth()->user()->name }}</span>
-                                <span class="text-xs font-light text-neutral-400">{{ auth()->user()->email }}
-                                    @isset($filename)
-                                        {{ $filename }}
-                                    @endisset($filename)
-
-                                </span>
+                                <span class="text-sm sm:text-lg tracking-wide">{{ auth()->user()->name }}</span>
+                                <span class="text-xs font-light text-neutral-400">{{ auth()->user()->email }}</span>
                             </span>
 
                         </button>
