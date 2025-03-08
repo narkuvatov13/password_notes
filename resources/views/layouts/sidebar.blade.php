@@ -207,16 +207,20 @@
                     <div x-data="{ accountDropdownOpen: false }" class="relative">
                         <!-- My Setting Dropdown Button -->
                         <button @click="accountDropdownOpen=true"
-                            class="inline-flex border-none items-center justify-center h-12 py-2 pl-3 pr-12 text-sm font-medium transition-colors bg-white border rounded-md text-neutral-700 hover:bg-neutral-100 active:bg-white focus:bg-white focus:outline-none disabled:opacity-50 disabled:pointer-events-none">
+                            class="inline-flex border-none items-center justify-center h-12 py-2 pl-3 pr-4 transition-colors bg-white border rounded-md text-neutral-700 hover:bg-neutral-100 active:bg-white focus:bg-white focus:outline-none disabled:opacity-50 disabled:pointer-events-none">
                             <img src="https://fls-9e603673-c78d-422c-9c57-d6f261ffdccb.laravel.cloud/{{ auth()->user()->img }}"
                                 class="object-cover h-8 w-8 border rounded-full border-neutral-200" />
                             {{-- <img src="{{asset('/storage/' . auth()->user()->img)}}"
                                 class="object-cover w-8 h-8 border rounded-full border-neutral-200" /> --}}
-                            <span
-                                class="flex flex-col items-start flex-shrink-0 h-full ml-2 leading-none translate-y-px">
-                                <span class="text-sm sm:text-lg tracking-wide">{{ auth()->user()->name }}</span>
-                                <span class="text-xs font-light text-neutral-400">{{ auth()->user()->email }}</span>
-                            </span>
+                            <div class="">
+                                <span
+                                    class="flex flex-col items-start flex-shrink-0 h-full ml-2 leading-none translate-y-px">
+                                    <span
+                                        class="text-sm font-medium sm:text-lg tracking-wide">{{ auth()->user()->name }}</span>
+                                    <span
+                                        class="text-xs font-light text-neutral-400">{{ auth()->user()->email }}</span>
+                                </span>
+                            </div>
 
                         </button>
                         <!-- Setting Dropdown Content -->
