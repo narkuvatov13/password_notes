@@ -98,19 +98,14 @@ class SettingController extends Controller
 
         // image upload
         $img = null;
-
         if ($request->file('imageUrl')) {
-            $fileName = $request->file('imageUrl')->getClientOriginalName();
-            // $img = $request->file('imageUrl')->storeAs('images', $fileName, ['disk' => 's3', 'visibility' => 'public']);
-            $img = Storage::put('images/' . $fileName, file_get_contents($request->file('imageUrl')), 'public');
+            $bucketUrl = "https://fls-9e603673-c78d-422c-9c57-d6f261ffdccb.laravel.cloud/";
 
-            // $img = Storage::put('images', $request->file('imageUrl'));
-            // $img = Storage::disk('public')->put('images', $request->file('imageUrl'));
-            // $s3path = Storage::disk('s3')->url('images/' . $request->file('imageUrl'));
-            // $filepath = $user->img ?? null;
-            // if ($filepath && Storage::exists($filepath)) {
-            //     Storage::disk('s3')->delete($user->img);
-            // }
+            $img = Storage::put('images', $request->file('imageUrl'));
+            $filepath = $user->img ?? null;
+            if ($filepath && Storage::exists($bucketUrl . $filepath)) {
+                Storage::delete($bucketUrl . $user->img);
+            }
         }
 
 
@@ -123,7 +118,7 @@ class SettingController extends Controller
                 'img' => $img != null ? $img : $user->img,
             ]);
 
-            return redirect()->back()->with(['success' => __('messages.update_profile_settings_settings'), 'filename' => $fileName]);
+            return redirect()->back()->with(['success' => __('messages.update_profile_settings_settings')]);
         } else {
 
             $user->update([
