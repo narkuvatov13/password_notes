@@ -214,7 +214,12 @@
                                 class="object-cover w-8 h-8 border rounded-full border-neutral-200" /> --}}
                             <span
                                 class="flex flex-col items-start flex-shrink-0 h-full ml-2 leading-none translate-y-px">
-                                <span>{{auth()->user()->name}} {{$filename}}</span>
+                                <span>{{auth()->user()->name}}
+                                    @isset($filename)
+                                        {{$filename}}
+                                    @endisset ($file)
+
+                                </span>
                                 <span class="text-xs font-light text-neutral-400">{{auth()->user()->email}}</span>
                             </span>
 
