@@ -496,7 +496,7 @@
 
                     <span class="flex-1 ms-3 whitespace-nowrap">{{ __('messages.passwords') }}</span>
                     <span
-                        class="inline-flex items-center justify-center w-3 h-3 p-3 ms-3 text-sm font-medium text-blue-800 bg-blue-100 rounded-full dark:bg-blue-900 dark:text-blue-300">{{\App\Models\Password::count()}}</span>
+                        class="inline-flex items-center justify-center w-3 h-3 p-3 ms-3 text-sm font-medium text-blue-800 bg-blue-100 rounded-full dark:bg-blue-900 dark:text-blue-300">{{Auth::user()->passwords->count()}}</span>
                 </a>
             </li>
             <li>
@@ -512,7 +512,7 @@
 
                     <span class="flex-1 ms-3 whitespace-nowrap">{{__('messages.notes')}} {{__('')}}</span>
                     <span
-                        class="inline-flex items-center justify-center w-3 h-3 p-3 ms-3 text-sm font-medium text-blue-800 bg-blue-100 rounded-full dark:bg-blue-900 dark:text-blue-300">{{ \App\Models\Note::count() }}</span>
+                        class="inline-flex items-center justify-center w-3 h-3 p-3 ms-3 text-sm font-medium text-blue-800 bg-blue-100 rounded-full dark:bg-blue-900 dark:text-blue-300">{{ Auth::user()->notes->count() }}</span>
                 </a>
             </li>
             <li>
@@ -527,7 +527,7 @@
 
                     <span class="flex-1 ms-3 whitespace-nowrap"> {{__('messages.adresses')}}</span>
                     <span
-                        class="inline-flex items-center justify-center w-3 h-3 p-3 ms-3 text-sm font-medium text-blue-800 bg-blue-100 rounded-full dark:bg-blue-900 dark:text-blue-300">{{ \App\Models\Address::count() }}</span>
+                        class="inline-flex items-center justify-center w-3 h-3 p-3 ms-3 text-sm font-medium text-blue-800 bg-blue-100 rounded-full dark:bg-blue-900 dark:text-blue-300">{{ Auth::user()->addresses->count() }}</span>
                 </a>
             </li>
             <li>
@@ -543,7 +543,7 @@
 
                     <span class="flex-1 ms-3 whitespace-nowrap"> {{__('messages.paymentCards')}}</span>
                     <span
-                        class="inline-flex items-center justify-center w-3 h-3 p-3 ms-3 text-sm font-medium text-blue-800 bg-blue-100 rounded-full dark:bg-blue-900 dark:text-blue-300">{{\App\Models\PaymentCard::count()}}</span>
+                        class="inline-flex items-center justify-center w-3 h-3 p-3 ms-3 text-sm font-medium text-blue-800 bg-blue-100 rounded-full dark:bg-blue-900 dark:text-blue-300">{{Auth::user()->paymentCards->count() }}</span>
                 </a>
             </li>
             <li>
@@ -561,7 +561,7 @@
 
                     <span class="flex-1 ms-3 whitespace-nowrap"> {{__('messages.bankAccounts')}}</span>
                     <span
-                        class="inline-flex items-center justify-center w-3 h-3 p-3 ms-3 text-sm font-medium text-blue-800 bg-blue-100 rounded-full dark:bg-blue-900 dark:text-blue-300">{{ \App\Models\BankAccount::count()  }}</span>
+                        class="inline-flex items-center justify-center w-3 h-3 p-3 ms-3 text-sm font-medium text-blue-800 bg-blue-100 rounded-full dark:bg-blue-900 dark:text-blue-300">{{ Auth::user()->bankAccounts->count()  }}</span>
                 </a>
             </li>
 
