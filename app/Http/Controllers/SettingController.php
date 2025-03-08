@@ -101,10 +101,10 @@ class SettingController extends Controller
 
         if ($request->file('imageUrl')) {
 
-            $img = Storage::disk('public')->put('images', $request->file('imageUrl'));
+            $img = Storage::disk('s3')->put('images', $request->file('imageUrl'));
             $filepath = $user->img ?? null;
             if ($filepath && Storage::exists($filepath)) {
-                Storage::disk('public')->delete($user->img);
+                Storage::disk('s3')->delete($user->img);
             }
         }
 
