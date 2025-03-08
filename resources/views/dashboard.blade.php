@@ -38,7 +38,7 @@
         {{-- Main Content Header --}}
         <div class="p-4 sm:ml-64">
             <div class="p-4 border-2 border-gray-200 border-dashed rounded-lg dark:border-gray-700 mt-14">
-                <h1 class="text-xl text-gray-700 font-bold">{{__('messages.all_items')}}</h1>
+                <h1 class="text-xl text-gray-700 font-bold">{{ __('messages.all_items') }}</h1>
             </div>
         </div>
 
@@ -52,12 +52,12 @@
                 <h2 id="accordion-collapse-heading-password">
 
                     <!-- Password Accordian Header -->
-                    <button type="button"
-                        class="flex items-center justify-between w-full p-5 font-medium rtl:text-right text-gray-500 border border-b-0 border-gray-200 rounded-t-xl focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-800 dark:border-gray-700 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 gap-3"
+                    <button
+                        type="button"class="flex items-center justify-between w-full p-5 font-medium rtl:text-right text-gray-500 border border-b-0 border-gray-200 rounded-t-xl focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-800 dark:border-gray-700 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 gap-3"
                         data-accordion-target="#accordion-collapse-body-password" aria-expanded="true"
                         aria-controls="accordion-collapse-body-password">
-                        <span>{{__('messages.password_items')}}<span
-                                class="inline-flex items-center justify-center w-3 h-3 p-3 ms-3 text-xs font-medium text-blue-800 bg-blue-100 rounded-full dark:bg-blue-900 dark:text-blue-300">{{Auth::user()->passwords->count()}}</span>
+                        <span>{{ __('messages.password_items') }}<span
+                                class="inline-flex items-center justify-center w-3 h-3 p-3 ms-3 text-xs font-medium text-blue-800 bg-blue-100 rounded-full dark:bg-blue-900 dark:text-blue-300">{{ Auth::user()->passwords->count() }}</span>
                         </span>
                         <svg data-accordion-icon class="w-3 h-3 rotate-180 shrink-0" aria-hidden="true"
                             xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
@@ -83,7 +83,7 @@
                                         data-dropdown-toggle="passwordDropdown{{ $loop->iteration }}"
                                         class="inline-block text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:ring-4 focus:outline-none focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm p-1.5"
                                         type="button">
-                                        <span class="sr-only">{{__('messages.open_dropdown')}}</span>
+                                        <span class="sr-only">{{ __('messages.open_dropdown') }}</span>
                                         <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                                             fill="currentColor" viewBox="0 0 16 3">
                                             <path
@@ -99,12 +99,12 @@
 
                                             {{-- Edit Modal --}}
                                             <li>
-                                                <div x-data="{ passwordEditModalOpen: false }"
+                                                <div x-data="{ passwordEditModalOpen: false, }"
                                                     @keydown.escape.window="passwordEditModalOpen = false"
                                                     class="relative z-50 w-auto h-auto">
                                                     {{-- Edit Modal Button --}}
                                                     <button @click="passwordEditModalOpen=true"
-                                                        class="w-full px-4 py-2 text-sm text-gray-600 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white disabled:opacity-50 disabled:pointer-events-none">{{__('messages.edit')}}</button>
+                                                        class="w-full px-4 py-2 text-sm text-gray-600 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white disabled:opacity-50 disabled:pointer-events-none">{{ __('messages.edit') }}</button>
                                                     {{-- Edit Modal Body --}}
                                                     <template x-teleport="body">
                                                         <div x-show="passwordEditModalOpen"
@@ -131,14 +131,16 @@
                                                                 class="relative w-full py-6 bg-white px-7 sm:max-w-lg sm:rounded-lg">
                                                                 <div class="flex items-center justify-between pb-2">
                                                                     <h3 class="text-lg font-semibold">
-                                                                        {{__('messages.password_update')}}
+                                                                        {{ __('messages.password_update') }}
                                                                     </h3>
                                                                     <button @click="passwordEditModalOpen=false"
                                                                         class="absolute top-0 right-0 flex items-center justify-center w-8 h-8 mt-5 mr-5 text-gray-600 rounded-full hover:text-gray-800 hover:bg-gray-50">
-                                                                        <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg"
-                                                                            fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                                                                            stroke="currentColor">
-                                                                            <path stroke-linecap="round" stroke-linejoin="round"
+                                                                        <svg class="w-5 h-5"
+                                                                            xmlns="http://www.w3.org/2000/svg"
+                                                                            fill="none" viewBox="0 0 24 24"
+                                                                            stroke-width="1.5" stroke="currentColor">
+                                                                            <path stroke-linecap="round"
+                                                                                stroke-linejoin="round"
                                                                                 d="M6 18L18 6M6 6l12 12" />
                                                                         </svg>
                                                                     </button>
@@ -147,38 +149,40 @@
                                                                 <div class="relative w-auto mt-2">
                                                                     <form @submit.prevent="passwordEditSubmitForm($event)"
                                                                         x-data="{
-                                                                                                                                            url: '{{old('url', $item->url)}}',
-                                                                                                                                            name: '{{old('name', $item->name)}}',
-                                                                                                                                            username: '{{old('username', $item->username)}}',
-                                                                                                                                            password: '{{old('password', $item->password)}}',
-                                                                                                                                            message: '{{old('message', $item->message)}}',
-                                                                                                                                            passwordEditSubmitForm(event) {
-                                                                                                                                                        if(this.url == '{{$item->url}}' && this.name == '{{$item->name}}' && this.username == '{{$item->username}}' && this.password == '{{$item->password}}' && this.message == '{{$item->message}}'){
-                                                                                                                                                            event.preventDefault();
-                                                                                                                                                            editModalOpen = false;
-                                                                                                                                                        } else{
-                                                                                                                                                                event.target.submit();
-                                                                                                                                                        }
-                                                                                                                                                    }
-                                                                                                                                            }"
-                                                                        class="max-w-md mx-auto"
-                                                                        action="{{ route('form.password.update', $item->id)}}"
+                                                                            visibility: false,
+                                                                            url: '{{ old('url', $item->url) }}',
+                                                                            name: '{{ old('name', $item->name) }}',
+                                                                            username: '{{ old('username', $item->username) }}',
+                                                                            password: '{{ old('password', $item->password) }}',
+                                                                            message: '{{ old('message', $item->message) }}',
+                                                                            passwordEditSubmitForm(event) {
+                                                                                if (this.url == '{{ $item->url }}' && this.name == '{{ $item->name }}' && this.username == '{{ $item->username }}' && this.password == '{{ $item->password }}' && this.message == '{{ $item->message }}') {
+                                                                                    event.preventDefault();
+                                                                                    editModalOpen = false;
+                                                                                } else {
+                                                                                    event.target.submit();
+                                                                                }
+                                                                            }
+                                                                        }" class="max-w-md mx-auto"
+                                                                        action="{{ route('form.password.update', $item->id) }}"
                                                                         method="POST">
                                                                         @method('PATCH')
                                                                         @csrf
                                                                         <div class="relative z-0 w-full mb-5 group">
-                                                                            <input x-model="url" type="text" name="url"
+                                                                            <input x-model="url" type="text"
+                                                                                name="url"
                                                                                 class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
                                                                                 placeholder=" " />
                                                                             <label for="url"
-                                                                                class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">{{__('messages.url')}}</label>
+                                                                                class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">{{ __('messages.url') }}</label>
                                                                         </div>
                                                                         <div class="relative z-0 w-full mb-5 group">
-                                                                            <input type="text" name="name" x-model="name"
+                                                                            <input type="text" name="name"
+                                                                                x-model="name"
                                                                                 class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
                                                                                 placeholder=" " required />
                                                                             <label for="name"
-                                                                                class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">{{__('messages.name')}}</label>
+                                                                                class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">{{ __('messages.name') }}</label>
                                                                         </div>
 
                                                                         <div class="grid md:grid-cols-2 md:gap-6">
@@ -188,21 +192,34 @@
                                                                                     class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
                                                                                     placeholder=" " />
                                                                                 <label for="username"
-                                                                                    class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">{{__('messages.username')}}</label>
+                                                                                    class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">{{ __('messages.username') }}</label>
                                                                             </div>
                                                                             <div class="relative z-0 w-full mb-5 group">
-                                                                                <input type="text" name="password"
-                                                                                    x-model="password"
+                                                                                <input
+                                                                                    :type="visibility ? 'text' : 'password'"
+                                                                                    name="password" x-model="password"
                                                                                     class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
                                                                                     placeholder=" " />
                                                                                 <label for="password"
-                                                                                    class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">{{__('messages.password')}}</label>
+                                                                                    class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">{{ __('messages.password') }}</label>
+                                                                                <svg @mouseenter="visibility=!visibility"
+                                                                                    @mouseleave="visibility=!visibility"
+                                                                                    class="absolute top-1/4 right-0 w-6 h-6 text-gray-500 cursor-pointer hover:text-gray-600 dark:text-white"
+                                                                                    aria-hidden="true"
+                                                                                    xmlns="http://www.w3.org/2000/svg"
+                                                                                    width="24" height="24"
+                                                                                    fill="currentColor"
+                                                                                    viewBox="0 0 24 24">
+                                                                                    <path fill-rule="evenodd"
+                                                                                        d="M4.998 7.78C6.729 6.345 9.198 5 12 5c2.802 0 5.27 1.345 7.002 2.78a12.713 12.713 0 0 1 2.096 2.183c.253.344.465.682.618.997.14.286.284.658.284 1.04s-.145.754-.284 1.04a6.6 6.6 0 0 1-.618.997 12.712 12.712 0 0 1-2.096 2.183C17.271 17.655 14.802 19 12 19c-2.802 0-5.27-1.345-7.002-2.78a12.712 12.712 0 0 1-2.096-2.183 6.6 6.6 0 0 1-.618-.997C2.144 12.754 2 12.382 2 12s.145-.754.284-1.04c.153-.315.365-.653.618-.997A12.714 12.714 0 0 1 4.998 7.78ZM12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z"
+                                                                                        clip-rule="evenodd" />
+                                                                                </svg>
                                                                             </div>
                                                                         </div>
 
                                                                         <div class="relative z-0 w-full mb-5 group">
                                                                             <label for="message"
-                                                                                class="block mb-2 text-sm font-medium text-gray-500 dark:text-gray-400">{{__('messages.your_message')}}</label>
+                                                                                class="block mb-2 text-sm font-medium text-gray-500 dark:text-gray-400">{{ __('messages.your_message') }}</label>
                                                                             <textarea name="message" rows="4" x-model="message"
                                                                                 class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                                                                 placeholder="{{ __('messages.leave_a_comment') }}"></textarea>
@@ -210,7 +227,7 @@
 
                                                                         <div class="w-full text-end">
                                                                             <button type="submit"
-                                                                                class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 ">{{__('messages.password_update')}}</button>
+                                                                                class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 ">{{ __('messages.password_update') }}</button>
                                                                         </div>
                                                                     </form>
                                                                 </div>
@@ -228,7 +245,7 @@
                                                     class="relative z-50 w-auto h-auto">
                                                     {{-- Delete Modal Button --}}
                                                     <button @click="passwordDeleteModalOpen=true"
-                                                        class="w-full px-4 py-2 text-sm text-red-700 hover:bg-gray-100  disabled:opacity-50 disabled:pointer-events-none">{{__('messages.delete')}}</button>
+                                                        class="w-full px-4 py-2 text-sm text-red-700 hover:bg-gray-100  disabled:opacity-50 disabled:pointer-events-none">{{ __('messages.delete') }}</button>
                                                     {{-- Delete Modal Body --}}
                                                     <template x-teleport="body">
                                                         <div x-show="passwordDeleteModalOpen"
@@ -256,36 +273,39 @@
                                                                 <div
                                                                     class="flex items-center justify-between bg-red-700 px-6  py-3 rounded-t-lg">
                                                                     <h3 class="text-lg font-semibold text-white">
-                                                                        {{__('messages.delete')}}
+                                                                        {{ __('messages.delete') }}
                                                                     </h3>
                                                                     <button @click="passwordDeleteModalOpen=false"
                                                                         class=" flex items-center justify-center w-8 h-8 text-white rounded-full hover:bg-red-600">
-                                                                        <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg"
-                                                                            fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                                                                            stroke="currentColor">
-                                                                            <path stroke-linecap="round" stroke-linejoin="round"
+                                                                        <svg class="w-5 h-5"
+                                                                            xmlns="http://www.w3.org/2000/svg"
+                                                                            fill="none" viewBox="0 0 24 24"
+                                                                            stroke-width="1.5" stroke="currentColor">
+                                                                            <path stroke-linecap="round"
+                                                                                stroke-linejoin="round"
                                                                                 d="M6 18L18 6M6 6l12 12" />
                                                                         </svg>
                                                                     </button>
                                                                 </div>
-                                                                {{--Delete Modal Content . . . . --}}
+                                                                {{-- Delete Modal Content . . . . --}}
                                                                 <div class="relative w-auto mt-2 px-6 py-3">
 
                                                                     <p class="text-lg text-gray-800">
-                                                                        {{__('messages.delete_this_site')}} - {{$item->name}}
+                                                                        {{ __('messages.delete_this_site') }} -
+                                                                        {{ $item->name }}
                                                                     </p>
                                                                     <div class="mt-4 flex justify-center gap-8 ">
                                                                         <button @click="passwordDeleteModalOpen=false"
                                                                             class="border shadow-md px-8 py-2 text-md text-black rounded-lg hover:bg-gray-100 ">
-                                                                            {{__('messages.no')}}
+                                                                            {{ __('messages.no') }}
                                                                         </button>
                                                                         <form
-                                                                            action="{{route('form.password.destroy', $item->id)}}"
+                                                                            action="{{ route('form.password.destroy', $item->id) }}"
                                                                             method="POST">
                                                                             @method('DELETE')
                                                                             @csrf
                                                                             <button type="submit"
-                                                                                class="shadow-md px-8 py-2 text-white text-md rounded-xl bg-red-700 hover:bg-red-800">{{__('messages.no')}}</button>
+                                                                                class="shadow-md px-8 py-2 text-white text-md rounded-xl bg-red-700 hover:bg-red-800">{{ __('messages.no') }}</button>
                                                                         </form>
                                                                     </div>
                                                                 </div>
@@ -302,10 +322,10 @@
                                 {{-- Item Card Content --}}
                                 <div class="flex flex-col items-center  ">
                                     <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-                                        {{Str::limit($item->name, 25, '...')}}
+                                        {{ Str::limit($item->name, 25, '...') }}
                                     </h5>
                                     <p class="font-normal text-gray-700 dark:text-gray-400">
-                                        {{Str::limit($item->username, 25, '...')}}
+                                        {{ Str::limit($item->username, 25, '...') }}
                                     </p>
                                 </div>
                             </div>
@@ -326,7 +346,7 @@
 
                             {{ __('messages.note_items') }}
                             <span
-                                class="inline-flex items-center justify-center w-3 h-3 p-3 ms-3 text-xs font-medium text-blue-800 bg-blue-100 rounded-full dark:bg-blue-900 dark:text-blue-300">{{Auth::user()->notes->count()}}</span>
+                                class="inline-flex items-center justify-center w-3 h-3 p-3 ms-3 text-xs font-medium text-blue-800 bg-blue-100 rounded-full dark:bg-blue-900 dark:text-blue-300">{{ Auth::user()->notes->count() }}</span>
 
                         </span>
                         <svg data-accordion-icon class="w-3 h-3 rotate-180 shrink-0" aria-hidden="true"
@@ -366,7 +386,7 @@
                                         class="z-10 hidden text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
                                         <ul class="py-2" aria-labelledby="noteEditDropdownButton">
 
-                                            {{--Note Edit Modal --}}
+                                            {{-- Note Edit Modal --}}
                                             <li>
                                                 <div x-data="{ noteEditModalOpen: false }"
                                                     @keydown.escape.window="noteEditModalOpen = false"
@@ -374,12 +394,13 @@
                                                     {{-- Note Edit Modal Button --}}
                                                     <button @click="noteEditModalOpen=true"
                                                         class="w-full px-4 py-2 text-sm text-gray-600 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white disabled:opacity-50 disabled:pointer-events-none">Edit</button>
-                                                    {{--Note Edit Modal Body --}}
+                                                    {{-- Note Edit Modal Body --}}
                                                     <template x-teleport="body">
                                                         <div x-show="noteEditModalOpen"
                                                             class="fixed top-0 left-0 z-[99] flex items-center justify-center w-screen h-screen"
                                                             x-cloak>
-                                                            <div x-show="noteEditModalOpen" @click="noteEditModalOpen=false"
+                                                            <div x-show="noteEditModalOpen"
+                                                                @click="noteEditModalOpen=false"
                                                                 x-transition:enter="ease-out duration-300"
                                                                 x-transition:enter-start="opacity-0"
                                                                 x-transition:enter-end="opacity-100"
@@ -403,36 +424,39 @@
                                                                     </h3>
                                                                     <button @click="noteEditModalOpen=false"
                                                                         class="absolute top-0 right-0 flex items-center justify-center w-8 h-8 mt-5 mr-5 text-gray-600 rounded-full hover:text-gray-800 hover:bg-gray-50">
-                                                                        <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg"
-                                                                            fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                                                                            stroke="currentColor">
-                                                                            <path stroke-linecap="round" stroke-linejoin="round"
+                                                                        <svg class="w-5 h-5"
+                                                                            xmlns="http://www.w3.org/2000/svg"
+                                                                            fill="none" viewBox="0 0 24 24"
+                                                                            stroke-width="1.5" stroke="currentColor">
+                                                                            <path stroke-linecap="round"
+                                                                                stroke-linejoin="round"
                                                                                 d="M6 18L18 6M6 6l12 12" />
                                                                         </svg>
                                                                     </button>
                                                                 </div>
-                                                                {{--Note Content --}}
+                                                                {{-- Note Content --}}
                                                                 <div class="relative w-auto mt-2">
-                                                                    <form @submit.prevent="noteEditSubmitForm($event)" x-data="{
-                                                                                                                        name: '{{old('name', $noteItem->name)}}',
-                                                                                                                        note_message: '{{old('note_message', $noteItem->note_message)}}',
-                                                                                                                        noteEditSubmitForm(event) {
-                                                                                                                                    if(this.name == '{{$noteItem->name}}' && this.note_message == '{{$noteItem->note_message}}'){
-                                                                                                                                        event.preventDefault();
-                                                                                                                                        noteEditModalOpen = false;
-                                                                                                                                    } else{
-                                                                                                                                            event.target.submit();
-                                                                                                                                    }
-                                                                                                                                }
-                                                                                                                        }"
-                                                                        class="max-w-md mx-auto"
-                                                                        action="{{ route('form.note.update', $noteItem->id)}}"
+                                                                    <form @submit.prevent="noteEditSubmitForm($event)"
+                                                                        x-data="{
+                                                                            name: '{{ old('name', $noteItem->name) }}',
+                                                                            note_message: '{{ old('note_message', $noteItem->note_message) }}',
+                                                                            noteEditSubmitForm(event) {
+                                                                                if (this.name == '{{ $noteItem->name }}' && this.note_message == '{{ $noteItem->note_message }}') {
+                                                                                    event.preventDefault();
+                                                                                    noteEditModalOpen = false;
+                                                                                } else {
+                                                                                    event.target.submit();
+                                                                                }
+                                                                            }
+                                                                        }" class="max-w-md mx-auto"
+                                                                        action="{{ route('form.note.update', $noteItem->id) }}"
                                                                         method="POST">
                                                                         @method('PATCH')
                                                                         @csrf
 
                                                                         <div class="relative z-0 w-full mb-5 group">
-                                                                            <input type="text" name="name" x-model="name"
+                                                                            <input type="text" name="name"
+                                                                                x-model="name"
                                                                                 class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
                                                                                 placeholder=" " required />
                                                                             <label for="name"
@@ -444,8 +468,7 @@
                                                                         <div class="relative z-0 w-full mb-5 group">
                                                                             <label for="note_message"
                                                                                 class="block mb-2 text-sm font-medium text-gray-500 dark:text-gray-400">{{ __('messages.your_message') }}</label>
-                                                                            <textarea name="note_message" rows="4"
-                                                                                x-model="note_message"
+                                                                            <textarea name="note_message" rows="4" x-model="note_message"
                                                                                 class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                                                                 placeholder="Leave a comment..."></textarea>
                                                                         </div>
@@ -464,21 +487,22 @@
                                                 </div>
                                             </li>
 
-                                            {{--Note Delete Form --}}
+                                            {{-- Note Delete Form --}}
                                             <li>
                                                 <!--Note Delete Modal Button -->
                                                 <div x-data="{ noteDeleteModalOpen: false }"
                                                     @keydown.escape.window="noteDeleteModalOpen = false"
                                                     class="relative z-50 w-auto h-auto">
-                                                    {{--Note Delete Modal Button --}}
+                                                    {{-- Note Delete Modal Button --}}
                                                     <button @click="noteDeleteModalOpen=true"
                                                         class="w-full px-4 py-2 text-sm text-red-700 hover:bg-gray-100  disabled:opacity-50 disabled:pointer-events-none">{{ __('messages.delete') }}</button>
-                                                    {{--Note Delete Modal Body --}}
+                                                    {{-- Note Delete Modal Body --}}
                                                     <template x-teleport="body">
                                                         <div x-show="noteDeleteModalOpen"
                                                             class="fixed top-0 left-0 z-[99] flex items-center justify-center w-screen h-screen rounded-md"
                                                             x-cloak>
-                                                            <div x-show="noteDeleteModalOpen" @click="noteDeleteModalOpen=false"
+                                                            <div x-show="noteDeleteModalOpen"
+                                                                @click="noteDeleteModalOpen=false"
                                                                 x-transition:enter="ease-out duration-300"
                                                                 x-transition:enter-start="opacity-0"
                                                                 x-transition:enter-end="opacity-100"
@@ -503,33 +527,35 @@
                                                                     </h3>
                                                                     <button @click="noteDeleteModalOpen=false"
                                                                         class=" flex items-center justify-center w-8 h-8 text-white rounded-full hover:bg-red-600">
-                                                                        <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg"
-                                                                            fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                                                                            stroke="currentColor">
-                                                                            <path stroke-linecap="round" stroke-linejoin="round"
+                                                                        <svg class="w-5 h-5"
+                                                                            xmlns="http://www.w3.org/2000/svg"
+                                                                            fill="none" viewBox="0 0 24 24"
+                                                                            stroke-width="1.5" stroke="currentColor">
+                                                                            <path stroke-linecap="round"
+                                                                                stroke-linejoin="round"
                                                                                 d="M6 18L18 6M6 6l12 12" />
                                                                         </svg>
                                                                     </button>
                                                                 </div>
-                                                                {{--Note Delete Modal Content --}}
+                                                                {{-- Note Delete Modal Content --}}
                                                                 <div class="relative w-auto mt-2 px-6 py-3">
 
                                                                     <p class="text-lg text-gray-800">
-                                                                        {{ __('messages.delete_this_site')  }} -
-                                                                        {{$noteItem->name}}
+                                                                        {{ __('messages.delete_this_site') }} -
+                                                                        {{ $noteItem->name }}
                                                                     </p>
                                                                     <div class="mt-4 flex justify-center gap-8 ">
                                                                         <button @click="noteDeleteModalOpen=false"
                                                                             class="border shadow-md px-8 py-2 text-md text-black rounded-lg hover:bg-gray-100 ">
-                                                                            {{ __('messages.no')  }}
+                                                                            {{ __('messages.no') }}
                                                                         </button>
                                                                         <form
-                                                                            action="{{route('form.note.destroy', $noteItem->id)}}"
+                                                                            action="{{ route('form.note.destroy', $noteItem->id) }}"
                                                                             method="POST">
                                                                             @method('DELETE')
                                                                             @csrf
                                                                             <button type="submit"
-                                                                                class="shadow-md px-8 py-2 text-white text-md rounded-xl bg-red-700 hover:bg-red-800">{{ __('messages.yes')  }}</button>
+                                                                                class="shadow-md px-8 py-2 text-white text-md rounded-xl bg-red-700 hover:bg-red-800">{{ __('messages.yes') }}</button>
                                                                         </form>
                                                                     </div>
                                                                 </div>
@@ -543,13 +569,13 @@
                                     </div>
                                 </div>
 
-                                {{--Note Item Card Content --}}
+                                {{-- Note Item Card Content --}}
                                 <div class="flex flex-col items-center  ">
                                     <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-                                        {{Str::limit($noteItem->name, 25, '...')}}
+                                        {{ Str::limit($noteItem->name, 25, '...') }}
                                     </h5>
                                     <p class="font-normal text-gray-700 dark:text-gray-400">
-                                        {{Str::limit($noteItem->username, 25, '...')}}
+                                        {{ Str::limit($noteItem->username, 25, '...') }}
                                     </p>
                                 </div>
                             </div>
@@ -568,9 +594,9 @@
                         class="flex items-center justify-between w-full p-5 font-medium rtl:text-right text-gray-500 border border-b-0 border-gray-200 rounded-t-xl focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-800 dark:border-gray-700 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 gap-3"
                         data-accordion-target="#accordion-collapse-body-address" aria-expanded="true"
                         aria-controls="accordion-collapse-body-address">
-                        <span>{{ __('messages.address_items')  }}
+                        <span>{{ __('messages.address_items') }}
                             <span
-                                class="inline-flex items-center justify-center w-3 h-3 p-3 ms-3 text-xs font-medium text-blue-800 bg-blue-100 rounded-full dark:bg-blue-900 dark:text-blue-300">{{Auth::user()->addresses->count()}}</span>
+                                class="inline-flex items-center justify-center w-3 h-3 p-3 ms-3 text-xs font-medium text-blue-800 bg-blue-100 rounded-full dark:bg-blue-900 dark:text-blue-300">{{ Auth::user()->addresses->count() }}</span>
                         </span>
                         <svg data-accordion-icon class="w-3 h-3 rotate-180 shrink-0" aria-hidden="true"
                             xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
@@ -581,7 +607,8 @@
                 </h2>
 
                 <!-- Adress Accordian Content -->
-                <div id="accordion-collapse-body-address" class="hidden" aria-labelledby="accordion-collapse-body-address">
+                <div id="accordion-collapse-body-address" class="hidden"
+                    aria-labelledby="accordion-collapse-body-address">
                     <div
                         class="flex flex-wrap gap-4 md:gap-6 md:justify-start justify-center p-5 border border-b-0 border-gray-200 dark:border-gray-700 dark:bg-gray-900">
 
@@ -596,7 +623,7 @@
                                         data-dropdown-toggle="addressEditDropdown{{ $loop->iteration }}"
                                         class="inline-block text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:ring-4 focus:outline-none focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm p-1.5"
                                         type="button">
-                                        <span class="sr-only">{{ __('messages.open_dropdown')  }}</span>
+                                        <span class="sr-only">{{ __('messages.open_dropdown') }}</span>
                                         <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                                             fill="currentColor" viewBox="0 0 16 3">
                                             <path
@@ -610,15 +637,15 @@
                                         class="z-10 hidden text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
                                         <ul class="py-2" aria-labelledby="addressEditDropdownButton">
 
-                                            {{--Address Edit Modal --}}
+                                            {{-- Address Edit Modal --}}
                                             <li>
                                                 <div x-data="{ addressEditModalOpen: false }"
                                                     @keydown.escape.window="addressEditModalOpen = false"
                                                     class="relative z-50 w-auto h-auto">
                                                     {{-- Address Edit Modal Button --}}
                                                     <button @click="addressEditModalOpen=true"
-                                                        class="w-full px-4 py-2 text-sm text-gray-600 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white disabled:opacity-50 disabled:pointer-events-none">{{ __('messages.edit')  }}</button>
-                                                    {{--Address Edit Modal Body --}}
+                                                        class="w-full px-4 py-2 text-sm text-gray-600 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white disabled:opacity-50 disabled:pointer-events-none">{{ __('messages.edit') }}</button>
+                                                    {{-- Address Edit Modal Body --}}
                                                     <template x-teleport="body">
                                                         <div x-show="addressEditModalOpen"
                                                             class="fixed top-0 left-0 z-[99] flex items-center justify-center w-screen h-screen"
@@ -644,61 +671,63 @@
                                                                 class="relative w-full py-6 bg-white px-7 sm:max-w-lg sm:rounded-lg">
                                                                 <div class="flex items-center justify-between pb-2">
                                                                     <h3 class="text-lg font-semibold">
-                                                                        {{ __('messages.address_update')  }}
+                                                                        {{ __('messages.address_update') }}
                                                                     </h3>
                                                                     <button @click="addressEditModalOpen=false"
                                                                         class="absolute top-0 right-0 flex items-center justify-center w-8 h-8 mt-5 mr-5 text-gray-600 rounded-full hover:text-gray-800 hover:bg-gray-50">
-                                                                        <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg"
-                                                                            fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                                                                            stroke="currentColor">
-                                                                            <path stroke-linecap="round" stroke-linejoin="round"
+                                                                        <svg class="w-5 h-5"
+                                                                            xmlns="http://www.w3.org/2000/svg"
+                                                                            fill="none" viewBox="0 0 24 24"
+                                                                            stroke-width="1.5" stroke="currentColor">
+                                                                            <path stroke-linecap="round"
+                                                                                stroke-linejoin="round"
                                                                                 d="M6 18L18 6M6 6l12 12" />
                                                                         </svg>
                                                                     </button>
                                                                 </div>
-                                                                {{--Address Content --}}
+                                                                {{-- Address Content --}}
                                                                 <div class="relative w-auto mt-2">
                                                                     <form @submit.prevent="addressEditSubmitForm($event)"
                                                                         x-data="{
-                                                                                                                        title: '{{old('title', $address->title)}}',
-                                                                                                                        first_name: '{{old('first_name', $address->first_name)}}',
-                                                                                                                        middle_name: '{{old('middle_name', $address->middle_name)}}',
-                                                                                                                        last_name: '{{old('last_name', $address->last_name)}}',
-                                                                                                                        username: '{{old('username', $address->username)}}',
-                                                                                                                        gender: '{{old('gender', $address->gender)}}',
-                                                                                                                        birthday: '{{old('birthday', $address->birthday)}}',
-                                                                                                                        company: '{{old('company', $address->company)}}',
-                                                                                                                        address: '{{old('address', $address->address)}}',
-                                                                                                                        city: '{{old('city', $address->city)}}',
-                                                                                                                        country: '{{old('country', $address->country)}}',
-                                                                                                                        state: '{{old('state', $address->state)}}',
-                                                                                                                        postal_code: '{{old('postal_code', $address->postal_code)}}',
-                                                                                                                        email: '{{old('email', $address->email)}}',
-                                                                                                                        phone_number: '{{old('phone_number', $address->phone_number)}}',
-                                                                                                                        mobile_phone_number: '{{old('mobile_phone_number', $address->mobile_phone_number)}}',
-                                                                                                                        fax: '{{old('fax', $address->fax)}}',
-                                                                                                                        notes: '{{old('notes', $address->notes)}}',
-                                                                                                                        addressEditSubmitForm(event) {
-                                                                                                                                    if(this.title == '{{$address->title}}' && this.first_name == '{{$address->first_name}}' && this.middle_name == '{{$address->middle_name}}' && this.last_name == '{{$address->last_name}}' && this.username == '{{$address->username}}' && this.gender == '{{$address->gender}}' && this.birthday == '{{$address->birthday}}' && this.company == '{{$address->company}}' && this.address == '{{$address->address}}' && this.city == '{{$address->city}}' && this.country == '{{$address->country}}' && this.state == '{{$address->state}}' && this.postal_code == '{{$address->postal_code}}' && this.email == '{{$address->email}}' && this.phone_number == '{{$address->phone_number}}' && this.mobile_phone_number == '{{$address->mobile_phone_number}}' && this.fax == '{{$address->fax}}' && this.notes == '{{$address->notes}}'){
-                                                                                                                                        event.preventDefault();
-                                                                                                                                        noteEditModalOpen = false;
-                                                                                                                                    } else{
-                                                                                                                                            event.target.submit();
-                                                                                                                                    }
-                                                                                                                                }
-                                                                                                                        }"
-                                                                        class="max-w-md mx-auto"
-                                                                        action="{{ route('form.address.update', $address->id)}}"
+                                                                            title: '{{ old('title', $address->title) }}',
+                                                                            first_name: '{{ old('first_name', $address->first_name) }}',
+                                                                            middle_name: '{{ old('middle_name', $address->middle_name) }}',
+                                                                            last_name: '{{ old('last_name', $address->last_name) }}',
+                                                                            username: '{{ old('username', $address->username) }}',
+                                                                            gender: '{{ old('gender', $address->gender) }}',
+                                                                            birthday: '{{ old('birthday', $address->birthday) }}',
+                                                                            company: '{{ old('company', $address->company) }}',
+                                                                            address: '{{ old('address', $address->address) }}',
+                                                                            city: '{{ old('city', $address->city) }}',
+                                                                            country: '{{ old('country', $address->country) }}',
+                                                                            state: '{{ old('state', $address->state) }}',
+                                                                            postal_code: '{{ old('postal_code', $address->postal_code) }}',
+                                                                            email: '{{ old('email', $address->email) }}',
+                                                                            phone_number: '{{ old('phone_number', $address->phone_number) }}',
+                                                                            mobile_phone_number: '{{ old('mobile_phone_number', $address->mobile_phone_number) }}',
+                                                                            fax: '{{ old('fax', $address->fax) }}',
+                                                                            notes: '{{ old('notes', $address->notes) }}',
+                                                                            addressEditSubmitForm(event) {
+                                                                                if (this.title == '{{ $address->title }}' && this.first_name == '{{ $address->first_name }}' && this.middle_name == '{{ $address->middle_name }}' && this.last_name == '{{ $address->last_name }}' && this.username == '{{ $address->username }}' && this.gender == '{{ $address->gender }}' && this.birthday == '{{ $address->birthday }}' && this.company == '{{ $address->company }}' && this.address == '{{ $address->address }}' && this.city == '{{ $address->city }}' && this.country == '{{ $address->country }}' && this.state == '{{ $address->state }}' && this.postal_code == '{{ $address->postal_code }}' && this.email == '{{ $address->email }}' && this.phone_number == '{{ $address->phone_number }}' && this.mobile_phone_number == '{{ $address->mobile_phone_number }}' && this.fax == '{{ $address->fax }}' && this.notes == '{{ $address->notes }}') {
+                                                                                    event.preventDefault();
+                                                                                    noteEditModalOpen = false;
+                                                                                } else {
+                                                                                    event.target.submit();
+                                                                                }
+                                                                            }
+                                                                        }" class="max-w-md mx-auto"
+                                                                        action="{{ route('form.address.update', $address->id) }}"
                                                                         method="POST">
                                                                         @method('PATCH')
                                                                         @csrf
                                                                         <div class="grid md:grid-cols-3 md:gap-6">
                                                                             <div class="relative z-0 w-full mb-5 group">
-                                                                                <input type="text" x-model="title" name="title"
+                                                                                <input type="text" x-model="title"
+                                                                                    name="title"
                                                                                     class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
                                                                                     placeholder=" " required />
                                                                                 <label for="title"
-                                                                                    class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">{{ __('messages.title')  }}</label>
+                                                                                    class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">{{ __('messages.title') }}</label>
                                                                             </div>
                                                                             <div class="relative z-0 w-full mb-5 group">
                                                                                 <input type="text" x-model="first_name"
@@ -706,15 +735,16 @@
                                                                                     class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
                                                                                     placeholder=" " />
                                                                                 <label for="first_name"
-                                                                                    class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">{{ __('messages.first_name')  }}</label>
+                                                                                    class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">{{ __('messages.first_name') }}</label>
                                                                             </div>
                                                                             <div class="relative z-0 w-full mb-5 group">
-                                                                                <input type="text" x-model="middle_name"
+                                                                                <input type="text"
+                                                                                    x-model="middle_name"
                                                                                     name="middle_name"
                                                                                     class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
                                                                                     placeholder=" " />
                                                                                 <label for="middle_name"
-                                                                                    class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">{{ __('messages.middle_name')  }}</label>
+                                                                                    class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">{{ __('messages.middle_name') }}</label>
                                                                             </div>
                                                                         </div>
 
@@ -725,7 +755,7 @@
                                                                                     class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
                                                                                     placeholder=" " />
                                                                                 <label for="last_name"
-                                                                                    class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">{{ __('messages.last_name')  }}</label>
+                                                                                    class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">{{ __('messages.last_name') }}</label>
                                                                             </div>
                                                                             <div class="relative z-0 w-full mb-5 group">
                                                                                 <input type="text" x-model="username"
@@ -733,7 +763,7 @@
                                                                                     class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
                                                                                     placeholder=" " />
                                                                                 <label for="username"
-                                                                                    class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">{{ __('messages.username')  }}</label>
+                                                                                    class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">{{ __('messages.username') }}</label>
                                                                             </div>
                                                                             <div class="relative z-0 w-full mb-5 group">
 
@@ -742,7 +772,9 @@
                                                                                     name="gender"
                                                                                     class="border-0 border-b-2 border-gray-300 focus:ring-0 text-gray-500 text-sm">
                                                                                     @foreach (\App\Enums\Gender::getValues() as $key => $gender)
-                                                                                        <option value="{{$gender}}">{{$gender}}
+                                                                                        <option
+                                                                                            value="{{ $gender }}">
+                                                                                            {{ $gender }}
                                                                                         </option>
                                                                                     @endforeach
                                                                                 </select>
@@ -755,7 +787,8 @@
                                                                                 <input type="date" x-model="birthday"
                                                                                     name="birthday" id="dateInput"
                                                                                     class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
-                                                                                    placeholder="GG/AA/YYYY" maxlength="10">
+                                                                                    placeholder="GG/AA/YYYY"
+                                                                                    maxlength="10">
                                                                             </div>
                                                                             <div class="relative z-0 w-full mb-5 group">
                                                                                 <input type="text" x-model="company"
@@ -768,7 +801,8 @@
                                                                         </div>
 
                                                                         <div class="relative z-0 w-full mb-5 group">
-                                                                            <input type="text" x-model="address" name="address"
+                                                                            <input type="text" x-model="address"
+                                                                                name="address"
                                                                                 class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
                                                                                 placeholder=" " />
                                                                             <label for="address"
@@ -777,7 +811,8 @@
 
                                                                         <div class="grid md:grid-cols-3 md:gap-6">
                                                                             <div class="relative z-0 w-full mb-5 group">
-                                                                                <input type="text" x-model="city" name="city"
+                                                                                <input type="text" x-model="city"
+                                                                                    name="city"
                                                                                     class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
                                                                                     placeholder=" " />
                                                                                 <label for="city"
@@ -792,7 +827,8 @@
                                                                                     class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">{{ __('messages.country') }}</label>
                                                                             </div>
                                                                             <div class="relative z-0 w-full mb-5 group">
-                                                                                <input type="text" x-model="state" name="state"
+                                                                                <input type="text" x-model="state"
+                                                                                    name="state"
                                                                                     class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
                                                                                     placeholder=" " />
                                                                                 <label for="state"
@@ -802,7 +838,8 @@
 
                                                                         <div class="grid md:grid-cols-3 md:gap-6">
                                                                             <div class="relative z-0 w-full mb-5 group">
-                                                                                <input type="text" x-model="postal_code"
+                                                                                <input type="text"
+                                                                                    x-model="postal_code"
                                                                                     name="postal_code"
                                                                                     class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
                                                                                     placeholder=" " />
@@ -810,14 +847,16 @@
                                                                                     class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">{{ __('messages.zip_postal') }}</label>
                                                                             </div>
                                                                             <div class="relative z-0 w-full mb-5 group">
-                                                                                <input type="text" x-model="email" name="email"
+                                                                                <input type="text" x-model="email"
+                                                                                    name="email"
                                                                                     class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
                                                                                     placeholder=" " />
                                                                                 <label for="email"
                                                                                     class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">{{ __('messages.email_address') }}</label>
                                                                             </div>
                                                                             <div class="relative z-0 w-full mb-5 group">
-                                                                                <input type="text" x-model="phone_number"
+                                                                                <input type="text"
+                                                                                    x-model="phone_number"
                                                                                     name="phone_number"
                                                                                     class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
                                                                                     placeholder=" " />
@@ -827,7 +866,8 @@
                                                                         </div>
                                                                         <div class="grid md:grid-cols-2 md:gap-6">
                                                                             <div class="relative z-0 w-full mb-5 group">
-                                                                                <input type="text" x-model="mobile_phone_number"
+                                                                                <input type="text"
+                                                                                    x-model="mobile_phone_number"
                                                                                     name="mobile_phone_number"
                                                                                     class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
                                                                                     placeholder=" " />
@@ -835,7 +875,8 @@
                                                                                     class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">{{ __('messages.mobile_phone') }}</label>
                                                                             </div>
                                                                             <div class="relative z-0 w-full mb-5 group">
-                                                                                <input type="text" x-model="fax" name="fax"
+                                                                                <input type="text" x-model="fax"
+                                                                                    name="fax"
                                                                                     class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
                                                                                     placeholder=" " />
                                                                                 <label for="fax"
@@ -864,16 +905,16 @@
                                                 </div>
                                             </li>
 
-                                            {{--Address Delete Form --}}
+                                            {{-- Address Delete Form --}}
                                             <li>
                                                 <!--Address Delete Modal Button -->
                                                 <div x-data="{ addressDeleteModalOpen: false }"
                                                     @keydown.escape.window="addressDeleteModalOpen = false"
                                                     class="relative z-50 w-auto h-auto">
-                                                    {{--Address Delete Modal Button --}}
+                                                    {{-- Address Delete Modal Button --}}
                                                     <button @click="addressDeleteModalOpen=true"
                                                         class="w-full px-4 py-2 text-sm text-red-700 hover:bg-gray-100  disabled:opacity-50 disabled:pointer-events-none">{{ __('messages.delete') }}</button>
-                                                    {{--Address Delete Modal Body --}}
+                                                    {{-- Address Delete Modal Body --}}
                                                     <template x-teleport="body">
                                                         <div x-show="addressDeleteModalOpen"
                                                             class="fixed top-0 left-0 z-[99] flex items-center justify-center w-screen h-screen rounded-md"
@@ -904,20 +945,22 @@
                                                                     </h3>
                                                                     <button @click="addressDeleteModalOpen=false"
                                                                         class=" flex items-center justify-center w-8 h-8 text-white rounded-full hover:bg-red-600">
-                                                                        <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg"
-                                                                            fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                                                                            stroke="currentColor">
-                                                                            <path stroke-linecap="round" stroke-linejoin="round"
+                                                                        <svg class="w-5 h-5"
+                                                                            xmlns="http://www.w3.org/2000/svg"
+                                                                            fill="none" viewBox="0 0 24 24"
+                                                                            stroke-width="1.5" stroke="currentColor">
+                                                                            <path stroke-linecap="round"
+                                                                                stroke-linejoin="round"
                                                                                 d="M6 18L18 6M6 6l12 12" />
                                                                         </svg>
                                                                     </button>
                                                                 </div>
-                                                                {{--Address Delete Modal Content --}}
+                                                                {{-- Address Delete Modal Content --}}
                                                                 <div class="relative w-auto mt-2 px-6 py-3">
 
                                                                     <p class="text-lg text-gray-800">
                                                                         {{ __('messages.delete_this_site') }} -
-                                                                        {{$address->title}}
+                                                                        {{ $address->title }}
                                                                     </p>
                                                                     <div class="mt-4 flex justify-center gap-8 ">
                                                                         <button @click="addressDeleteModalOpen=false"
@@ -925,7 +968,7 @@
                                                                             {{ __('messages.no') }}
                                                                         </button>
                                                                         <form
-                                                                            action="{{route('form.address.destroy', $address->id)}}"
+                                                                            action="{{ route('form.address.destroy', $address->id) }}"
                                                                             method="POST">
                                                                             @method('DELETE')
                                                                             @csrf
@@ -944,13 +987,13 @@
                                     </div>
                                 </div>
 
-                                {{--Address Item Card Content --}}
+                                {{-- Address Item Card Content --}}
                                 <div class="flex flex-col items-center  ">
                                     <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-                                        {{Str::limit($address->title, 25, '...')}}
+                                        {{ Str::limit($address->title, 25, '...') }}
                                     </h5>
                                     <p class="font-normal text-gray-700 dark:text-gray-400">
-                                        {{Str::limit($address->address, 25, '...')}}
+                                        {{ Str::limit($address->address, 25, '...') }}
                                     </p>
                                 </div>
                             </div>
@@ -970,7 +1013,7 @@
                         aria-controls="accordion-collapse-body-payment-card">
                         <span>{{ __('messages.payment_card_items') }}
                             <span
-                                class="inline-flex items-center justify-center w-3 h-3 p-3 ms-3 text-xs font-medium text-blue-800 bg-blue-100 rounded-full dark:bg-blue-900 dark:text-blue-300">{{Auth::user()->paymentCards->count()}}</span>
+                                class="inline-flex items-center justify-center w-3 h-3 p-3 ms-3 text-xs font-medium text-blue-800 bg-blue-100 rounded-full dark:bg-blue-900 dark:text-blue-300">{{ Auth::user()->paymentCards->count() }}</span>
                         </span>
                         <svg data-accordion-icon class="w-3 h-3 rotate-180 shrink-0" aria-hidden="true"
                             xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
@@ -1018,7 +1061,7 @@
                                                     {{-- Payment Cards Edit Modal Button --}}
                                                     <button @click="paymentCardEditModalOpen=true"
                                                         class="w-full px-4 py-2 text-sm text-gray-600 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white disabled:opacity-50 disabled:pointer-events-none">{{ __('messages.edit') }}</button>
-                                                    {{--Payment Cards Edit Modal Body --}}
+                                                    {{-- Payment Cards Edit Modal Body --}}
                                                     <template x-teleport="body">
                                                         <div x-show="paymentCardEditModalOpen"
                                                             class="fixed top-0 left-0 z-[99] flex items-center justify-center w-screen h-screen"
@@ -1048,43 +1091,46 @@
                                                                     </h3>
                                                                     <button @click="paymentCardEditModalOpen=false"
                                                                         class="absolute top-0 right-0 flex items-center justify-center w-8 h-8 mt-5 mr-5 text-gray-600 rounded-full hover:text-gray-800 hover:bg-gray-50">
-                                                                        <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg"
-                                                                            fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                                                                            stroke="currentColor">
-                                                                            <path stroke-linecap="round" stroke-linejoin="round"
+                                                                        <svg class="w-5 h-5"
+                                                                            xmlns="http://www.w3.org/2000/svg"
+                                                                            fill="none" viewBox="0 0 24 24"
+                                                                            stroke-width="1.5" stroke="currentColor">
+                                                                            <path stroke-linecap="round"
+                                                                                stroke-linejoin="round"
                                                                                 d="M6 18L18 6M6 6l12 12" />
                                                                         </svg>
                                                                     </button>
                                                                 </div>
-                                                                {{--Payment Cards Content --}}
+                                                                {{-- Payment Cards Content --}}
                                                                 <div class="relative w-auto mt-2">
-                                                                    <form @submit.prevent="paymentCardsEditSubmitForm($event)"
+                                                                    <form
+                                                                        @submit.prevent="paymentCardsEditSubmitForm($event)"
                                                                         x-data="{
-                                                                                                        title: '{{old('title', $paymentCard->title)}}',
-                                                                                                        card_name: '{{old('card_name', $paymentCard->card_name)}}',
-                                                                                                        card_type: '{{old('card_type', $paymentCard->card_type)}}',
-                                                                                                        card_number: '{{old('card_number', $paymentCard->card_number)}}',
-                                                                                                        card_security_code: '{{old('card_security_code', $paymentCard->card_security_code)}}',
-                                                                                                        card_start_date: '{{old('card_start_date', $paymentCard->card_start_date)}}',
-                                                                                                        card_expiration_date: '{{old('card_expiration_date', $paymentCard->card_expiration_date)}}',
-                                                                                                        notes: '{{old('notes', $paymentCard->notes)}}',
-                                                                                                        paymentCardsEditSubmitForm(event) {
-                                                                                                                    if(this.title == '{{$paymentCard->title}}' && this.card_name == '{{$paymentCard->card_name}}' && this.card_type == '{{$paymentCard->card_type}}' && this.card_number == '{{$paymentCard->card_number}}' && this.card_security_code == '{{$paymentCard->card_security_code}}' && this.card_start_date == '{{$paymentCard->titcard_start_datele}}' && this.card_expiration_date == '{{$paymentCard->card_expiration_date}}' && this.notes == '{{$paymentCard->notes}}'){
-                                                                                                                        event.preventDefault();
-                                                                                                                        paymentCardEditModalOpen = false;
-                                                                                                                    } else{
-                                                                                                                            event.target.submit();
-                                                                                                                    }
-                                                                                                                }
-                                                                                                        }"
-                                                                        class="max-w-md mx-auto"
-                                                                        action="{{ route('form.payment_card.update', $paymentCard->id)}}"
+                                                                            title: '{{ old('title', $paymentCard->title) }}',
+                                                                            card_name: '{{ old('card_name', $paymentCard->card_name) }}',
+                                                                            card_type: '{{ old('card_type', $paymentCard->card_type) }}',
+                                                                            card_number: '{{ old('card_number', $paymentCard->card_number) }}',
+                                                                            card_security_code: '{{ old('card_security_code', $paymentCard->card_security_code) }}',
+                                                                            card_start_date: '{{ old('card_start_date', $paymentCard->card_start_date) }}',
+                                                                            card_expiration_date: '{{ old('card_expiration_date', $paymentCard->card_expiration_date) }}',
+                                                                            notes: '{{ old('notes', $paymentCard->notes) }}',
+                                                                            paymentCardsEditSubmitForm(event) {
+                                                                                if (this.title == '{{ $paymentCard->title }}' && this.card_name == '{{ $paymentCard->card_name }}' && this.card_type == '{{ $paymentCard->card_type }}' && this.card_number == '{{ $paymentCard->card_number }}' && this.card_security_code == '{{ $paymentCard->card_security_code }}' && this.card_start_date == '{{ $paymentCard->titcard_start_datele }}' && this.card_expiration_date == '{{ $paymentCard->card_expiration_date }}' && this.notes == '{{ $paymentCard->notes }}') {
+                                                                                    event.preventDefault();
+                                                                                    paymentCardEditModalOpen = false;
+                                                                                } else {
+                                                                                    event.target.submit();
+                                                                                }
+                                                                            }
+                                                                        }" class="max-w-md mx-auto"
+                                                                        action="{{ route('form.payment_card.update', $paymentCard->id) }}"
                                                                         method="POST">
                                                                         @method('PATCH')
                                                                         @csrf
 
                                                                         <div class="relative z-0 w-full mb-5 group">
-                                                                            <input type="text" name="title" x-model="title"
+                                                                            <input type="text" name="title"
+                                                                                x-model="title"
                                                                                 class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
                                                                                 placeholder=" " required />
                                                                             <label for="title"
@@ -1119,7 +1165,8 @@
                                                                         </div>
 
                                                                         <div class="relative z-0 w-full mb-5 group">
-                                                                            <input type="text" name="card_security_code"
+                                                                            <input type="text"
+                                                                                name="card_security_code"
                                                                                 x-model="card_security_code"
                                                                                 class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
                                                                                 placeholder=" " required />
@@ -1137,7 +1184,8 @@
                                                                         </div>
 
                                                                         <div class="relative z-0 w-full mb-5 group">
-                                                                            <input type="text" name="card_expiration_date"
+                                                                            <input type="text"
+                                                                                name="card_expiration_date"
                                                                                 x-model="card_expiration_date"
                                                                                 class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
                                                                                 placeholder=" " required />
@@ -1166,16 +1214,16 @@
                                                 </div>
                                             </li>
 
-                                            {{--Payment Cards Delete Form --}}
+                                            {{-- Payment Cards Delete Form --}}
                                             <li>
                                                 <!--Payment Cards Delete Modal Button -->
                                                 <div x-data="{ paymentCardDeleteModalOpen: false }"
                                                     @keydown.escape.window="paymentCardDeleteModalOpen = false"
                                                     class="relative z-50 w-auto h-auto">
-                                                    {{--Payment Cards Delete Modal Button --}}
+                                                    {{-- Payment Cards Delete Modal Button --}}
                                                     <button @click="paymentCardDeleteModalOpen=true"
                                                         class="w-full px-4 py-2 text-sm text-red-700 hover:bg-gray-100  disabled:opacity-50 disabled:pointer-events-none">{{ __('messages.delete') }}</button>
-                                                    {{--Payment Cards Delete Modal Body --}}
+                                                    {{-- Payment Cards Delete Modal Body --}}
                                                     <template x-teleport="body">
                                                         <div x-show="paymentCardDeleteModalOpen"
                                                             class="fixed top-0 left-0 z-[99] flex items-center justify-center w-screen h-screen rounded-md"
@@ -1206,20 +1254,22 @@
                                                                     </h3>
                                                                     <button @click="paymentCardDeleteModalOpen=false"
                                                                         class=" flex items-center justify-center w-8 h-8 text-white rounded-full hover:bg-red-600">
-                                                                        <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg"
-                                                                            fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                                                                            stroke="currentColor">
-                                                                            <path stroke-linecap="round" stroke-linejoin="round"
+                                                                        <svg class="w-5 h-5"
+                                                                            xmlns="http://www.w3.org/2000/svg"
+                                                                            fill="none" viewBox="0 0 24 24"
+                                                                            stroke-width="1.5" stroke="currentColor">
+                                                                            <path stroke-linecap="round"
+                                                                                stroke-linejoin="round"
                                                                                 d="M6 18L18 6M6 6l12 12" />
                                                                         </svg>
                                                                     </button>
                                                                 </div>
-                                                                {{--Payment Cards Delete Modal Content --}}
+                                                                {{-- Payment Cards Delete Modal Content --}}
                                                                 <div class="relative w-auto mt-2 px-6 py-3">
 
                                                                     <p class="text-lg text-gray-800">
                                                                         {{ __('messages.delete_this_site') }} -
-                                                                        {{$paymentCard->title}}
+                                                                        {{ $paymentCard->title }}
                                                                     </p>
                                                                     <div class="mt-4 flex justify-center gap-8 ">
                                                                         <button @click="paymentCardDeleteModalOpen=false"
@@ -1227,7 +1277,7 @@
                                                                             {{ __('messages.no') }}
                                                                         </button>
                                                                         <form
-                                                                            action="{{route('form.payment_card.destroy', $paymentCard->id)}}"
+                                                                            action="{{ route('form.payment_card.destroy', $paymentCard->id) }}"
                                                                             method="POST">
                                                                             @method('DELETE')
                                                                             @csrf
@@ -1246,13 +1296,13 @@
                                     </div>
                                 </div>
 
-                                {{--Payment Cards Item Card Content --}}
+                                {{-- Payment Cards Item Card Content --}}
                                 <div class="flex flex-col items-center  ">
                                     <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-                                        {{Str::limit($paymentCard->title, 15, '...')}}
+                                        {{ Str::limit($paymentCard->title, 15, '...') }}
                                     </h5>
                                     <p class="font-normal text-gray-700 dark:text-gray-400">
-                                        {{Str::limit($paymentCard->card_name, 25, '...')}}
+                                        {{ Str::limit($paymentCard->card_name, 25, '...') }}
                                     </p>
                                 </div>
                             </div>
@@ -1273,7 +1323,7 @@
                         <span>
                             {{ __('messages.bank_account_items') }}
                             <span
-                                class="inline-flex items-center justify-center w-3 h-3 p-3 ms-3 text-xs font-medium text-blue-800 bg-blue-100 rounded-full dark:bg-blue-900 dark:text-blue-300">{{Auth::user()->bankAccounts->count()}}</span>
+                                class="inline-flex items-center justify-center w-3 h-3 p-3 ms-3 text-xs font-medium text-blue-800 bg-blue-100 rounded-full dark:bg-blue-900 dark:text-blue-300">{{ Auth::user()->bankAccounts->count() }}</span>
                         </span>
                         <svg data-accordion-icon class="w-3 h-3 rotate-180 shrink-0" aria-hidden="true"
                             xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
@@ -1351,45 +1401,49 @@
                                                                     </h3>
                                                                     <button @click="bankAccountEditModalOpen=false"
                                                                         class="absolute top-0 right-0 flex items-center justify-center w-8 h-8 mt-5 mr-5 text-gray-600 rounded-full hover:text-gray-800 hover:bg-gray-50">
-                                                                        <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg"
-                                                                            fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                                                                            stroke="currentColor">
-                                                                            <path stroke-linecap="round" stroke-linejoin="round"
+                                                                        <svg class="w-5 h-5"
+                                                                            xmlns="http://www.w3.org/2000/svg"
+                                                                            fill="none" viewBox="0 0 24 24"
+                                                                            stroke-width="1.5" stroke="currentColor">
+                                                                            <path stroke-linecap="round"
+                                                                                stroke-linejoin="round"
                                                                                 d="M6 18L18 6M6 6l12 12" />
                                                                         </svg>
                                                                     </button>
                                                                 </div>
-                                                                {{--Bank Account Content --}}
+                                                                {{-- Bank Account Content --}}
                                                                 <div class="relative w-auto mt-2">
-                                                                    <form @submit.prevent="bankAccountEditSubmitForm($event)"
+                                                                    <form
+                                                                        @submit.prevent="bankAccountEditSubmitForm($event)"
                                                                         x-data="{
-                                                                                        title: '{{old('title', $bankAccount->title)}}',
-                                                                                        bank_name: '{{old('bank_name', $bankAccount->bank_name)}}',
-                                                                                        account_type: '{{old('account_type', $bankAccount->account_type)}}',
-                                                                                        routing_number: '{{old('routing_number', $bankAccount->routing_number)}}',
-                                                                                        account_number: '{{old('account_number', $bankAccount->account_number)}}',
-                                                                                        swift_code: '{{old('swift_code', $bankAccount->swift_code)}}',
-                                                                                        iban_number: '{{old('iban_number', $bankAccount->iban_number)}}',
-                                                                                        pin: '{{old('pin', default: $bankAccount->pin)}}',
-                                                                                        branch_address: '{{old('branch_address', $bankAccount->branch_address)}}',
-                                                                                        branch_phone: '{{old('branch_phone', $bankAccount->branch_phone)}}',
-                                                                                        notes: '{{old('notes', $bankAccount->notes)}}',
-                                                                                        bankAccountEditSubmitForm(event) {
-                                                                                                    if(this.title == '{{$bankAccount->title}}' && this.bank_name == '{{$bankAccount->bank_name}}' && this.account_type == '{{$bankAccount->account_type}}' && this.routing_number == '{{$bankAccount->routing_number}}' && this.account_number == '{{$bankAccount->account_number}}' && this.swift_code == '{{$bankAccount->swift_code}}' && this.iban_number == '{{$bankAccount->iban_number}}' && this.pin == '{{$bankAccount->pin}}' && this.branch_address == '{{$bankAccount->branch_address}}' && this.branch_phone == '{{$bankAccount->branch_phone}}' && this.notes == '{{$bankAccount->notes}}'){
-                                                                                                        event.preventDefault();
-                                                                                                        bankAccountEditModalOpen = false;
-                                                                                                    } else{
-                                                                                                            event.target.submit();
-                                                                                                    }
-                                                                                                }
-                                                                                        }" class="max-w-md mx-auto"
-                                                                        action="{{ route('form.bank_account.update', $bankAccount->id)}}"
+                                                                            title: '{{ old('title', $bankAccount->title) }}',
+                                                                            bank_name: '{{ old('bank_name', $bankAccount->bank_name) }}',
+                                                                            account_type: '{{ old('account_type', $bankAccount->account_type) }}',
+                                                                            routing_number: '{{ old('routing_number', $bankAccount->routing_number) }}',
+                                                                            account_number: '{{ old('account_number', $bankAccount->account_number) }}',
+                                                                            swift_code: '{{ old('swift_code', $bankAccount->swift_code) }}',
+                                                                            iban_number: '{{ old('iban_number', $bankAccount->iban_number) }}',
+                                                                            pin: '{{ old('pin', default: $bankAccount->pin) }}',
+                                                                            branch_address: '{{ old('branch_address', $bankAccount->branch_address) }}',
+                                                                            branch_phone: '{{ old('branch_phone', $bankAccount->branch_phone) }}',
+                                                                            notes: '{{ old('notes', $bankAccount->notes) }}',
+                                                                            bankAccountEditSubmitForm(event) {
+                                                                                if (this.title == '{{ $bankAccount->title }}' && this.bank_name == '{{ $bankAccount->bank_name }}' && this.account_type == '{{ $bankAccount->account_type }}' && this.routing_number == '{{ $bankAccount->routing_number }}' && this.account_number == '{{ $bankAccount->account_number }}' && this.swift_code == '{{ $bankAccount->swift_code }}' && this.iban_number == '{{ $bankAccount->iban_number }}' && this.pin == '{{ $bankAccount->pin }}' && this.branch_address == '{{ $bankAccount->branch_address }}' && this.branch_phone == '{{ $bankAccount->branch_phone }}' && this.notes == '{{ $bankAccount->notes }}') {
+                                                                                    event.preventDefault();
+                                                                                    bankAccountEditModalOpen = false;
+                                                                                } else {
+                                                                                    event.target.submit();
+                                                                                }
+                                                                            }
+                                                                        }" class="max-w-md mx-auto"
+                                                                        action="{{ route('form.bank_account.update', $bankAccount->id) }}"
                                                                         method="POST">
                                                                         @method('PATCH')
                                                                         @csrf
 
                                                                         <div class="relative z-0 w-full mb-5 group">
-                                                                            <input type="text" name="title" x-model="title"
+                                                                            <input type="text" name="title"
+                                                                                x-model="title"
                                                                                 class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
                                                                                 placeholder=" " required />
                                                                             <label for="title"
@@ -1456,7 +1510,8 @@
 
                                                                         <div class="grid md:grid-cols-2 md:gap-6">
                                                                             <div class="relative z-0 w-full mb-5 group">
-                                                                                <input type="text" name="branch_address"
+                                                                                <input type="text"
+                                                                                    name="branch_address"
                                                                                     x-model="branch_address"
                                                                                     class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
                                                                                     placeholder=" " required />
@@ -1494,16 +1549,16 @@
                                                 </div>
                                             </li>
 
-                                            {{--Bank Account Delete Form --}}
+                                            {{-- Bank Account Delete Form --}}
                                             <li>
                                                 <!--Bank Account Delete Modal Button -->
                                                 <div x-data="{ bankAccountDeleteModalOpen: false }"
                                                     @keydown.escape.window="bankAccountDeleteModalOpen = false"
                                                     class="relative z-50 w-auto h-auto">
-                                                    {{--Payment Cards Delete Modal Button --}}
+                                                    {{-- Payment Cards Delete Modal Button --}}
                                                     <button @click="bankAccountDeleteModalOpen=true"
                                                         class="w-full px-4 py-2 text-sm text-red-700 hover:bg-gray-100  disabled:opacity-50 disabled:pointer-events-none">Delete</button>
-                                                    {{--Payment Cards Delete Modal Body --}}
+                                                    {{-- Payment Cards Delete Modal Body --}}
                                                     <template x-teleport="body">
                                                         <div x-show="bankAccountDeleteModalOpen"
                                                             class="fixed top-0 left-0 z-[99] flex items-center justify-center w-screen h-screen rounded-md"
@@ -1534,20 +1589,22 @@
                                                                     </h3>
                                                                     <button @click="bankAccountDeleteModalOpen=false"
                                                                         class=" flex items-center justify-center w-8 h-8 text-white rounded-full hover:bg-red-600">
-                                                                        <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg"
-                                                                            fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                                                                            stroke="currentColor">
-                                                                            <path stroke-linecap="round" stroke-linejoin="round"
+                                                                        <svg class="w-5 h-5"
+                                                                            xmlns="http://www.w3.org/2000/svg"
+                                                                            fill="none" viewBox="0 0 24 24"
+                                                                            stroke-width="1.5" stroke="currentColor">
+                                                                            <path stroke-linecap="round"
+                                                                                stroke-linejoin="round"
                                                                                 d="M6 18L18 6M6 6l12 12" />
                                                                         </svg>
                                                                     </button>
                                                                 </div>
-                                                                {{--Payment Cards Delete Modal Content --}}
+                                                                {{-- Payment Cards Delete Modal Content --}}
                                                                 <div class="relative w-auto mt-2 px-6 py-3">
 
                                                                     <p class="text-lg text-gray-800">
                                                                         {{ __('messages.delete_this_site') }} -
-                                                                        {{$bankAccount->title}}
+                                                                        {{ $bankAccount->title }}
                                                                     </p>
                                                                     <div class="mt-4 flex justify-center gap-8 ">
                                                                         <button @click="bankAccountDeleteModalOpen=false"
@@ -1555,7 +1612,7 @@
                                                                             {{ __('no') }}
                                                                         </button>
                                                                         <form
-                                                                            action="{{route('form.bank_account.destroy', $bankAccount->id)}}"
+                                                                            action="{{ route('form.bank_account.destroy', $bankAccount->id) }}"
                                                                             method="POST">
                                                                             @method('DELETE')
                                                                             @csrf
@@ -1574,13 +1631,13 @@
                                     </div>
                                 </div>
 
-                                {{--Bank Account Item Card Content --}}
+                                {{-- Bank Account Item Card Content --}}
                                 <div class="flex flex-col items-center  ">
                                     <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-                                        {{Str::limit($bankAccount->title, 15, '...')}}
+                                        {{ Str::limit($bankAccount->title, 15, '...') }}
                                     </h5>
                                     <p class="font-normal text-gray-700 dark:text-gray-400">
-                                        {{Str::limit($bankAccount->bank_name, 25, '...')}}
+                                        {{ Str::limit($bankAccount->bank_name, 25, '...') }}
                                     </p>
                                 </div>
                             </div>
@@ -1628,7 +1685,7 @@
                 if (event) {
                     const input = event.target;
 
-                    input.addEventListener("input", function () {
+                    input.addEventListener("input", function() {
                         let value = input.value;
 
                         // Sadece rakamları al (tarih için geçerli karakterler)

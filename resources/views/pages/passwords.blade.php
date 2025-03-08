@@ -76,9 +76,9 @@
                                                 <div class="relative w-auto mt-2">
                                                     <form @submit.prevent="passwordEditSubmitForm($event)" x-data="{
                                                                         url: '{{old('url',$item->url)}}',
-                                                                        name: '{{old('name',$item->name)}}', 
-                                                                        username: '{{old('username', $item->username)}}', 
-                                                                        password: '{{old('password',$item->password)}}', 
+                                                                        name: '{{old('name',$item->name)}}',
+                                                                        username: '{{old('username', $item->username)}}',
+                                                                        password: '{{old('password',$item->password)}}',
                                                                         message: '{{old('message',$item->message)}}',
                                                                         passwordEditSubmitForm(event) {
                                                                                     if(this.url == '{{$item->url}}' && this.name == '{{$item->name}}' && this.username == '{{$item->username}}' && this.password == '{{$item->password}}' && this.message == '{{$item->message}}'){
@@ -87,7 +87,7 @@
                                                                                     } else{
                                                                                             event.target.submit();
                                                                                     }
-                                                                                } 
+                                                                                }
                                                                         }"
                                                         class="max-w-md mx-auto" action="{{ route('form.password.update',$item->id)}}" method="POST">
                                                         @method('PATCH')
