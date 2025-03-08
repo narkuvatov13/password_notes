@@ -100,8 +100,11 @@ class SettingController extends Controller
         $img = null;
 
         if ($request->file('imageUrl')) {
+            $fileName = $request->file('imageUrl')->getClientOriginalName();
+            // $img = $request->file('imageUrl')->storeAs('images', $fileName, ['disk' => 's3', 'visibility' => 'public']);
+            $img = Storage::disk('s3')->put('images/' . $fileName, file_get_contents($request->file('imageUrl')), 'public');
 
-            $img = Storage::put('images', $request->file('imageUrl'));
+            // $img = Storage::put('images', $request->file('imageUrl'));
             // $img = Storage::disk('public')->put('images', $request->file('imageUrl'));
             // $s3path = Storage::disk('s3')->url('images/' . $request->file('imageUrl'));
             // $filepath = $user->img ?? null;

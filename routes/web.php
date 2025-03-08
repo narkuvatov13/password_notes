@@ -14,6 +14,7 @@ use App\Http\Controllers\SettingController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 
 Route::any('/switch-locale/{locale}', [LanguageController::class, 'switchLocale'])->name('switch-language');
 
