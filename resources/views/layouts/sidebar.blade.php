@@ -219,9 +219,12 @@
 
                                 </span>
                                 <span class="text-xs font-light text-neutral-400">{{auth()->user()->email}}
-                                    @if($filename)
+                                    @isset($filename)
                                         {{$filename}}
-                                    @endif</span>
+
+                                    @endisset($filename)
+
+                                </span>
                             </span>
 
                         </button>
