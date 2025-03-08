@@ -305,7 +305,7 @@
                                                                             @method('DELETE')
                                                                             @csrf
                                                                             <button type="submit"
-                                                                                class="shadow-md px-8 py-2 text-white text-md rounded-xl bg-red-700 hover:bg-red-800">{{ __('messages.no') }}</button>
+                                                                                class="shadow-md px-8 py-2 text-white text-md rounded-xl bg-red-700 hover:bg-red-800">{{ __('messages.yes') }}</button>
                                                                         </form>
                                                                     </div>
                                                                 </div>
