@@ -214,10 +214,7 @@
                                 class="object-cover w-8 h-8 border rounded-full border-neutral-200" /> --}}
                             <span
                                 class="flex flex-col items-start flex-shrink-0 h-full ml-2 leading-none translate-y-px">
-                                <span>{{auth()->user()->name}}
-
-
-                                </span>
+                                <span>{{auth()->user()->name}}</span>
                                 <span class="text-xs font-light text-neutral-400">{{auth()->user()->email}}
                                     @isset($filename)
                                         {{$filename}}
@@ -484,7 +481,7 @@
 
                     <span class="flex-1 ms-3 whitespace-nowrap">{{__('messages.all')}}</span>
                     <span
-                        class="inline-flex items-center justify-center w-3 h-3 p-3 ms-3 text-sm font-medium text-blue-800 bg-blue-100 rounded-full dark:bg-blue-900 dark:text-blue-300">{{\App\Models\Password::count() + \App\Models\Note::count() + \App\Models\Address::count() + \App\Models\PaymentCard::count() + \App\Models\BankAccount::count() }}</span>
+                        class="inline-flex items-center justify-center w-3 h-3 p-3 ms-3 text-sm font-medium text-blue-800 bg-blue-100 rounded-full dark:bg-blue-900 dark:text-blue-300">{{Auth::user()->passwords->count() + Auth::user()->notes->count() + Auth::user()->addresses->count() + Auth::user()->paymentCards->count() + Auth::user()->bankAccounts->count() }}</span>
                 </a>
             </li>
             <li>
