@@ -8,4 +8,4 @@
 <p>🌍 Access Anywhere: Easily access your notes from any device with an internet connection.</p>
 <p>🔑 User-Friendly Management: Organize, edit, and securely store your important information with ease.</p>
 
-<p>Özel bilgilerinizi güvenli ve düzenli tutmak için hemen kullanmaya başlayın!</p>
+<p>Start using it now to keep your private information safe and organized!</p>
