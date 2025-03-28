@@ -16,11 +16,11 @@ use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 
-Route::any('/switch-locale/{locale}', [LanguageController::class, 'switchLocale'])->name('switch-language');
+Route::any('/switch-locale/{locale}', [LanguageController::class, 'switchLocale'])->name('switch-language')->middleware('auth');
 
 Route::get('/', function () {
     return view('auth.login');
-});
+})->middleware('guest');
 
 // Route::get('/test', function () {
 //     $pass = Hash::make('12345Yusup');
