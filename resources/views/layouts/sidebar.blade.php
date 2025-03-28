@@ -209,7 +209,7 @@
                         <button @click="accountDropdownOpen=true"
                             class="inline-flex border-none items-center justify-center h-12 py-2 pl-3 pr-12 transition-colors bg-white border rounded-md text-neutral-700 hover:bg-neutral-100 active:bg-white focus:bg-white focus:outline-none disabled:opacity-50 disabled:pointer-events-none">
                             <img src="https://fls-9e603673-c78d-422c-9c57-d6f261ffdccb.laravel.cloud/{{ auth()->user()->img }}"
-                                class="object-cover h-8 w-8 border rounded-full border-neutral-200" />
+                                class="object-cover h-8 w-8 hidden sm:block border rounded-full border-neutral-200" />
                             {{-- <img src="{{asset('/storage/' . auth()->user()->img)}}"
                                 class="object-cover w-8 h-8 border rounded-full border-neutral-200" /> --}}
                             <div class="">
@@ -298,7 +298,7 @@
                                                             loading: false,
                                                             visibility: false,
                                                             visibility2: false,
-                                                        
+
                                                             previewImage(event) {
                                                                 let file = event.target.files[0];
                                                                 if (file) {
@@ -317,7 +317,7 @@
                                                                     event.preventDefault();
                                                                 } else {
                                                                     console.log(settingModalOpen);
-                                                        
+
                                                                     event.target.submit();
                                                                 }
                                                             }
