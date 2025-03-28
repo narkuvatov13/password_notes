@@ -76,9 +76,9 @@
                         </path>
                     </svg>
                 </button>
-                <a href="{{ route('dashboard') }}" class="flex ms-2 md:me-24 text-blue-600">
+                <a href="{{ route('dashboard') }}" class="flex ms-2 md:me-2 text-blue-600">
                     <span
-                        class="self-center text-sm sm:text-xl  font-semibold whitespace-nowrap dark:text-white">{{ __('Password Notes') }}</span>
+                        class="self-center text-sm sm:text-xl font-semibold whitespace-nowrap dark:text-white">{{ __('Password Notes') }}</span>
                 </a>
             </div>
             {{-- UP Navbar right section --}}
@@ -207,7 +207,7 @@
                     <div x-data="{ accountDropdownOpen: false }" class="relative">
                         <!-- My Setting Dropdown Button -->
                         <button @click="accountDropdownOpen=true"
-                            class="inline-flex border-none items-center justify-center h-12 py-2 pl-3 pr-12 transition-colors bg-white border rounded-md text-neutral-700 hover:bg-neutral-100 active:bg-white focus:bg-white focus:outline-none disabled:opacity-50 disabled:pointer-events-none">
+                            class="inline-flex border-none items-center justify-center h-12 py-2 sm:pl-3 pr-12 transition-colors bg-white border rounded-md text-neutral-700 hover:bg-neutral-100 active:bg-white focus:bg-white focus:outline-none disabled:opacity-50 disabled:pointer-events-none">
                             <img src="https://fls-9e603673-c78d-422c-9c57-d6f261ffdccb.laravel.cloud/{{ auth()->user()->img }}"
                                 class="object-cover h-8 w-8 hidden sm:block border rounded-full border-neutral-200" />
                             {{-- <img src="{{asset('/storage/' . auth()->user()->img)}}"
